@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+   <title>joebon.tk</title>
+   <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
+   <link href="http://joebon.tk" rel="alternate" type="text/html" />
+   <updated>2014-10-20T16:56:24+08:00</updated>
+   <id>http://joebon.tk</id>
+   <author>
+     <name></name>
+     <email></email>
+   </author>
+
+   
+   <entry>
+     <title>平凡之路，重新出发</title>
+     <link href="http://beiyuu.com/restart"/>
+     <updated>2014-10-20T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/restart</id>
+     <content type="html">&lt;h2&gt;摆脱迷茫&lt;/h2&gt;
+
+&lt;p&gt;2013年9月开始学习前端，转眼一年有余。一直没有时间将这段经历做个梳理，现在终于闲下来了。颓废了一段时间，重新拾起往日的激情和干劲，从现在开始为了下一个目标努力。&lt;/p&gt;
+
+&lt;p&gt;说起自己前端学习之路，还是从自己的专业背景开始说起吧！本科阴差阳错的读了材料成型专业，后来有幸转到工业工程，开始了为期两年的半工科半管理的学习之路。也就是这两年遇到了一帮有想法有追求的同学们。这和我一直期待的状态不谋而合，回忆起来大三一年可谓是我目前为止最充实最开心的一段经历。又是一次机缘巧合，保送大工读研，专业信息管理。这无疑对我又意味着一次转折。因为它直接决定了我现在的职业发展方向。&lt;/p&gt;
+
+&lt;p&gt;进入研一的自己对于未来的职场依旧迷茫，于是整个研一基本是一个探索阶段，于是有了后来西门子、IBM两家公司的实习经历，综合自己过往经历和师兄师姐的经验。最终发现前端开发才是自己喜欢并且有很好发展前景的岗位。&lt;/p&gt;
+
+&lt;h2&gt;初涉前端&lt;/h2&gt;
+
+&lt;p&gt;借用一位前辈对于前端的描述：“相对后端，前端入门要容易些；但是要想成为前端大牛，则需要比后端付出更多的努力。也就是说，前端的学习曲线更像一个对数函数。”因此，对于一个想以前端为职业方向的新手来说，一年的学习时间足够了。&lt;/p&gt;
+
+&lt;p&gt;写博客这个不知道几个“互联网世纪”前的东西，现在还有必要拿出来说吗？不想用太多的理论去说这个命题，先看看两个最近对我影响比较大的两个博客：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://stevelosh.com/&quot; title=&quot;Steve Losh&quot;&gt;Steve Losh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://sivers.org/&quot; title=&quot;Derek Sivers&quot;&gt;Derek Sivers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;第一个是&lt;a href=&quot;http://stevelosh.com/&quot; title=&quot;Steve Losh&quot;&gt;Steve Losh&lt;/a&gt;的博客，我在搜索了&lt;a href=&quot;http://stevelosh.com/blog/2011/09/writing-vim-plugins/&quot; title=&quot;Write Vim Plugins&quot;&gt;VIM&lt;/a&gt;相关的关键字之后被带到了这里。简洁的风格和关屏的利落就已经吸引了我，顺手点开其他的文章看了看，博主非常的谨慎认真，每一篇都是高质量的作品，看得出他的用心，整个网站也是异常的简洁舒适，深深的被这种淡然的心态打动，躲进小楼成一统，哪管他春夏与秋冬。再看看他的介绍：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;&quot;I’m a programmer, photographer, dancer &amp;amp; bassist from Rochester, New York.&quot;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;呵呵，他完全就过着我期望的生活。&lt;/p&gt;
+
+&lt;p&gt;第二位博主的&lt;a href=&quot;http://sivers.org/sharing&quot; title=&quot;The co-op business model: share whatever you&#39;ve got&quot;&gt;&#39;Co-op Business Model&#39;&lt;/a&gt;文章也是让我茅厕顿开，这种分享的精神，用博主自己活生生的例子讲述出来之后，读者自然会被感动的，我也在团队内分享过这篇文章，下面我简要介绍一下他的事迹吧：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1994年，他把需要邮寄才能得到的版权申请表单扫描上传到网上，为大家申请提供方便的下载服务，直到版权机构将表单上网之前，他的网站是全美唯一一个可以下载到表单的地方，他也并没有盈利。&lt;/li&gt;
+&lt;li&gt;1995年，他为自己的乐队注册了一个名字，并且把注册过程详细的写在自己的博客上，很长一段时间内，他的这篇文章几乎成了注册乐队名称的标准教程。&lt;/li&gt;
+&lt;li&gt;1996年，他有了一个&lt;a href=&quot;http://artificialrecords.com&quot;&gt;小唱片公司&lt;/a&gt;，也就有了一个条形码账户，他需要支付$750给条码协会，这样他就拥有了十万个条码，一开始他免费把这些条码给朋友们要出售的CD用，后来，越来越多人知道了他有条码，又懒得去自己申请账户，就给他付一定的费用，方便的使用，他每个收费$20，在过去的12年里，他靠出售这个条码就赚到了二百万美元。&lt;/li&gt;
+&lt;li&gt;1997年，他花费$1000申请了一个信用卡商户账户，用来销售自己的CD，一开始也免费给他的做音乐的朋友们帮忙卖，后来有越来越多的陌生人希望能使用他的账号，省的自己去申请，因为他有一些劳动量，所以也收取一定费用，每张专辑收取$35的制作费，然后每卖一张收$4，在过去的12年中，他赚到了二千万美元。&lt;/li&gt;
+&lt;li&gt;1999年，他学会了制作网站，一开始是为了展示自己的CD，后来他的朋友们抱怨自己的网站服务商很糟糕，希望能使用&lt;a href=&quot;http://sivers.org/&quot; title=&quot;Derek Sivers&quot;&gt;Derek Sivers&lt;/a&gt;的系统，因为也有一些劳动量，所以会一开始收取$300，然后每个月收取$20，在过去的9年中，他赚到了五百万美元。&lt;/li&gt;
+&lt;li&gt;2000年以后，他会无偿的分享所有他学到的东西，或许“&lt;a href=&quot;http://sivers.org/below-average&quot; title=&quot;probably below average&quot;&gt;他不是最聪明的人&lt;/a&gt;”，但是分享没有什么成本，而且这是正确的事，所以在后来的11年里，他收获了很多的好运与快乐，遇见了很多有趣的人。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;找到了一个神交的外国博主，又有这么励志“好人好报”的故事，我想大道理不用讲太多也都明白了。&lt;/p&gt;
+
+&lt;p&gt;还有一篇理论性很强的文章做参考，&lt;a href=&quot;http://www.cnblogs.com/bangerlee/archive/2011/09/11/2173632.html&quot; title=&quot;Why I Blog翻译版&quot;&gt;我为什么写博客&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2&gt;那些虚的没用，说点实际的&lt;/h2&gt;
+
+&lt;p&gt;或许这些看起来很美好的东西，你会觉得离自己很远，那就说点直接的收益，看看是否够诱人。&lt;/p&gt;
+
+&lt;p&gt;我还是先推荐一篇文章：&lt;a href=&quot;http://mindhacks.cn/2011/11/04/how-to-interview-a-person-for-two-years/&quot; title=&quot;怎样花两年时间去面试一个人&quot;&gt;怎样花两年时间去面试一个人&lt;/a&gt;，招聘永远是公司和个人的难题，双方的信息不对称，导致这个矛盾无法调和，这篇文章就是告诉你，如何自己去推销自己，让公司得到你的全部优质信息，尤其在现在的网络环境下，将自己工作有用的能力搬上网，那么就是最好的能力证明，就是最好的面试答案。无论你是程序员，还是设计师。&lt;/p&gt;
+
+&lt;p&gt;或许你会想，好吧好吧，那我找个博客站开一个博客好了，我不太会同意这个做法，有一个个人的品牌，对于自己的发展只有好处，行走网络江湖，有同一个ID标识，无论在哪里都会让人看到你，这样长期的潜移默化，个人的品牌效力也就展现出来了。然后有一个自己独立的域名，并且用心去经营，肯定会有人欣赏的。而且经过我的一番研究，成本并不是很高。&lt;/p&gt;
+
+&lt;p&gt;我期望的博客内容，并不是贴一段代码，或者胡言乱语两句，具体的质量可以参考&lt;a href=&quot;http://stevelosh.com/&quot; title=&quot;Steve Losh&quot;&gt;Steve Losh&lt;/a&gt;，这样的高质量，更能展现自己的态度，或许你说有一些小心得小点滴也想和大家分享，那也可以在自己的空间下开一个Wiki频道，专门存放琐碎的知识点。&lt;/p&gt;
+
+&lt;p&gt;高质量的博文，肯定需要自己缜密的思考，并且需要一定的文笔才能将自己的想法完整清晰的表达出来，我在这两个方面都还差了很多，还需要大量的练习才好，给自己这样的机会。&lt;/p&gt;
+
+&lt;p&gt;在快知识、微段子横行的今天，能对一个个问题深入的去思考，一方面得到的是心灵的平静，更多的则是深入思考之后的收获的喜悦感，会有不一样的体会的。&lt;/p&gt;
+
+&lt;h2&gt;技术很简单，不用担心&lt;/h2&gt;
+
+&lt;p&gt;或者你很幸运不是一个程序员，或者你是一个不用搞这些乱七八糟东西的程序员，那么相信我，你一样可以搭起来一个跟我的一模一样的个人站点的。&lt;/p&gt;
+
+&lt;p&gt;我要特别鸣谢以下几个站点、技术：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://godaddy.com&quot; title=&quot;Godaddy&quot;&gt;GoDaddy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://dnspod.cn&quot; title=&quot;DNSPod&quot;&gt;DNSPod&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://github.com&quot; title=&quot;Github:social coding&quot;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://disqus.com&quot; title=&quot;Disqus&quot;&gt;Disqus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;下面我来做一个简要说明，完整的搭建方法，我后面会专门写一篇博客分享给大家，等不及的可以自己去找资料哈。&lt;/p&gt;
+
+&lt;h3&gt;GoDaddy &amp;amp; DNSPod&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://godaddy.com&quot; title=&quot;Godaddy&quot;&gt;GoDaddy&lt;/a&gt;是一家非常不错的域名注册商，良好的用户体验，飞快的生效速度，给力的优惠码，也支持支付宝，永远不用担心国内那些流氓厂商的流氓行为，注册了域名，就可以放心不会被别人抢走。在Godaddy注册域名是一件很简单的事情，按照提示走就完全没有问题，唯一需要动脑筋的可能是，你要想一个既有个人标识，又没有被别人注册的域名了，我觉得我的&lt;a href=&quot;http://beiyuu.com&quot; title=&quot;BeiYuu&quot;&gt;BeiYuu&lt;/a&gt;还是不错的，呵呵。&lt;/p&gt;
+
+&lt;p&gt;Godaddy一切都很完美，直到遇到了GFW，原因你肯定懂。前段时间推上风传Godaddy的DNS服务器被墙，导致域名不能解析，看起来好像自己的站被墙了一样，这个确实是个闹心的事情，还好国内有DNS服务的替代产品，而且做得还非常的不错，也是免费的，功能强大，速度快，不用担心被和谐，所以隆重推荐&lt;a href=&quot;http://dnspod.cn&quot; title=&quot;DNSPod&quot;&gt;DNSPod&lt;/a&gt;给大家，可以试用一下，把DNS服务迁移到DNSPod来，解决后顾之忧，配置比较简单，不懂的可以等我后面的博客啦，哈。&lt;/p&gt;
+
+&lt;h3&gt;GitHub &amp;amp; Jekyll&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com&quot; title=&quot;Github:social coding&quot;&gt;GitHub&lt;/a&gt;是一个非常优秀的产品，爆发式的增长，各大优质开源软件的蜂涌而至，只能说明人们太需要他了。&lt;strong&gt;Social Coding&lt;/strong&gt;是他的Slogan，产品的设计确实解决了很多代码交流的难题，让世界更平，让交流更畅，关于Git的学习，大家可以移步这里&lt;a href=&quot;http://progit.org/book/zh/&quot; title=&quot;Pro Git&quot;&gt;Pro Git中文版&lt;/a&gt;，这也是一个本身就在Github维护的一个项目，高质量的翻译了Git入门书，讲解详细，是学习Git的好资料。&lt;/p&gt;
+
+&lt;p&gt;GitHub是一个伟大的产品，&lt;a href=&quot;http://pages.github.com&quot; title=&quot;GitHub Pages&quot;&gt;GitHub Pages&lt;/a&gt;是他伟大的一部分，GitHub Pages基于&lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;博客引擎，当我深入的研究了他之后，我深深的想给Jekyll的作者一个拥抱，列举一下Jekyll的优点：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;可以单独放在自己的服务器上，他也是GitHub Pages的基础，质量可靠&lt;/li&gt;
+&lt;li&gt;将博客最重要的功能抽取出来，去除了&lt;a href=&quot;http://wordpress.org&quot; title=&quot;WordPress&quot;&gt;WordPress&lt;/a&gt;的复杂、烦躁的东西，一切都是清晰可控的&lt;/li&gt;
+&lt;li&gt;可以方便的使用&lt;a href=&quot;http://markdown.tw/&quot; title=&quot;Markdown语法&quot;&gt;Markdown&lt;/a&gt;等其他标记语言
+&lt;li&gt;清晰、简洁的文件组织，完美的永久链接方案，既漂亮、又可定制&lt;/li&gt;
+&lt;li&gt;博客静态化，速度快&lt;/li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;是完美的&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;Disqus&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;都很不错，但是可能有些童鞋会不满意于他不提供评论功能，这个时候，&lt;a href=&quot;http://disqus.com&quot; title=&quot;Disqus&quot;&gt;Disqus&lt;/a&gt;的出现就显得是雪中送炭了。&lt;/p&gt;
+
+&lt;p&gt;Disqus是一个社会化的评论解决方案，请允许我使用这个烂透了的词，调用它的接口非常简单，在自己的页面加载他的一段JS代码即可，如果别人注册了Disqus，那么就可以方便的留言，交流，一处登录，处处方便，而且Disqus也提供了一些spam等策略，不用自己操心了，并且可以和一些现有的博客系统很好的转换对接。越来越多的网站开始使用Disqus的服务了，这是一个非常不错的趋势，Jekyll配合&lt;a href=&quot;http://disqus.com&quot; title=&quot;Disqus&quot;&gt;Disqus&lt;/a&gt;实在是完美了。我别无所求了。&lt;/p&gt;
+
+&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;p&gt;写到这里，基本的点已经介绍完毕，看看Jekyll生成的博客页面，我心满意足，虽然文笔很烂，语句多不通顺，但是这是一个新的开始了，我觉得心灵都纯洁了不少，这不是发一条微博什么能带来的快乐。&lt;/p&gt;
+
+&lt;p&gt;对于那些对上述技术不是很熟悉的童鞋来说，搭建起来可能还是需要花费些功夫的，我会在后面写一篇专门的教程，给有需要的人，等不及了的，可以自己研究下，&lt;strong&gt;生命在于折腾&lt;/strong&gt;。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>随内容滚动隐藏的工具栏</title>
+     <link href="http://beiyuu.com/auto-edit-bar"/>
+     <updated>2012-12-27T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/auto-edit-bar</id>
+     <content type="html">&lt;p&gt;最先在&lt;a href=&quot;https://itunes.apple.com/us/app/google+/id447119634?mt=8&quot;&gt;Google+&lt;/a&gt;的APP上看到这种交互细节，而后在&lt;a href=&quot;http://www.meilishuo.com/welcome&quot;&gt;美丽说&lt;/a&gt;的新版上也看到了，上图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/other/auto-edit-bar.jpg&quot; alt=&quot;Auto Edit Bar&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图中画蓝色线框的部分既是。打开APP，下面的工具栏部分是显示的，当手指滑动内容，如果是向下浏览更多内容，工具栏自动收起，如果向上回滚，工具栏又会显示。&lt;/p&gt;
+
+&lt;p&gt;好处显而易见，当APP认为你在浏览，收起留出更多的屏幕空间，不遮挡、影响内容的显示，需要时再出现。&lt;/p&gt;
+
+&lt;p&gt;起初看到这个交互，还有些不习惯，体会到他的优势之后，顿时又觉得不支持这样的APP实在太out。&lt;/p&gt;
+
+&lt;p&gt;Google+和美丽说还有些不同的细节：&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Google+是在手指动作触发刚开始时就起效，而美丽说做在了手指滑动之后，因为有个缓冲时间，所以略感迟钝。&lt;/li&gt;
+    &lt;li&gt;美丽说在工具栏收起之后，留有一个小按钮，其实当用户熟悉这个交互后，略显多余。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>如果侧滑成为APP标配</title>
+     <link href="http://beiyuu.com/side-slide"/>
+     <updated>2012-12-26T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/side-slide</id>
+     <content type="html">&lt;p&gt;前两天这样感叹过：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;
+像Weico和网易新闻的手势滑动后退这样流畅、高效的交互真让人爱不释手，而且会很快形成惯性，真期待成为各App标配。就像当年第一次用完触屏手机，再去用其他机器，都会上手去摸一样。
+&lt;/p&gt;&lt;/blockquote&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;/images/other/side-slide.jpg&quot; alt=&quot;Weico Side&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;左图Weico的侧拉导航这种交互，从Path之后就遍地开花。对于手机应用，合理利用边缘操作，方便的隐藏显示功能，实在优雅。&lt;/p&gt;
+
+&lt;p&gt;导航部分的侧拉交互并不是每个APP都需要，但是像右图中网易新闻的内容侧拉后退，我觉得应该成为各APP标配。&lt;/p&gt;
+
+&lt;p&gt;这个交互并不新鲜，iPad上的&lt;a href=&quot;http://reederapp.com/ipad/&quot;&gt;Reeder&lt;/a&gt;和&lt;a href=&quot;http://alienblue.org/&quot;&gt;Alien Blue&lt;/a&gt;一直都有，iPad屏幕大，点击顶部按钮的动作幅度太大，问题很突出，就有了侧滑后退这个不错的办法。Alien Blue还像Mac下Finder的并列布局那样，会留有一定宽度的上级内容边缘，转换更加方便。&lt;/p&gt;
+
+&lt;p&gt;先不说手机屏幕越来越大，这个交互本就是令人愉悦的，就像之前Tweetie的下拉刷新一样。人在习惯了高效的东西之后，就很难再回去了，我现在遇见不能侧滑后退的应用，心底的鄙视之情油然而生。可喜的是，很多应用也有了这个Feature，比如&lt;a href=&quot;http://instagram.com/&quot;&gt;Instagram&lt;/a&gt;，等等。&lt;/p&gt;
+
+&lt;p&gt;侧滑本就是手机上很舒适自然的一个体验，想想你会不会没事解锁手机，桌面划两下，再锁屏呢？&lt;/p&gt;
+
+&lt;p&gt;希望能有更多的PM、设计师和开发者认同，赶紧给自己的APP加上这个舒适的Feature吧！&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>谈谈刚需和360影视</title>
+     <link href="http://beiyuu.com/needs-video"/>
+     <updated>2012-11-22T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/needs-video</id>
+     <content type="html">&lt;h2&gt;很久以前&lt;/h2&gt;
+
+&lt;p&gt;很欠的说，一年半之前，我非常想做影视导航站，构思也近完整。当时试用了几个同类站，基本上能确定，这些产品经理不追美剧。&lt;a href=&quot;http://v.360.cn&quot;&gt;360影视&lt;/a&gt;在2011年4月下旬发布，跟我的想法同期，不过我发现他却是几个月之后了。&lt;/p&gt;
+
+&lt;h2&gt;需求很简单&lt;/h2&gt;
+
+&lt;p&gt;对于追剧集的来说，需求其实很简单：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;找到需要的剧集&lt;/li&gt;
+&lt;li&gt;在线看地址或下载链接（在线最好）&lt;/li&gt;
+&lt;li&gt;记住我看到哪了&lt;/li&gt;
+&lt;li&gt;更新及时&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;这样简单的需求，那么多站做的我连吐槽的兴趣都没有。好吧，360影视满足了上面的需求，所以我用他，又因为我用，所以才吐槽：&lt;/p&gt;
+
+&lt;h2&gt;吐槽360影视&lt;/h2&gt;
+
+&lt;h3&gt;一个剧集&lt;/h3&gt;
+
+&lt;p&gt;各站对一个剧集有多季的处理，除了豆瓣电影可以方便完整的链接到其他季，其他各站几乎都独立了每一季，这是糟糕的体验，人为增大&lt;strong&gt; “找到需要的剧集” &lt;/strong&gt;的难度。看下图：
+&lt;img src=&quot;/images/360video/sp-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+我是不会明白这样做的好处，得到的只是难受、难受。&lt;/p&gt;
+
+&lt;h3&gt;new标识&lt;/h3&gt;
+
+&lt;p&gt;new标识绝对是互联网上最被滥用的图标之一。有些地方用的真让人莫名的恼火：
+&lt;img src=&quot;/images/360video/baidu-new.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+这是百度首页网址导航的new标识，难以理解，猜测他根据我的浏览记录来决定是否显示new，但是Big Bang我看过了却还显示，所以这个逻辑行不通，只好猜测他是根据绝对时间的new程度来显示，这就无法满足&lt;strong&gt; “记住我看到哪了” &lt;/strong&gt;需求，如果我有很久一段时间没看，提示失去了参考意义，而且点一下链接，new就会消失，我只能呵呵了。完全不可用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/360video/2b-sohu.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+再看搜狐视频的new标识，3、4集都标上了new，你却根本不管我到底看了没，看过3了，3上面的new还在，也是混乱了正常秩序，没有安全感，不靠谱。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/360video/2b-360.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+360影视的这个new的定义也很奇怪，我看过了new还在，过了两个星期了new也还在，我只能推断他的逻辑就是，最新的一集就是需要标new的那一集，真把用户当白痴了，不过他稍好一点的是，这个毫无意义的标识不会捣乱。&lt;/p&gt;
+
+&lt;p&gt;那到底怎样做才好呢，既然每个剧集里面会标明看过与否，那么在我正在追的美剧的集合页，明确的告诉我，我赶上最新一集某剧还差多少就好了啊。
+&lt;img src=&quot;/images/360video/new-out.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+看到这，也就能体会独立每一季出来有多恶心了。&lt;/p&gt;
+
+&lt;h3&gt;注册用户&lt;/h3&gt;
+
+&lt;p&gt;我明白，像这样一个刚需产品，又通过360浏览器导航过来的，大多都是低端用户，首页做成那个样子无可厚非，可是当我顶着极大的不情愿注册了用户之后，能不能稍微体谅下注册用户的心呢？&lt;/p&gt;
+
+&lt;p&gt;我猜想根据产品的设计，用户注册就是为了标记自己想看的剧集，方便更快更准的追剧，可是每次打开还是那个国产垃圾横行的首页，你让小清新们怎么看的上呢？&lt;/p&gt;
+
+&lt;p&gt;好啦，我就忍一下，多点一下“我的影视”吧：
+&lt;img src=&quot;/images/360video/360-home.jpg&quot; alt=&quot;ssh key success&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;发现问题没，把我主动标记了的影视放在下面，要把那些自作聪明的推荐作品放在上面，并且一个都没有推荐，这不是耍流氓的干活还是什么滴干活？&lt;/p&gt;
+
+&lt;p&gt;再综合上面new标识最后一条，基本上，网站的使用效率被这些恶心的细节全面拉低，需要很多无谓的操作，才能到达我的真正目的。&lt;/p&gt;
+
+&lt;h3&gt;安全感&lt;/h3&gt;
+
+&lt;p&gt;我最近比较喜欢用安全感这个概念，大意就是我在乎的事情你都能很好的解决，并不需要我过多的操心。
+&lt;img src=&quot;/images/360video/homeland.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+看过与否倒是一目了然，可当我只是看了几眼，并不想接着看下去，或者手贱点了后面的某一集，我就得人肉去记住，我没看过第一集，只是手贱点了一下，下次想看的时候得从第一集看，一定要记得，一定。&lt;/p&gt;
+
+&lt;p&gt;呵呵，那我还要你记干嘛呢？&lt;/p&gt;
+
+&lt;h2&gt;顺道吐槽社交&lt;/h2&gt;
+
+&lt;p&gt;看到这个需求人很多，在移动端尤甚。有个叫“段落”的电视导航应用，主要功能是电视节目早知道，现在电视节目有精彩到需要看着预告时间等的程度吗？我表示怀疑。不过“段落”主打的是社交，可以跟同时看“非诚勿扰”的观众交流哦~&lt;/p&gt;
+
+&lt;p&gt;我只想说，&lt;strong&gt;社你妈X交&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;真有那么困难吗&lt;/h2&gt;
+
+&lt;p&gt;是的，这个命题很难以理解，来看看百度视频的例子，美剧在百度的搜索量肯定不小：
+&lt;img src=&quot;/images/360video/baidu-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+继续吐槽那个无法理解的new标识，总体看起来不错哦，提供了好几个视频服务商，点开过的链接，自然的变不同颜色，看起来很自然，但是满足 &lt;strong&gt;“记住我看到哪儿”&lt;/strong&gt; 的需求还是不可靠，就没有安全感。&lt;/p&gt;
+
+&lt;p&gt;再看看假如我要追一个剧集，那么在百度视频里面该怎么做呢？
+&lt;img src=&quot;/images/360video/baidu-video.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+点了，好久，终于发现了这个藏起来的“订阅”按钮，订阅，订阅，呵呵，订阅！&lt;/p&gt;
+
+&lt;p&gt;在回到百度视频的首页，我是无法找到我刚才的“订阅”操作，对首页有任何影响，参考上面的“注册用户”一节，百度首页上也没什么特别的变化，所以，至此，我不知道这个订阅按钮到底有什么作用。&lt;/p&gt;
+
+&lt;p&gt;百度视频首页，在众多傻逼一样的new标识之下，我还是被吸引到了一个叫“我的随心看”的频道，以为可以快速打开我订阅的剧集，原来是“豆瓣猜”啊，混乱至极。&lt;/p&gt;
+
+&lt;h2&gt;结语&lt;/h2&gt;
+
+&lt;p&gt;本来想心平气和的吐槽下，毕竟360影视做的正常的地方还是有的，可是说着说着还是不免激动了，哎。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>听雨</title>
+     <link href="http://beiyuu.com/raining-in-chrome"/>
+     <updated>2012-04-18T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/raining-in-chrome</id>
+     <content type="html">&lt;p&gt;&lt;strong&gt;之前直接下载.crx文件的童鞋，现在可以把原来的卸载，直接在Chrome Web Store中下载了，地址：&lt;a href=&quot;https://chrome.google.com/webstore/detail/fkakmejoechmicbecchienoapbakancc&quot;&gt;It&#39;s Raining&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;来京快两年了，撑伞的次数屈指可数，有时候也会在心里暗暗后怕，是帝都的蓝天硬生生战胜了抑郁。&lt;/p&gt;
+
+&lt;p&gt;京城令人发指的秋天，蓝的清透，顶着这样的天，要是心底再泛起所谓的忧郁，自己都会鄙视自己。时常也会怀念连绵的阴雨，天色阴暗、空气清新、雨声滴答，单纯而静谧，就算假装想想心事也很有情调。&lt;/p&gt;
+
+&lt;p&gt;不得不说，有时候只是听着雨声，也能换个心情，也能专注起来。&lt;/p&gt;
+
+&lt;p&gt;近来对Chrome插件有点兴趣，又看到&lt;a href=&quot;http://www.rainymood.com&quot; title=&quot;Rainy Mood&quot;&gt;RainyMood&lt;/a&gt;，就试试写一个这样调整气氛心情的插件。Chrome的插件开发体验很棒，待整理下再发博客。另外感谢&lt;a href=&quot;http://www.softicons.com/free-icons/web-icons/vector-stylish-weather-icons-by-bartosz-kaszubowski/cloud-dark-rain-icon&quot;&gt;softicons&lt;/a&gt;提供漂亮的图标。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://movie.douban.com/subject/7054120/&quot; title=&quot;黑镜&quot;&gt;Black Mirror&lt;/a&gt;最近很火，豆瓣评分也非常高。我看完的时候，心中的赞叹感让我觉得应该写篇影评骂一骂，影评还没写，却发现我经常会想起里面的情景，所以我不得不低头承认，他确实拍的有那么一点深刻了。&lt;/p&gt;
+
+&lt;p&gt;美剧有时候看起来很右派，要完美，即使不完美，那一定得是感动。英剧显然就是2B青年的套路。现实有多2B，他就有多现实。把Black Mirror的每一集总结一下就是：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1、我就是单纯要搞你，你看着办吧。&lt;/li&gt;
+&lt;li&gt;2、这就是未来。&lt;/li&gt;
+&lt;li&gt;3、科技让欺骗无处遁形，很好。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;未来是现世一步步发展过去的。记得之前有一个问题：如果用电流刺激你的大脑，让你得到与真实环境刺激一样的神经感受，那么这到底算什么呢。我相信，总有一天技术会达到，但是现在离那也不遥远，互联网就在做这样的事情，我的这个小插件也是做同样的事情，你说这是杯具呢还是悲剧呢？&lt;/p&gt;
+
+&lt;p&gt;想体验，就点&lt;a href=&quot;https://chrome.google.com/webstore/detail/fkakmejoechmicbecchienoapbakancc&quot;&gt;这里&lt;/a&gt;下载吧，只支持&lt;a href=&quot;https://www.google.com/chrome&quot;&gt;Chrome&lt;/a&gt;浏览器哦！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rainingchrome/rain.jpg&quot; alt=&quot;Raining&quot; /&gt;&lt;/p&gt;
+</content>
+   </entry>
+   
+ 
+</feed>
