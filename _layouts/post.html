@@ -39,6 +39,7 @@ layout: default
                   for( var p in param ){
                     temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
                   }
+
                   document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
                 })()
                 </script>
@@ -53,23 +54,23 @@ layout: default
     </div>
 
     <div class="sidenav">
-        <h2>Blog</h2>
+        <h2>FE</h2>
         <ul class="artical-list">
-        {% for post in site.categories.blog%}
+        {% for post in site.categories.fe%}
             <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
         </ul>
 
-        <h2>Opinion</h2>
+        <h2>Product</h2>
         <ul class="artical-list">
-        {% for post in site.categories.opinion%}
+        {% for post in site.categories.product%}
             <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
         </ul>
 
-        <h2>Project</h2>
+        <h2>Life</h2>
         <ul class="artical-list">
-        {% for post in site.categories.project%}
+        {% for post in site.categories.life%}
             <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
         </ul>
