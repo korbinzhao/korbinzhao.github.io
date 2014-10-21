@@ -28,6 +28,8 @@ $(document).ready(function(){
     $('#disqus_container .comment').on('click',function(){
         $(this).html('加载中...');
 
+        var that = this;
+
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'korbinzhao'; // required: replace example with your forum shortname
 
@@ -37,6 +39,11 @@ $(document).ready(function(){
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
+
+        setTimeout(function(){
+            $(that).remove();
+        },1000);
+        
     
     });
     //**评论的代码也删掉哦***
