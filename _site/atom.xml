@@ -4,13 +4,91 @@
    <title>joebon.tk</title>
    <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.tk" rel="alternate" type="text/html" />
-   <updated>2014-11-02T01:14:56+08:00</updated>
+   <updated>2014-11-15T23:49:28+08:00</updated>
    <id>http://joebon.tk</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Cocos2d-X 3.0 事件分发机制</title>
+     <link href="http://beiyuu.com/cocos2d-event-dispatcher"/>
+     <updated>2014-11-15T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/cocos2d-event-dispatcher</id>
+     <content type="html">&lt;h2&gt;事件&lt;/h2&gt;
+
+&lt;p&gt;Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。&lt;/p&gt;
+
+&lt;p&gt;事件监听器有以下几种：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;触摸事件&lt;/li&gt;
+&lt;li&gt;键盘响应事件&lt;/li&gt;
+&lt;li&gt;鼠标响应事件&lt;/li&gt;
+&lt;li&gt;自定义事件&lt;/li&gt;
+&lt;li&gt;加速计事件&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;实例&lt;/h2&gt;
+
+&lt;p&gt;新建一个sprite，并为其添加一个touch事件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var SushiSprite = cc.Sprite.extend({
+    onEnter:function () {
+        cc.log(&quot;onEnter&quot;);
+        this._super();
+    },
+
+    onExit:function () {
+        cc.log(&quot;onExit&quot;);
+    }
+});
+
+addTouchEventListenser:function(){
+    this.touchListener = cc.EventListener.create({
+        event: cc.EventListener.TOUCH_ONE_BY_ONE,
+        // When &quot;swallow touches&quot; is true, then returning &#39;true&#39; from the onTouchBegan method will &quot;swallow&quot; the touch event, preventing other listeners from using it.
+        swallowTouches: true,
+        //onTouchBegan event callback function                      
+        onTouchBegan: function (touch, event) { 
+            var pos = touch.getLocation();
+            var target = event.getCurrentTarget();  
+            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
+                cc.log(&quot;touched&quot;)
+                return true;
+            }
+            return false;
+        }
+    cc.eventManager.addListener(this.touchListener,this);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;首先通过使用cc.EventListener.create创建了一个Touch事件监听器touchListener&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后，通过cc.eventManager.addListener注册监听器到事件管理器。cc.EventListener.create扩展出一个用户监听器。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;event属性，定义这个监听器监听的类型。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;swallowTouches属性设置是否吃掉事件，事件被吃掉后不会递给下一层监听器。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onTouchBegan方法处理触摸点击按下事件，我们在这里可以获取到触摸点的坐标pos。event.getCurrentTarget()获取当前事件的接受者，并判断当前的是否点击到了SushiSprite。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在touch事件中，我们还可以添加onTouchMoved/onTouchEnded方法监听touch移动和结束的回调。如果onTouchBegan返回false后onTouchMoved/onTouchEnded不会执行。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;通过添加事件监听器，将精灵以显示优先级 (SceneGraphPriority) 添加到事件分发器。这就是说，当我们点击精灵按钮时，根据屏幕显示的“遮盖”实际情况，进行有序的函数回调（即：如图中黄色按钮首先进入 onTouchBegan 逻辑处理）。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在事件逻辑处理时，根据各种条件处理触摸后的逻辑，如点击范围判断，设置被点击元素为不同的透明度，达到点击效果。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;因为设置了 listener1-&gt;setSwallowTouches(true); 并且在 onTouchBegan 中做相应的判断，以决定其返回值是 false 还是 true，用来处理触摸事件是否依据显示的顺序关系向后传递。
+注意：与 SceneGraphPriority 所不同的是 FixedPriority 将会依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</title>
@@ -220,40 +298,6 @@
 &lt;h2&gt;结语&lt;/h2&gt;
 
 &lt;p&gt;本来想心平气和的吐槽下，毕竟360影视做的正常的地方还是有的，可是说着说着还是不免激动了，哎。&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>听雨</title>
-     <link href="http://beiyuu.com/raining-in-chrome"/>
-     <updated>2012-04-18T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/raining-in-chrome</id>
-     <content type="html">&lt;p&gt;&lt;strong&gt;之前直接下载.crx文件的童鞋，现在可以把原来的卸载，直接在Chrome Web Store中下载了，地址：&lt;a href=&quot;https://chrome.google.com/webstore/detail/fkakmejoechmicbecchienoapbakancc&quot;&gt;It&#39;s Raining&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;来京快两年了，撑伞的次数屈指可数，有时候也会在心里暗暗后怕，是帝都的蓝天硬生生战胜了抑郁。&lt;/p&gt;
-
-&lt;p&gt;京城令人发指的秋天，蓝的清透，顶着这样的天，要是心底再泛起所谓的忧郁，自己都会鄙视自己。时常也会怀念连绵的阴雨，天色阴暗、空气清新、雨声滴答，单纯而静谧，就算假装想想心事也很有情调。&lt;/p&gt;
-
-&lt;p&gt;不得不说，有时候只是听着雨声，也能换个心情，也能专注起来。&lt;/p&gt;
-
-&lt;p&gt;近来对Chrome插件有点兴趣，又看到&lt;a href=&quot;http://www.rainymood.com&quot; title=&quot;Rainy Mood&quot;&gt;RainyMood&lt;/a&gt;，就试试写一个这样调整气氛心情的插件。Chrome的插件开发体验很棒，待整理下再发博客。另外感谢&lt;a href=&quot;http://www.softicons.com/free-icons/web-icons/vector-stylish-weather-icons-by-bartosz-kaszubowski/cloud-dark-rain-icon&quot;&gt;softicons&lt;/a&gt;提供漂亮的图标。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://movie.douban.com/subject/7054120/&quot; title=&quot;黑镜&quot;&gt;Black Mirror&lt;/a&gt;最近很火，豆瓣评分也非常高。我看完的时候，心中的赞叹感让我觉得应该写篇影评骂一骂，影评还没写，却发现我经常会想起里面的情景，所以我不得不低头承认，他确实拍的有那么一点深刻了。&lt;/p&gt;
-
-&lt;p&gt;美剧有时候看起来很右派，要完美，即使不完美，那一定得是感动。英剧显然就是2B青年的套路。现实有多2B，他就有多现实。把Black Mirror的每一集总结一下就是：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;1、我就是单纯要搞你，你看着办吧。&lt;/li&gt;
-&lt;li&gt;2、这就是未来。&lt;/li&gt;
-&lt;li&gt;3、科技让欺骗无处遁形，很好。&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;未来是现世一步步发展过去的。记得之前有一个问题：如果用电流刺激你的大脑，让你得到与真实环境刺激一样的神经感受，那么这到底算什么呢。我相信，总有一天技术会达到，但是现在离那也不遥远，互联网就在做这样的事情，我的这个小插件也是做同样的事情，你说这是杯具呢还是悲剧呢？&lt;/p&gt;
-
-&lt;p&gt;想体验，就点&lt;a href=&quot;https://chrome.google.com/webstore/detail/fkakmejoechmicbecchienoapbakancc&quot;&gt;这里&lt;/a&gt;下载吧，只支持&lt;a href=&quot;https://www.google.com/chrome&quot;&gt;Chrome&lt;/a&gt;浏览器哦！&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/rainingchrome/rain.jpg&quot; alt=&quot;Raining&quot; /&gt;&lt;/p&gt;
 </content>
    </entry>
    

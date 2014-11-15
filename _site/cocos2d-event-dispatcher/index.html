@@ -5,7 +5,7 @@
     * Author:         BeiYuu
     -->
     <meta charset="utf-8" />
-    <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己 | joebon.tk</title>
+    <title>Cocos2d-X 3.0 事件分发机制 | joebon.tk</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,29 +42,78 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/first-douban-activity" title="第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己">第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</a></h1>
-        <p class="entry-date">2014-11-02</p>
-        <p>自从实习结束、工作确定之后，一直处于比较慵懒颓废的状态。前两天看到豆瓣同城上有这样一个活动，急需有个动力改变下状态的自己就怂恿另外两个同学一起报名。出于观摩和尝鲜的心态，也没有做什么准备，就这样轻松上阵。</p>
+        <h1 class="entry-title"><a href="/cocos2d-event-dispatcher" title="Cocos2d-X 3.0 事件分发机制">Cocos2d-X 3.0 事件分发机制</a></h1>
+        <p class="entry-date">2014-11-15</p>
+        <h2>事件</h2>
 
-<p>经过一番寻找，终于在一栋大楼6楼的一个角落找到活动地点——城市星空咖啡馆，一个不怎么起眼的咖啡馆。经过一番介绍后，活动正式开始。这次活动为期10周，主要是以Coursera公开课为依托，大家每次进行演讲分享，互相寻找问题，随意聊天交流的活动。</p>
+<p>Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。</p>
 
-<p>一直都非常清楚演讲对于职业生涯乃至日常生活的重要性，作为一个日后要从事技术岗的不折不扣的工科生来说，表达能力一直是我的弱项，也一直希望能够得到有效的提升。虽然在求职准备时做过一段时间的尝试，和一个小伙伴做了大概三周的演讲练习，并且有将演讲过程录制下来，但是由于之后技术准备、实习面试等一系列事情的压力，最终还是半途而废。这次也是非常偶然的找到这样一个机会，希望能够坚持下来，做个改变。</p>
-
-<p>本次活动一共10个人参加，4个学生，5个刚刚参加工作的童鞋，还有一位很健谈很有趣的老者。活动主要由活动组织者和这位老者主导。组织者jianyan英语口语确实很好，洋洋洒洒为我们分享了Cousera第一周课程，这让有段时间未碰英语的我有点惭愧。“周一”是一位刚刚毕业的技术支持工程师，由于没戴眼镜只能看到大概轮廓，声音好听，思路清晰，笑起来很有感染力，这让我不由想起一位大学同学。她的一句话让我印象深刻：“人总是要不断尝试新的东西，不断让自己有所成长。”，这一点确实是这段时间十分颓废的我所要好好思考的。然后，邓琳为我们做了一个简短的很有趣的presentation，PPT简明有趣，笑容可人，声音甜美，这个演讲过程赏心悦目，最后也获得了Peter老师（老者）的赞赏。其他时间，基本被jianyan和Peter老师填满，我们时不时的会被要求提些建议。就这样，我完成了第一次豆瓣活动的打酱油之旅。</p>
-
-<p>最后，谈谈这次活动的感受。虽然活动场所没有我想象中的高大上。但是遇到这样一批愿意不断尝试改变自己的小伙伴们确实是一件幸运的事情，整个活动没有出现冷场，所有的时间都被侃侃而谈所占据。这种感觉其实是我这样一个平时不太擅长言语的所喜欢的。由于成长环境的原因，我是一个不太会找话题，不太会逗趣的一个人。不过我一直希望能够通过接触更多新鲜的环境来慢慢改变自己。我一直希望能够达到一种状态：</p>
+<p>事件监听器有以下几种：</p>
 
 <ul>
-<li>拥有清晰的思考问题的逻辑</li>
-<li>能够条理清晰的表达出自己的观点</li>
-<li>聊天时，能找到对方感兴趣的话题</li>
-<li>富有幽默感</li>
+<li>触摸事件</li>
+<li>键盘响应事件</li>
+<li>鼠标响应事件</li>
+<li>自定义事件</li>
+<li>加速计事件</li>
 </ul>
 
 
-<p>虽然知道有些改变不容易，也不会很快有成效，但是我想慢慢改变。</p>
+<h2>实例</h2>
 
-<p>One day I will be who I wanna be.</p>
+<p>新建一个sprite，并为其添加一个touch事件：</p>
+
+<pre><code>var SushiSprite = cc.Sprite.extend({
+    onEnter:function () {
+        cc.log("onEnter");
+        this._super();
+    },
+
+    onExit:function () {
+        cc.log("onExit");
+    }
+});
+
+addTouchEventListenser:function(){
+    this.touchListener = cc.EventListener.create({
+        event: cc.EventListener.TOUCH_ONE_BY_ONE,
+        // When "swallow touches" is true, then returning 'true' from the onTouchBegan method will "swallow" the touch event, preventing other listeners from using it.
+        swallowTouches: true,
+        //onTouchBegan event callback function                      
+        onTouchBegan: function (touch, event) { 
+            var pos = touch.getLocation();
+            var target = event.getCurrentTarget();  
+            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
+                cc.log("touched")
+                return true;
+            }
+            return false;
+        }
+    cc.eventManager.addListener(this.touchListener,this);
+});
+</code></pre>
+
+<p>上面的代码：</p>
+
+<ol>
+<li><p>首先通过使用cc.EventListener.create创建了一个Touch事件监听器touchListener</p></li>
+<li><p>然后，通过cc.eventManager.addListener注册监听器到事件管理器。cc.EventListener.create扩展出一个用户监听器。</p></li>
+<li><p>event属性，定义这个监听器监听的类型。</p></li>
+<li><p>swallowTouches属性设置是否吃掉事件，事件被吃掉后不会递给下一层监听器。</p></li>
+<li><p>onTouchBegan方法处理触摸点击按下事件，我们在这里可以获取到触摸点的坐标pos。event.getCurrentTarget()获取当前事件的接受者，并判断当前的是否点击到了SushiSprite。</p></li>
+<li><p>在touch事件中，我们还可以添加onTouchMoved/onTouchEnded方法监听touch移动和结束的回调。如果onTouchBegan返回false后onTouchMoved/onTouchEnded不会执行。</p></li>
+</ol>
+
+
+<p>tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。</p>
+
+<ol>
+<li><p>通过添加事件监听器，将精灵以显示优先级 (SceneGraphPriority) 添加到事件分发器。这就是说，当我们点击精灵按钮时，根据屏幕显示的“遮盖”实际情况，进行有序的函数回调（即：如图中黄色按钮首先进入 onTouchBegan 逻辑处理）。</p></li>
+<li><p>在事件逻辑处理时，根据各种条件处理触摸后的逻辑，如点击范围判断，设置被点击元素为不同的透明度，达到点击效果。</p></li>
+<li><p>因为设置了 listener1->setSwallowTouches(true); 并且在 onTouchBegan 中做相应的判断，以决定其返回值是 false 还是 true，用来处理触摸事件是否依据显示的顺序关系向后传递。
+注意：与 SceneGraphPriority 所不同的是 FixedPriority 将会依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高。</p></li>
+</ol>
+
 
 
         <div id="disqus_container">
