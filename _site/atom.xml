@@ -4,7 +4,7 @@
    <title>joebon.tk</title>
    <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.tk" rel="alternate" type="text/html" />
-   <updated>2014-11-15T23:49:28+08:00</updated>
+   <updated>2014-11-16T13:11:41+08:00</updated>
    <id>http://joebon.tk</id>
    <author>
      <name></name>
@@ -30,6 +30,33 @@
 &lt;li&gt;自定义事件&lt;/li&gt;
 &lt;li&gt;加速计事件&lt;/li&gt;
 &lt;/ul&gt;
+
+
+&lt;h2&gt;事件分发&lt;/h2&gt;
+
+&lt;p&gt;在了解事件分发机制之前，我们首先要明确什么是事件分发。&lt;/p&gt;
+
+&lt;p&gt;对于事件分发，cocos2d官方定义为：当事件发生(例如，用户触摸屏幕，或者敲键盘)，EventDispatcher 会发布(Event objects)事件对象到合适的EventListeners，并调用你的回调。各个Event object包含事件的信息(比如，触摸点所在的坐标)。&lt;/p&gt;
+
+&lt;p&gt;我的理解是对于一个事件（比如触摸事件、键盘相应事件等）可以与任意对象绑定，那么当这个事件被用户触发时，此时应该执行哪一个对象的回调函数（比如此时我们在好几个sprite上同时绑定了touch事件，用户此时点击屏幕，用户此时想点击的到底是哪一个sprite），我们就需要作出判断。EventDispatcher做的就是这个事情。&lt;/p&gt;
+
+&lt;p&gt;以touch事件（触摸事件）为例，判断用户点击的是哪一个sprite的方法很简单，其实就是在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。不过此时又会出现另外一个问题，就是如果两个sprite有相互重叠的部分，而此时用户点击的恰恰是重叠部分，那么怎么判断到底点击的是哪一个sprite呢？这里是通过priority（分为两种：SceneGraphPriority和FixedPriority）来解决的，优先级高的sprite优先执行它所对应的事件监听器的回调函数。这样就形成了一个按照优先级高低排列的sprite队列等待依次执行用户触发的事件，而这中间则通过swallowTouches（吞没事件）属性来控制是否继续向优先级低的sprite传递事件。这就形成了一个完整的事件分发机制。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;tip:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;SceneGraphPriority(显示优先级)：根据屏幕显示的“遮盖”实际情况，进行有序的函数回调。zOrder越大，优先级越大。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;FixedPriority(固定优先级)：依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;总结一下：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;通过点击位置进行点击范围判断，来确定执行哪一个sprite的事件监听器&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果该位置存在重叠的sprite绑定了相同的事件，则依据优先级（SceneGraphPriority显示优先级或FixedPriority固定优先级）来顺序执行函数回调&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;通过设置swallowTouches属性为true，并在onTouchBegan中返回true或者false来决定是否阻止事件的顺序传递。如果onTouchBegan返回true，且swallowTouches为true，则事件被吞没，事件的顺序传递则被阻止。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 
 &lt;h2&gt;实例&lt;/h2&gt;
@@ -80,13 +107,11 @@ addTouchEventListenser:function(){
 
 &lt;p&gt;tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;通过添加事件监听器，将精灵以显示优先级 (SceneGraphPriority) 添加到事件分发器。这就是说，当我们点击精灵按钮时，根据屏幕显示的“遮盖”实际情况，进行有序的函数回调（即：如图中黄色按钮首先进入 onTouchBegan 逻辑处理）。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在事件逻辑处理时，根据各种条件处理触摸后的逻辑，如点击范围判断，设置被点击元素为不同的透明度，达到点击效果。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;因为设置了 listener1-&gt;setSwallowTouches(true); 并且在 onTouchBegan 中做相应的判断，以决定其返回值是 false 还是 true，用来处理触摸事件是否依据显示的顺序关系向后传递。
-注意：与 SceneGraphPriority 所不同的是 FixedPriority 将会依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2&gt;参考文献&lt;/h2&gt;
 
+&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&quot;&gt;[1] http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&quot;&gt;[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&lt;/a&gt;&lt;/p&gt;
 </content>
    </entry>
    
