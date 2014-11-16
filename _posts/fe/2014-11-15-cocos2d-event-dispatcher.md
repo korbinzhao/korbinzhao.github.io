@@ -98,6 +98,5 @@ tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectCont
 [[2] http://cn.cocos2d-x.org/article/index?type=wiki&url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md][2]
 
 
-[Joebon]:    http://joebon.tk  "Joebon"
 [1]: http://cn.cocos2d-x.org/article/index?type=cocos2d-x&url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md
 [2]: http://cn.cocos2d-x.org/article/index?type=wiki&url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md
