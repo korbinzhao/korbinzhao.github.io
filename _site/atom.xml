@@ -4,7 +4,7 @@
    <title>joebon.tk</title>
    <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.tk" rel="alternate" type="text/html" />
-   <updated>2015-06-02T17:20:48+08:00</updated>
+   <updated>2015-06-02T20:09:25+08:00</updated>
    <id>http://joebon.tk</id>
    <author>
      <name></name>
@@ -123,6 +123,8 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
 
 &lt;h2&gt;项目结构的初始化&lt;/h2&gt;
 
+&lt;p&gt;进入项目目录，运行Node.js command prompt,运行以下代码：&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;- imooc/
  &amp;gt; npm install express
  &amp;gt; npm install jade
@@ -131,7 +133,58 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
  &amp;gt; npm install bootstrap
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;通过npm对项目中使用的框架和模块进行安装之后就可以正式开始项目开发了。&lt;/p&gt;
+&lt;p&gt;通过npm对项目中使用的框架和模块进行安装之后就可以正式开始项目开发了。具体项目源码见&lt;a href=&quot;https://github.com/korbinzhao/exercise/tree/master/imooc&quot; title=&quot;imooc github&quot;&gt;github仓库&lt;/a&gt;。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>SVG入门</title>
+     <link href="http://beiyuu.com/introduction-to-svg"/>
+     <updated>2015-06-02T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/introduction-to-svg</id>
+     <content type="html">&lt;h2&gt;SVG&lt;/h2&gt;
+
+&lt;p&gt;SVG是使用XML描述的矢量文件，全称可缩放矢量图形，用于描述二维矢量图形的一种图形格式。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;位图&amp;amp;矢量图&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;位图（BMP、PNG、JPG等）是基于颜色的描述，由一个个像素点组成；矢量图（SVG、AI等）是基于数学的描述，根据几何特征来绘制图形，矢量可以是一个点或一条线，矢量图只能靠软件生成，特点是放大后图像不会失真，和分辨率无关。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-svg/svg.png&quot; title=&quot;svg&quot; alt=&quot;svg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;SVG示例&lt;/h2&gt;
+
+&lt;p&gt;simple.svg&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;200&quot; height=&quot;200&quot;&amp;gt;
+&amp;lt;!--face--&amp;gt;
+&amp;lt;circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;90&quot; fill=&quot;#39F&quot;/&amp;gt;
+&amp;lt;!--eyes--&amp;gt;
+&amp;lt;circle cx=&quot;70&quot; cy=&quot;80&quot; r=&quot;20&quot; fill=&quot;white&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;130&quot; cy=&quot;80&quot; r=&quot;20&quot; fill=&quot;white&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;65&quot; cy=&quot;75&quot; r=&quot;10&quot; fill=&quot;black&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;125&quot; cy=&quot;75&quot; r=&quot;10&quot; fill=&quot;black&quot;/&amp;gt;
+&amp;lt;!--smile--&amp;gt;
+&amp;lt;path d=&quot;M 50 140 A 60 60 0 0 0 150 140&quot; stroke=&quot;white&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot; /&amp;gt;
+&amp;lt;/svg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;SVG的使用方式&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;浏览器直接打开&lt;/li&gt;
+&lt;li&gt;在HTML中使用img标签引用&lt;/li&gt;
+&lt;li&gt;直接在HTML中使用SVG&lt;/li&gt;
+&lt;li&gt;作为CSS背景&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;基本操作API&lt;/h2&gt;
+
+&lt;p&gt;创建图形，需要使用document.createElementNS()方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;document.createElementNS(ns, tagName)
+&lt;/code&gt;&lt;/pre&gt;
 </content>
    </entry>
    
