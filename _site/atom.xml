@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+   <title>joebon.tk</title>
+   <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
+   <link href="http://joebon.tk" rel="alternate" type="text/html" />
+   <updated>2015-06-02T20:09:25+08:00</updated>
+   <id>http://joebon.tk</id>
+   <author>
+     <name></name>
+     <email></email>
+   </author>
+
+   
+   <entry>
+     <title>nodejs+mongdb+express建站学习中所踩得坑</title>
+     <link href="http://beiyuu.com/nodejs-express-mongodb-website"/>
+     <updated>2015-06-02T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/nodejs-express-mongodb-website</id>
+     <content type="html">&lt;h2&gt;网站开发框架&lt;/h2&gt;
+
+&lt;p&gt;在网站开发之前，我们首先对网站开发框架进行设计。主要分为后端、前端、本地开发环境三部分。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;网站后端由nodejs支撑，同时安装nodejs框架express，数据库选择mongodb，同时选择对mongodb进行快速建模的工具mongoose，后端模板引擎选择jade，日期和时间的格式化选择moment.js，express、mongoose、jade、moment.js都通过npm模块安装包来安装。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;前端选择jQuery类库、Bootstrap样式框架，jQuery和Bootstrap都属于前端静态资源，使用Bower来安装它们，Bower也是一个npm安装模块，因此也需要使用npm安装。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;本地开发环境用到less的编译、cssmin样式合并、JSHint前后端单元测试的实现等。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/website-framework.png&quot; title=&quot;website framework&quot; alt=&quot;website framework&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;视频教程详见&lt;a href=&quot;http://www.imooc.com/learn/75&quot; title=&quot;imooc.com&quot;&gt;imooc.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;nodejs的安装&lt;/h2&gt;
+
+&lt;p&gt;开发前需要先安装[nodejs]，通过nodejs官网即可完成nodejs的安装。&lt;/p&gt;
+
+&lt;h2&gt;mongodb的安装&lt;/h2&gt;
+
+&lt;p&gt;mongodb是一个高性能、开源、无模式的文档型数据库（非关系型数据库），是当前NoSql数据库中比较热门的一种。mongodb中的一条记录就是一个文档（document），它的数据结构由键值对组成。mongodb文档和JSON对象很相似。&lt;/p&gt;
+
+&lt;p&gt;拓展：NoSql，全称是Not Only Sql，指的是非关系型数据库。下一代数据库主要解决几个要点：非关系型、分布式、开源、水平可拓展。&lt;/p&gt;
+
+&lt;p&gt;开发前mongodb需要单独安装。这也是我在不了解情况下踩过的一个坑，mongoose是mongodb的快速建模工具，通过npm安装mongoose并不会同时安装mongodb，且在安装完成mongobd后，在运行node app.&lt;/p&gt;
+
+&lt;p&gt;首先安装&lt;a href=&quot;https://www.mongodb.org/&quot; title=&quot;mongodb&quot;&gt;mongodb&lt;/a&gt;,js本地查看网站效果前，必须前行启动mongodb，并与node连接起来。在项目文件夹imooc下新建data文件夹用于存放mongdb数据。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd d:/fe_exercise/imooc
+mkdir data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入mongodb的安装目录 D:\Program Files\MongoDB 2.6 Standard下的bin文件夹中执行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd d:/Program Files/MongoDB 2.6 Standard/bin
+mongod --dbpath &quot;d:/fe_exercise/imooc/data&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;出现以下结果则证明连接成功。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/mongodb-node-link.png&quot; title=&quot;mongodb-node-link&quot; alt=&quot;mongodb-node-link&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;每次本地查看网站前，用命令行启动mongodb，并将mongodb和node连接是一件很麻烦的事情。可以通过一种相对简单方法可以简化这个过程。具体方法如下：&lt;/p&gt;
+
+&lt;p&gt;新建一个名为mongodb.cmd的文件，文件内容如下。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:: 定位到D盘
+d:
+:: 切换到mongodb的数据库目录
+cd Program files\MongoDB 2.6 Standard\data
+:: 删除数据库锁定记录文件
+if exist mongod.lock del mongod.lock missing
+:: 切换到mongodb的bin目录
+cd ..\bin
+:: 配置mongodb的文档存储目录
+mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;双击运行，即可完成启动mongodb，连接mongodb和node的过程。&lt;/p&gt;
+
+&lt;h2&gt;mongodb可视化管理工具：rockmongo的安装与配置&lt;/h2&gt;
+
+&lt;p&gt;rockmongo是一个用PHP5写的mongodb可视化管理工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下载rockmongo&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://rockmongo.com/downloads&quot; title=&quot;rockmongo&quot;&gt;rockmongo官网&lt;/a&gt;目前无法访问，可选择另一种替代方式：直接访问&lt;a href=&quot;https://github.com/iwind/rockmongo&quot; title=&quot;rockmongo&quot;&gt;rockmongo github地址&lt;/a&gt;，选择一个版本进行下载，本文选用1.1.7版本。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;安装PHP环境&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;rockmongo的运行需要PHP环境，本文选用&lt;a href=&quot;http://pan.baidu.com/s/1c0dInYg&quot; title=&quot;appserv&quot;&gt;AppServ 2.5.1&lt;/a&gt;进行PHP、Apache等环境的打包安装，AppServ是PHP网页架站工具组合包，所包含的软件有：Apache、Apache Monitor、MySQL、PHPMyAdmin等。AppServ 2.5.1中PHP版本为PHP 5.2。下载AppServ点击安装，本文选用安装目录为C:/AppServ。&lt;/p&gt;
+
+&lt;p&gt;将上文中从github上下载的rockmongo 1.1.7文件夹重命名为rockmongo，放到AppServ安装目录下的www文件夹中：C:/AppServ/www。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下载mongodb-php拓展&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;根据所安装的PHP版本选择相应的mongo-php驱动拓展，本文PHP版本为5.2，因此选择PHP 5.2 VC6 Thread-Safe Mongo extension：&lt;a href=&quot;http://pan.baidu.com/s/1eQo33kI&quot; title=&quot;mongo-php-driver&quot;&gt;mongo-php-driver&lt;/a&gt;，将下载目录中的php_mongo.dll文件copy到C:/AppServ/php5/ext中。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;修改php.ini文件&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在php.ini文件中添加extension=php_mongo.dll&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;重启Apache服务&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;重启Apache服务&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;修改rockmongo中的文件config..php&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;设置以下内容的USERNAME和PASSWORD，将两者均设为root&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$MONGO[&quot;servers&quot;][$i][&quot;control_users&quot;][&quot;root&quot;] = &quot;root&quot;;//one of control users [&quot;USERNAME&quot;]=PASSWORD, works only if mongo_auth=false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;使用rockmongo登录mongodb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;访问http://localhost/rockmongo,界面如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/login.png&quot; title=&quot;login&quot; alt=&quot;login&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;登录后界面如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/dbview.png&quot; title=&quot;dbview&quot; alt=&quot;dbview&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;项目结构的初始化&lt;/h2&gt;
+
+&lt;p&gt;进入项目目录，运行Node.js command prompt,运行以下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- imooc/
+ &amp;gt; npm install express
+ &amp;gt; npm install jade
+ &amp;gt; npm install mongoose
+ &amp;gt; npm install bower -g
+ &amp;gt; npm install bootstrap
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过npm对项目中使用的框架和模块进行安装之后就可以正式开始项目开发了。具体项目源码见&lt;a href=&quot;https://github.com/korbinzhao/exercise/tree/master/imooc&quot; title=&quot;imooc github&quot;&gt;github仓库&lt;/a&gt;。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>SVG入门</title>
+     <link href="http://beiyuu.com/introduction-to-svg"/>
+     <updated>2015-06-02T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/introduction-to-svg</id>
+     <content type="html">&lt;h2&gt;SVG&lt;/h2&gt;
+
+&lt;p&gt;SVG是使用XML描述的矢量文件，全称可缩放矢量图形，用于描述二维矢量图形的一种图形格式。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;位图&amp;amp;矢量图&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;位图（BMP、PNG、JPG等）是基于颜色的描述，由一个个像素点组成；矢量图（SVG、AI等）是基于数学的描述，根据几何特征来绘制图形，矢量可以是一个点或一条线，矢量图只能靠软件生成，特点是放大后图像不会失真，和分辨率无关。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-svg/svg.png&quot; title=&quot;svg&quot; alt=&quot;svg&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;SVG示例&lt;/h2&gt;
+
+&lt;p&gt;simple.svg&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;200&quot; height=&quot;200&quot;&amp;gt;
+&amp;lt;!--face--&amp;gt;
+&amp;lt;circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;90&quot; fill=&quot;#39F&quot;/&amp;gt;
+&amp;lt;!--eyes--&amp;gt;
+&amp;lt;circle cx=&quot;70&quot; cy=&quot;80&quot; r=&quot;20&quot; fill=&quot;white&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;130&quot; cy=&quot;80&quot; r=&quot;20&quot; fill=&quot;white&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;65&quot; cy=&quot;75&quot; r=&quot;10&quot; fill=&quot;black&quot;/&amp;gt;
+&amp;lt;circle cx=&quot;125&quot; cy=&quot;75&quot; r=&quot;10&quot; fill=&quot;black&quot;/&amp;gt;
+&amp;lt;!--smile--&amp;gt;
+&amp;lt;path d=&quot;M 50 140 A 60 60 0 0 0 150 140&quot; stroke=&quot;white&quot; stroke-width=&quot;3&quot; fill=&quot;none&quot; /&amp;gt;
+&amp;lt;/svg&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;SVG的使用方式&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;浏览器直接打开&lt;/li&gt;
+&lt;li&gt;在HTML中使用img标签引用&lt;/li&gt;
+&lt;li&gt;直接在HTML中使用SVG&lt;/li&gt;
+&lt;li&gt;作为CSS背景&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;基本操作API&lt;/h2&gt;
+
+&lt;p&gt;创建图形，需要使用document.createElementNS()方法&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;document.createElementNS(ns, tagName)
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>关于方法</title>
+     <link href="http://beiyuu.com/about-method"/>
+     <updated>2014-12-05T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/about-method</id>
+     <content type="html">&lt;p&gt;有时候我们每天忙忙碌碌只是为了让自己觉得自己很努力，其实在徒然做着无用功。&lt;/p&gt;
+
+&lt;h2&gt;装作努力，只是一种心理慰藉&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;现象：&lt;/strong&gt;我们时长会有这种感觉：每天忙忙碌碌却又不知道自己忙了什么，或是看不到忙碌的效果。这个时候我们可能就已经陷入了自我安慰、自我欺骗的陷阱。也就是说我们不自觉得伪装成很忙的样子，只是为了让自己觉得自己每天都很努力，寻求一种心理慰藉，实际上我们每天所做的事情只是些对自己目标实现没有太大意义的无用功。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;为什么会产生这种状态呢？我觉得产生这种状态的心理和拖延症产生的心理是类似的，当我们做一件自己不愿意做的事情时就会产生一种疲惫感，拖延就是因为畏惧这种疲惫感而产生的逃避；同理，当我们被迫开始做这件不愿意做的事情时，我们也会经意不经意地去用一种方式继续逃避，比如漫不经心的草草了事或者刚开始几分钟注意力就转移到了其他事情上去。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;举例：&lt;/strong&gt;以我为例，对于作为音乐白痴+五音不全的自己来说，唱K一直对我都是一件很不情愿的事情，因为没有一两首自己拿手的歌，所以每次去KTV唱与不唱歌对我来说都是一件很尴尬的事情。但是唱K确实又是一种必备的社交手段，无论对生活还是工作都是很有好处而且必须掌握的。尽管自己也很想能够唱的几首好歌，但是几乎每次尝试都是以中途开原唱，然后草草应付了事。&lt;/p&gt;
+
+&lt;h2&gt;做事没有捷径，却有方法&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;做事情前先明确做事的方法。&lt;/strong&gt;做每件事情都会有相应的方法，这些方法肯定不会是一成不变的宝典，却是很多前人经验和技巧的总结。因此，做事情先明确做事的方法，往往可以达到事半功倍的效果。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;举例1：&lt;/strong&gt;比如《金字塔原理》这本书建议我们写作、表达应该遵循金字塔原理，文章中所有思想的理想组织结构也就必定是一个金字塔结构——由一个总的思想统领多组思想。这种结构用程序员熟悉的数据结构来表述，其实就是树形结构。这种结构清晰明了，一目了然，便于理解，不会让读者或者听众无法抓取你表达的结构和重点。&lt;/p&gt;
+
+&lt;p&gt;因此，我现在也开始用上述方式开始组织自己的思维和文字。在平时阅读文章的经验来看，很多作者文章并没有清晰的结构，段落没有中心句，也没有适当的加粗。这就使得阅读此类文章更加费神。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;举例2：&lt;/strong&gt;再说回前文中唱K的例子，受到《金字塔原理》的影响，我也开始寻找拯救我唱K窘境的方法。此时，我想起上小学4年级时数学老师教我们唱歌的场景（说来惭愧，小学条件有限，连个音乐课都没有），当时的学习是老师教一句，我们跟着学一句。五音不全，毫无旋律感的自己居然现在还能清晰记得那首歌的旋律。于是我给自己制定了使用这种最简单方式每天学习一首歌的计划，已经坚持了三天，初见成效。&lt;/p&gt;
+
+&lt;p&gt;具体方法：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;以一段歌词为单位，一句一句学习，先跟唱，再自己唱，有不对的地方及时纠正。这一段没有问题之后，再跳到下一段学习。&lt;/li&gt;
+&lt;li&gt;完成所有歌词学习后，完整唱几遍，查漏补缺。&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;这其实是再简单不过的方法了，但是当我们面对复杂场景或是复杂问题时，再加上一些情绪化的问题，往往将自己绕进某种恶性循环中，长时间跳不出来。&lt;/p&gt;
+
+&lt;h2&gt;最后的话&lt;/h2&gt;
+
+&lt;p&gt;写这篇文章的原因是希望自己能够将最近的经历和思考总结一下，时刻提醒自己不要陷入自我慰藉的坑中，并且对一些重要的事情能够找到有效的方法，让自己每天的忙碌不要成为无用功。也希望能够给大家提供一些借鉴。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>关于思考</title>
+     <link href="http://beiyuu.com/about-thinking"/>
+     <updated>2014-11-21T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/about-thinking</id>
+     <content type="html">&lt;p&gt;这两天世界互联网大会在乌镇热热闹闹开起来了，国内互联网大佬云集，看了两场分享，激起自己的一些思考。&lt;/p&gt;
+
+&lt;h2&gt;关于演讲&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;演讲能力是职场乃至人生之中非常重要的能力，无论从事技术还是管理岗位。&lt;/strong&gt;今天看了场马云关于跨境电子商务的演讲，侃侃而谈40分钟。中国互联网界比较能言善辩的除了周鸿祎也就是马云了。演讲前半段还是有很多干货的，确实对我产生了很大冲击，用舍友的话说这演讲很有煽动力。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;成功的演讲必须言之有物、逻辑清晰、声情并茂。&lt;/strong&gt;之前一直希望能够通过演讲课培训的方式有效提升自己的演讲能力。现在越发觉得优秀的演讲必须言之有物，想要言之有物，就必须保证演讲的内容是你自己真正思考过的东西，并且能够保证有一个清晰明了的框架将内容撑起来。当你所说的内容是你真正认同的经过自己思考的内容之后，所谓的一些抑扬顿挫、声情并茂、眼神交流等演讲技巧就会很自然的充斥在你的演讲中。所以我觉得周鸿祎、马云之所以有很好的演讲能力，无非是说的内容是自己每天思考、每天和别人交流的想法罢了。&lt;/p&gt;
+
+&lt;h2&gt;关于视野&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;视野，就是对于未来的清晰的判断。&lt;/strong&gt;马云在这次演讲中开篇就讲了眼光（vision）的重要性。不过我个人更喜欢把vision翻译成视野。所谓视野，我的理解是对于未来有一个属于自己清晰的判断。“如果你想今天做，明天就成功，这种机会几乎是不存在的。因为聪明的人实在太多了，比聪明、比勤奋都是没有机会的。只有比对未来的判断，并且提早准备才有可能成功。正如阿里现在的状态是15年前就想到并且开始做的。”“战略就是你认为这样走下去，将来一定会到那儿。提早准备。”马云如是说。可见持续思考未来，对未来进行清晰判断的重要性。&lt;/p&gt;
+
+&lt;h2&gt;关于思考&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;停止思考，便陷入颓废。&lt;/strong&gt;安逸的生活是舒服的，但长久的安逸便成了颓废，会让你失去斗志，停步不前，长久下去便失去了价值，失去立足社会的基础。颓废的一大标志便是不愿意去深入思考，毕竟每天接触到的信息实在太大，无论是新闻客户端推送的长篇累牍的新闻、无休无止的QQ群、微信群消息。。信息爆炸造成神经疲劳，造成厌倦，大量信息一扫而过，其实根本没有有效接收。造成这种状态的原因一个是接收信息毫无目的，另一个便是没有将长久以来接收的信息进行有效梳理、深入思考。这就造成了每天浏览大量信息，却也只是徒然做些无用功。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;设计框架，清晰梳理，深入思考。&lt;/strong&gt;为了能够让自己每天有所成长，不再颓废，我能想到的方式便是每天有目标的接收信息，并且设计框架，进行梳理，继而深入思考。比如对于FE和PM两方面的信息进行有目标的接收，根据各自的特点、内在联系设计分类和逻辑框架，将每天积累的内容进行填充，继而根据梳理进行进一步思考。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;思考一个问题：有什么，要什么，放弃什么。&lt;/strong&gt;在中外互联网领袖高峰对话上，李彦宏说自己每天比较头疼的便是机会太多，每天5点钟便会起床思考到底该放弃那些机会。比较有趣的是，马云在后面打趣的补充到，如果你想清楚“自己有什么，要什么，放弃什么”这个问题，其实摆在你面前的机会真的很少。所以自己真正想要的是什么，这个问题每个人都有必要好好思考，想清楚了，也许就没那么多迷茫了。&lt;/p&gt;
+
+&lt;h2&gt;关于成功&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;和优秀的人为伍。&lt;/strong&gt;提到成功，立马用到眼前的让人颇感厌烦的成功学。想想也是我们之前对成功的定义过于狭隘了。我眼中的成功应该是按照自己想要的生活方式快乐的生活。不过如果真的这样定义的话，我离自己想要的成功还真是相差甚远。目前的状态既不是自己想要的生活方式，自己也没那么快乐。不过想想自己真正快乐的时候，其实是和自己或喜欢或欣赏的人在一起的时光，这样的人充满正能量、总是给你带来快乐，甚至充满激情，对某些事物有自己的想法，并且更难能可贵的是有自己的态度和坚持。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;团队比idea要重要。&lt;/strong&gt;突然想到创业导师徐小平的一句话：“初创团队，合伙人比商业模式更重要。”非常认同，正如投资大师巴菲特的投资其实只看人一样，人靠谱的话，其实这个人做什么都是会成功的。希望自己日后能够足够幸运遇到那么一帮让我佩服、足够靠谱的人，共同做点事情。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;成功不可复制，失败或可避免。&lt;/strong&gt;吴晓波最近推出的个人脱口秀节目《吴晓波频道》中有一句话：“成功不可复制，失败或可避免。”这个观点再次被马云印证，马云在演讲中说其实失败的道理差不多，如果能把其他人失败的事情研究的差不多，就离成功不远了。&lt;/p&gt;
+
+&lt;h2&gt;最后的自勉&lt;/h2&gt;
+
+&lt;p&gt;最后拿三句话做自勉吧！&lt;/p&gt;
+
+&lt;p&gt;前两句是马云的，后一句是自己的。&lt;/p&gt;
+
+&lt;p&gt;“对未来执着；有优秀团队；不怕犯错。那么总有一天你会成功。”&lt;/p&gt;
+
+&lt;p&gt;“自信来自于你知道自己要做什么。”&lt;/p&gt;
+
+&lt;p&gt;“每天用自己最充沛的精力，做有价值的事情。”&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>Cocos2d-X 3.0 事件分发机制</title>
+     <link href="http://beiyuu.com/cocos2d-event-dispatcher"/>
+     <updated>2014-11-15T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/cocos2d-event-dispatcher</id>
+     <content type="html">&lt;h2&gt;事件&lt;/h2&gt;
+
+&lt;p&gt;Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。&lt;/p&gt;
+
+&lt;p&gt;事件监听器有以下几种：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;触摸事件&lt;/li&gt;
+&lt;li&gt;键盘响应事件&lt;/li&gt;
+&lt;li&gt;鼠标响应事件&lt;/li&gt;
+&lt;li&gt;自定义事件&lt;/li&gt;
+&lt;li&gt;加速计事件&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;事件分发&lt;/h2&gt;
+
+&lt;p&gt;在了解事件分发机制之前，我们首先要明确什么是事件分发。&lt;/p&gt;
+
+&lt;p&gt;对于事件分发，cocos2d官方定义为：当事件发生(例如，用户触摸屏幕，或者敲键盘)，EventDispatcher 会发布(Event objects)事件对象到合适的EventListeners，并调用你的回调。各个Event object包含事件的信息(比如，触摸点所在的坐标)。&lt;/p&gt;
+
+&lt;p&gt;我的理解是对于一个事件（比如触摸事件、键盘相应事件等）可以与任意对象绑定，那么当这个事件被用户触发时，此时应该执行哪一个对象的回调函数（比如此时我们在好几个sprite上同时绑定了touch事件，用户此时点击屏幕，用户此时想点击的到底是哪一个sprite），我们就需要作出判断。EventDispatcher做的就是这个事情。&lt;/p&gt;
+
+&lt;p&gt;以touch事件（触摸事件）为例，判断用户点击的是哪一个sprite的方法很简单，其实就是在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。不过此时又会出现另外一个问题，就是如果两个sprite有相互重叠的部分，而此时用户点击的恰恰是重叠部分，那么怎么判断到底点击的是哪一个sprite呢？这里是通过priority（分为两种：SceneGraphPriority和FixedPriority）来解决的，优先级高的sprite优先执行它所对应的事件监听器的回调函数。这样就形成了一个按照优先级高低排列的sprite队列等待依次执行用户触发的事件，而这中间则通过swallowTouches（吞没事件）属性来控制是否继续向优先级低的sprite传递事件。这就形成了一个完整的事件分发机制。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;tip:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;SceneGraphPriority(显示优先级)：根据屏幕显示的“遮盖”实际情况，进行有序的函数回调。zOrder越大，优先级越大。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;FixedPriority(固定优先级)：依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;strong&gt;总结一下：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;通过点击位置进行点击范围判断，来确定执行哪一个sprite的事件监听器&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果该位置存在重叠的sprite绑定了相同的事件，则依据优先级（SceneGraphPriority显示优先级或FixedPriority固定优先级）来顺序执行函数回调&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;通过设置swallowTouches属性为true，并在onTouchBegan中返回true或者false来决定是否阻止事件的顺序传递。如果onTouchBegan返回true，且swallowTouches为true，则事件被吞没，事件的顺序传递则被阻止。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;实例&lt;/h2&gt;
+
+&lt;p&gt;新建一个sprite，并为其添加一个touch事件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var SushiSprite = cc.Sprite.extend({
+    onEnter:function () {
+        cc.log(&quot;onEnter&quot;);
+        this._super();
+    },
+
+    onExit:function () {
+        cc.log(&quot;onExit&quot;);
+    }
+});
+
+addTouchEventListenser:function(){
+    this.touchListener = cc.EventListener.create({
+        event: cc.EventListener.TOUCH_ONE_BY_ONE,
+        // When &quot;swallow touches&quot; is true, then returning &#39;true&#39; from the onTouchBegan method will &quot;swallow&quot; the touch event, preventing other listeners from using it.
+        swallowTouches: true,
+        //onTouchBegan event callback function                      
+        onTouchBegan: function (touch, event) { 
+            var pos = touch.getLocation();
+            var target = event.getCurrentTarget();  
+            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
+                cc.log(&quot;touched&quot;)
+                return true;
+            }
+            return false;
+        }
+    cc.eventManager.addListener(this.touchListener,this);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的代码：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;首先通过使用cc.EventListener.create创建了一个Touch事件监听器touchListener&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;然后，通过cc.eventManager.addListener注册监听器到事件管理器。cc.EventListener.create扩展出一个用户监听器。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;event属性，定义这个监听器监听的类型。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;swallowTouches属性设置是否吃掉事件，事件被吃掉后不会递给下一层监听器。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;onTouchBegan方法处理触摸点击按下事件，我们在这里可以获取到触摸点的坐标pos。event.getCurrentTarget()获取当前事件的接受者，并判断当前的是否点击到了SushiSprite。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在touch事件中，我们还可以添加onTouchMoved/onTouchEnded方法监听touch移动和结束的回调。如果onTouchBegan返回false后onTouchMoved/onTouchEnded不会执行。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。&lt;/p&gt;
+
+&lt;h2&gt;参考文献&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&quot;&gt;[1] http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&quot;&gt;[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&lt;/a&gt;&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</title>
+     <link href="http://beiyuu.com/first-douban-activity"/>
+     <updated>2014-11-02T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/first-douban-activity</id>
+     <content type="html">&lt;p&gt;自从实习结束、工作确定之后，一直处于比较慵懒颓废的状态。前两天看到豆瓣同城上有这样一个活动，急需有个动力改变下状态的自己就怂恿另外两个同学一起报名。出于观摩和尝鲜的心态，也没有做什么准备，就这样轻松上阵。&lt;/p&gt;
+
+&lt;p&gt;经过一番寻找，终于在一栋大楼6楼的一个角落找到活动地点——城市星空咖啡馆，一个不怎么起眼的咖啡馆。经过一番介绍后，活动正式开始。这次活动为期10周，主要是以Coursera公开课为依托，大家每次进行演讲分享，互相寻找问题，随意聊天交流的活动。&lt;/p&gt;
+
+&lt;p&gt;一直都非常清楚演讲对于职业生涯乃至日常生活的重要性，作为一个日后要从事技术岗的不折不扣的工科生来说，表达能力一直是我的弱项，也一直希望能够得到有效的提升。虽然在求职准备时做过一段时间的尝试，和一个小伙伴做了大概三周的演讲练习，并且有将演讲过程录制下来，但是由于之后技术准备、实习面试等一系列事情的压力，最终还是半途而废。这次也是非常偶然的找到这样一个机会，希望能够坚持下来，做个改变。&lt;/p&gt;
+
+&lt;p&gt;本次活动一共10个人参加，4个学生，5个刚刚参加工作的童鞋，还有一位很健谈很有趣的老者。活动主要由活动组织者和这位老者主导。组织者jianyan英语口语确实很好，洋洋洒洒为我们分享了Cousera第一周课程，这让有段时间未碰英语的我有点惭愧。“周一”是一位刚刚毕业的技术支持工程师，由于没戴眼镜只能看到大概轮廓，声音好听，思路清晰，笑起来很有感染力，这让我不由想起一位大学同学。她的一句话让我印象深刻：“人总是要不断尝试新的东西，不断让自己有所成长。”，这一点确实是这段时间十分颓废的我所要好好思考的。然后，邓琳为我们做了一个简短的很有趣的presentation，PPT简明有趣，笑容可人，声音甜美，这个演讲过程赏心悦目，最后也获得了Peter老师（老者）的赞赏。其他时间，基本被jianyan和Peter老师填满，我们时不时的会被要求提些建议。就这样，我完成了第一次豆瓣活动的打酱油之旅。&lt;/p&gt;
+
+&lt;p&gt;最后，谈谈这次活动的感受。虽然活动场所没有我想象中的高大上。但是遇到这样一批愿意不断尝试改变自己的小伙伴们确实是一件幸运的事情，整个活动没有出现冷场，所有的时间都被侃侃而谈所占据。这种感觉其实是我这样一个平时不太擅长言语的所喜欢的。由于成长环境的原因，我是一个不太会找话题，不太会逗趣的一个人。不过我一直希望能够通过接触更多新鲜的环境来慢慢改变自己。我一直希望能够达到一种状态：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;拥有清晰的思考问题的逻辑&lt;/li&gt;
+&lt;li&gt;能够条理清晰的表达出自己的观点&lt;/li&gt;
+&lt;li&gt;聊天时，能找到对方感兴趣的话题&lt;/li&gt;
+&lt;li&gt;富有幽默感&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;虽然知道有些改变不容易，也不会很快有成效，但是我想慢慢改变。&lt;/p&gt;
+
+&lt;p&gt;One day I will be who I wanna be.&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>平凡之路，重新出发</title>
+     <link href="http://beiyuu.com/restart"/>
+     <updated>2014-10-20T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/restart</id>
+     <content type="html">&lt;h2&gt;摆脱迷茫&lt;/h2&gt;
+
+&lt;p&gt;2013年9月开始学习前端，转眼一年有余。一直没有时间将这段经历做个梳理，现在终于闲下来了。颓废了一段时间，重新拾起往日的激情和干劲，从现在开始为了下一个目标努力。&lt;/p&gt;
+
+&lt;p&gt;说起自己前端学习之路，还是从自己的专业背景开始说起吧！本科阴差阳错的读了材料成型专业，后来有幸转到工业工程，开始了为期两年的半工科半管理的学习之路。也就是这两年遇到了一帮有想法有追求的同学们。这和我一直期待的状态不谋而合，回忆起来大三一年可谓是我目前为止最充实最开心的一段经历。又是一次机缘巧合，保送读研，专业信息管理。这无疑对我又意味着一次转折。因为它直接决定了我现在的职业发展方向。&lt;/p&gt;
+
+&lt;p&gt;进入研一的自己对于未来的职场依旧迷茫，于是整个研一基本是一个探索阶段，于是有了后来西门子、IBM两家公司的实习经历，综合自己过往经历和师兄师姐的经验。最终发现前端开发才是自己喜欢并且有很好发展前景的岗位。&lt;/p&gt;
+
+&lt;h2&gt;初涉前端&lt;/h2&gt;
+
+&lt;p&gt;借用一位前辈对于前端的描述：“相对后端，前端入门要容易些；但是要想成为前端大牛，则需要比后端付出更多的努力。也就是说，前端的学习曲线更像一个对数函数。”因此，对于一个想以前端为职业方向的新手来说，一年的学习时间足够了。《JavaScript高级程序设计》是一个不错的入门级书籍，讲解细致且通俗易懂。前期对于前端的学习主要以这本书为主，再加上其他前端书籍以及网上的资料、博客作为辅助。实习面试也是很不错的个人提升的途径，通过面试可以了解到企业具体的技术需求现状以及自己的不足。没经过一次面试，都感觉自己成长很多。最终拿到淘宝UED的实习Offer。&lt;/p&gt;
+
+&lt;h2&gt;阿里实习&lt;/h2&gt;
+
+&lt;p&gt;怀着无比激动的心情，开始了为期3个月淘宝UED实习。阿里给我的感觉是自由、开放、主动。整个办公环境就像是一个超级大学，园区有如诗如画的园林绿化，有活泼调皮又略带文艺的壁画，有略显吵闹的园区广播，有免费穿梭自行车，有设备齐全的健身房，味道不错的饭堂。。虽然工作时常紧张，但是待在这种办公环境下，始终觉得是一种惬意的感觉。&lt;/p&gt;
+
+&lt;p&gt;工作方面，淘宝UED给我的最大的感觉就是完善的开发环境和开发流程，这些很大程度上降低了开发的成本。虽然，学习这些工具确实要花费很多时间，但是这却让之后的开发事半功倍。另外一个感觉就是阿里人对于技术的追求。通过与带我的师兄的交流，总会被师兄思考问题的视角和逻辑触动，切实感觉自己还有很多需要学习提升的地方。因此，我对于三个月实习的感受更多是个人的自我重新认识和提升。并且，也非常幸运能够拿到正式offer。&lt;/p&gt;
+
+&lt;h2&gt;重新出发&lt;/h2&gt;
+
+&lt;p&gt;实习结束，返回学校。拥有了更多弥补自身不足的时间，确实要好好利用这段时间去做更多的积累。为之后更好的适应工作、职业发展做好准备。&lt;/p&gt;
+
+&lt;p&gt;在转正面试上，圆心给我提了2个建议：1.找到自己感兴趣的方向；2.积累与分享。出于对自己学习的积累与分享，于是开通了这个个人博客。所以，重新出发，从博客开始吧！&lt;/p&gt;
+
+&lt;p&gt;很久没写东西了，文字越来越不听自己的使唤了。今天就先到这里吧！&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>如果侧滑成为APP标配</title>
+     <link href="http://beiyuu.com/side-slide"/>
+     <updated>2012-12-26T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/side-slide</id>
+     <content type="html">&lt;p&gt;前两天这样感叹过：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;
+像Weico和网易新闻的手势滑动后退这样流畅、高效的交互真让人爱不释手，而且会很快形成惯性，真期待成为各App标配。就像当年第一次用完触屏手机，再去用其他机器，都会上手去摸一样。
+&lt;/p&gt;&lt;/blockquote&gt;
+
+
+&lt;p&gt;&lt;img src=&quot;/images/other/side-slide.jpg&quot; alt=&quot;Weico Side&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;左图Weico的侧拉导航这种交互，从Path之后就遍地开花。对于手机应用，合理利用边缘操作，方便的隐藏显示功能，实在优雅。&lt;/p&gt;
+
+&lt;p&gt;导航部分的侧拉交互并不是每个APP都需要，但是像右图中网易新闻的内容侧拉后退，我觉得应该成为各APP标配。&lt;/p&gt;
+
+&lt;p&gt;这个交互并不新鲜，iPad上的&lt;a href=&quot;http://reederapp.com/ipad/&quot;&gt;Reeder&lt;/a&gt;和&lt;a href=&quot;http://alienblue.org/&quot;&gt;Alien Blue&lt;/a&gt;一直都有，iPad屏幕大，点击顶部按钮的动作幅度太大，问题很突出，就有了侧滑后退这个不错的办法。Alien Blue还像Mac下Finder的并列布局那样，会留有一定宽度的上级内容边缘，转换更加方便。&lt;/p&gt;
+
+&lt;p&gt;先不说手机屏幕越来越大，这个交互本就是令人愉悦的，就像之前Tweetie的下拉刷新一样。人在习惯了高效的东西之后，就很难再回去了，我现在遇见不能侧滑后退的应用，心底的鄙视之情油然而生。可喜的是，很多应用也有了这个Feature，比如&lt;a href=&quot;http://instagram.com/&quot;&gt;Instagram&lt;/a&gt;，等等。&lt;/p&gt;
+
+&lt;p&gt;侧滑本就是手机上很舒适自然的一个体验，想想你会不会没事解锁手机，桌面划两下，再锁屏呢？&lt;/p&gt;
+
+&lt;p&gt;希望能有更多的PM、设计师和开发者认同，赶紧给自己的APP加上这个舒适的Feature吧！&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>谈谈刚需和360影视</title>
+     <link href="http://beiyuu.com/needs-video"/>
+     <updated>2012-11-22T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/needs-video</id>
+     <content type="html">&lt;h2&gt;很久以前&lt;/h2&gt;
+
+&lt;p&gt;很欠的说，一年半之前，我非常想做影视导航站，构思也近完整。当时试用了几个同类站，基本上能确定，这些产品经理不追美剧。&lt;a href=&quot;http://v.360.cn&quot;&gt;360影视&lt;/a&gt;在2011年4月下旬发布，跟我的想法同期，不过我发现他却是几个月之后了。&lt;/p&gt;
+
+&lt;h2&gt;需求很简单&lt;/h2&gt;
+
+&lt;p&gt;对于追剧集的来说，需求其实很简单：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;找到需要的剧集&lt;/li&gt;
+&lt;li&gt;在线看地址或下载链接（在线最好）&lt;/li&gt;
+&lt;li&gt;记住我看到哪了&lt;/li&gt;
+&lt;li&gt;更新及时&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;这样简单的需求，那么多站做的我连吐槽的兴趣都没有。好吧，360影视满足了上面的需求，所以我用他，又因为我用，所以才吐槽：&lt;/p&gt;
+
+&lt;h2&gt;吐槽360影视&lt;/h2&gt;
+
+&lt;h3&gt;一个剧集&lt;/h3&gt;
+
+&lt;p&gt;各站对一个剧集有多季的处理，除了豆瓣电影可以方便完整的链接到其他季，其他各站几乎都独立了每一季，这是糟糕的体验，人为增大&lt;strong&gt; “找到需要的剧集” &lt;/strong&gt;的难度。看下图：
+&lt;img src=&quot;/images/360video/sp-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+我是不会明白这样做的好处，得到的只是难受、难受。&lt;/p&gt;
+
+&lt;h3&gt;new标识&lt;/h3&gt;
+
+&lt;p&gt;new标识绝对是互联网上最被滥用的图标之一。有些地方用的真让人莫名的恼火：
+&lt;img src=&quot;/images/360video/baidu-new.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+这是百度首页网址导航的new标识，难以理解，猜测他根据我的浏览记录来决定是否显示new，但是Big Bang我看过了却还显示，所以这个逻辑行不通，只好猜测他是根据绝对时间的new程度来显示，这就无法满足&lt;strong&gt; “记住我看到哪了” &lt;/strong&gt;需求，如果我有很久一段时间没看，提示失去了参考意义，而且点一下链接，new就会消失，我只能呵呵了。完全不可用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/360video/2b-sohu.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+再看搜狐视频的new标识，3、4集都标上了new，你却根本不管我到底看了没，看过3了，3上面的new还在，也是混乱了正常秩序，没有安全感，不靠谱。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/360video/2b-360.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+360影视的这个new的定义也很奇怪，我看过了new还在，过了两个星期了new也还在，我只能推断他的逻辑就是，最新的一集就是需要标new的那一集，真把用户当白痴了，不过他稍好一点的是，这个毫无意义的标识不会捣乱。&lt;/p&gt;
+
+&lt;p&gt;那到底怎样做才好呢，既然每个剧集里面会标明看过与否，那么在我正在追的美剧的集合页，明确的告诉我，我赶上最新一集某剧还差多少就好了啊。
+&lt;img src=&quot;/images/360video/new-out.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+看到这，也就能体会独立每一季出来有多恶心了。&lt;/p&gt;
+
+&lt;h3&gt;注册用户&lt;/h3&gt;
+
+&lt;p&gt;我明白，像这样一个刚需产品，又通过360浏览器导航过来的，大多都是低端用户，首页做成那个样子无可厚非，可是当我顶着极大的不情愿注册了用户之后，能不能稍微体谅下注册用户的心呢？&lt;/p&gt;
+
+&lt;p&gt;我猜想根据产品的设计，用户注册就是为了标记自己想看的剧集，方便更快更准的追剧，可是每次打开还是那个国产垃圾横行的首页，你让小清新们怎么看的上呢？&lt;/p&gt;
+
+&lt;p&gt;好啦，我就忍一下，多点一下“我的影视”吧：
+&lt;img src=&quot;/images/360video/360-home.jpg&quot; alt=&quot;ssh key success&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;发现问题没，把我主动标记了的影视放在下面，要把那些自作聪明的推荐作品放在上面，并且一个都没有推荐，这不是耍流氓的干活还是什么滴干活？&lt;/p&gt;
+
+&lt;p&gt;再综合上面new标识最后一条，基本上，网站的使用效率被这些恶心的细节全面拉低，需要很多无谓的操作，才能到达我的真正目的。&lt;/p&gt;
+
+&lt;h3&gt;安全感&lt;/h3&gt;
+
+&lt;p&gt;我最近比较喜欢用安全感这个概念，大意就是我在乎的事情你都能很好的解决，并不需要我过多的操心。
+&lt;img src=&quot;/images/360video/homeland.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+看过与否倒是一目了然，可当我只是看了几眼，并不想接着看下去，或者手贱点了后面的某一集，我就得人肉去记住，我没看过第一集，只是手贱点了一下，下次想看的时候得从第一集看，一定要记得，一定。&lt;/p&gt;
+
+&lt;p&gt;呵呵，那我还要你记干嘛呢？&lt;/p&gt;
+
+&lt;h2&gt;顺道吐槽社交&lt;/h2&gt;
+
+&lt;p&gt;看到这个需求人很多，在移动端尤甚。有个叫“段落”的电视导航应用，主要功能是电视节目早知道，现在电视节目有精彩到需要看着预告时间等的程度吗？我表示怀疑。不过“段落”主打的是社交，可以跟同时看“非诚勿扰”的观众交流哦~&lt;/p&gt;
+
+&lt;p&gt;我只想说，&lt;strong&gt;社你妈X交&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;真有那么困难吗&lt;/h2&gt;
+
+&lt;p&gt;是的，这个命题很难以理解，来看看百度视频的例子，美剧在百度的搜索量肯定不小：
+&lt;img src=&quot;/images/360video/baidu-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+继续吐槽那个无法理解的new标识，总体看起来不错哦，提供了好几个视频服务商，点开过的链接，自然的变不同颜色，看起来很自然，但是满足 &lt;strong&gt;“记住我看到哪儿”&lt;/strong&gt; 的需求还是不可靠，就没有安全感。&lt;/p&gt;
+
+&lt;p&gt;再看看假如我要追一个剧集，那么在百度视频里面该怎么做呢？
+&lt;img src=&quot;/images/360video/baidu-video.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
+点了，好久，终于发现了这个藏起来的“订阅”按钮，订阅，订阅，呵呵，订阅！&lt;/p&gt;
+
+&lt;p&gt;在回到百度视频的首页，我是无法找到我刚才的“订阅”操作，对首页有任何影响，参考上面的“注册用户”一节，百度首页上也没什么特别的变化，所以，至此，我不知道这个订阅按钮到底有什么作用。&lt;/p&gt;
+
+&lt;p&gt;百度视频首页，在众多傻逼一样的new标识之下，我还是被吸引到了一个叫“我的随心看”的频道，以为可以快速打开我订阅的剧集，原来是“豆瓣猜”啊，混乱至极。&lt;/p&gt;
+
+&lt;h2&gt;结语&lt;/h2&gt;
+
+&lt;p&gt;本来想心平气和的吐槽下，毕竟360影视做的正常的地方还是有的，可是说着说着还是不免激动了，哎。&lt;/p&gt;
+</content>
+   </entry>
+   
+ 
+</feed>
