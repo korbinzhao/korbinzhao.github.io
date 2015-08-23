@@ -2,90 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0dc235a-67ad-4e04-a1b6-fb6403d1f057" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/bg1.jpg" afterPath="$PROJECT_DIR$/_site/images/bg1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/bg1.jpg" afterPath="$PROJECT_DIR$/images/bg1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/bg2.jpg" afterPath="$PROJECT_DIR$/_site/images/bg2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/bg2.jpg" afterPath="$PROJECT_DIR$/images/bg2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/dbview.png" afterPath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/dbview.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/dbview.png" afterPath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/dbview.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/external_link.gif" afterPath="$PROJECT_DIR$/_site/images/external_link.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/external_link_on.gif" afterPath="$PROJECT_DIR$/_site/images/external_link_on.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/favicon.ico" afterPath="$PROJECT_DIR$/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/favicon.ico" afterPath="$PROJECT_DIR$/_site/favicon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/icons.gif" afterPath="$PROJECT_DIR$/_site/images/icons.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/login.png" afterPath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/login.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/login.png" afterPath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/login.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/mongodb-node-link.png" afterPath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/mongodb-node-link.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/mongodb-node-link.png" afterPath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/mongodb-node-link.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/introduction-to-svg/svg.png" afterPath="$PROJECT_DIR$/_site/images/introduction-to-svg/svg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/introduction-to-svg/svg.png" afterPath="$PROJECT_DIR$/images/introduction-to-svg/svg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/website-framework.png" afterPath="$PROJECT_DIR$/_site/images/nodejs-express-mongondb-website/website-framework.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/website-framework.png" afterPath="$PROJECT_DIR$/images/nodejs-express-mongondb-website/website-framework.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/product/2012-11-22-needs-video.md" afterPath="$PROJECT_DIR$/_posts/product/2012-11-22-needs-video.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/product/2012-12-26-side-slide.md" afterPath="$PROJECT_DIR$/_posts/product/2012-12-26-side-slide.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/life/2014-10-20-restart.md" afterPath="$PROJECT_DIR$/_posts/life/2014-10-20-restart.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/life/2014-11-02-first-douban-activity.md" afterPath="$PROJECT_DIR$/_posts/life/2014-11-02-first-douban-activity.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/fe/2014-11-15-cocos2d-event-dispatcher.md" afterPath="$PROJECT_DIR$/_posts/fe/2014-11-15-cocos2d-event-dispatcher.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/product/2014-11-21-about-thinking.md" afterPath="$PROJECT_DIR$/_posts/product/2014-11-21-about-thinking.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/product/2014-12-5-about-method.md" afterPath="$PROJECT_DIR$/_posts/product/2014-12-5-about-method.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/fe/2015-6-2-introduction-to-svg.md" afterPath="$PROJECT_DIR$/_posts/fe/2015-6-2-introduction-to-svg.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/fe/2015-6-2-nodejs-express-mongodb-website.md" afterPath="$PROJECT_DIR$/_posts/fe/2015-6-2-nodejs-express-mongodb-website.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/404.html" afterPath="$PROJECT_DIR$/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNAME" afterPath="$PROJECT_DIR$/CNAME" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/CNAME" afterPath="$PROJECT_DIR$/_site/CNAME" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/README.md" afterPath="$PROJECT_DIR$/_site/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/atom.xml" afterPath="$PROJECT_DIR$/_site/atom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/css/css3-ani.css" afterPath="$PROJECT_DIR$/_site/css/css3-ani.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/css3-ani.css" afterPath="$PROJECT_DIR$/css/css3-ani.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/css3-ani.js" afterPath="$PROJECT_DIR$/_site/js/css3-ani.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/css3-ani.js" afterPath="$PROJECT_DIR$/js/css3-ani.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/css/default.css" afterPath="$PROJECT_DIR$/_site/css/default.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/google0bd953d19d6551fe.html" afterPath="$PROJECT_DIR$/google0bd953d19d6551fe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/google0bd953d19d6551fe.html" afterPath="$PROJECT_DIR$/_site/google0bd953d19d6551fe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about-method/index.html" afterPath="$PROJECT_DIR$/_site/about-method/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about-thinking/index.html" afterPath="$PROJECT_DIR$/_site/about-thinking/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/cocos2d-event-dispatcher/index.html" afterPath="$PROJECT_DIR$/_site/cocos2d-event-dispatcher/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/first-douban-activity/index.html" afterPath="$PROJECT_DIR$/_site/first-douban-activity/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/introduction-to-svg/index.html" afterPath="$PROJECT_DIR$/_site/introduction-to-svg/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/life/index.html" afterPath="$PROJECT_DIR$/_site/life/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/needs-video/index.html" afterPath="$PROJECT_DIR$/_site/needs-video/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/nodejs-express-mongodb-website/index.html" afterPath="$PROJECT_DIR$/_site/nodejs-express-mongodb-website/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/product/index.html" afterPath="$PROJECT_DIR$/_site/product/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/restart/index.html" afterPath="$PROJECT_DIR$/_site/restart/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/side-slide/index.html" afterPath="$PROJECT_DIR$/_site/side-slide/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/life/index.md" afterPath="$PROJECT_DIR$/life/index.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/product/index.md" afterPath="$PROJECT_DIR$/product/index.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/jquery-1.7.1.min.js" afterPath="$PROJECT_DIR$/_site/js/jquery-1.7.1.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-apollo.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-apollo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-clj.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-clj.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-css.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-css.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-go.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-go.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-hs.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-hs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-lisp.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-lisp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-lua.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-lua.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-ml.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-ml.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-n.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-n.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-proto.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-proto.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-scala.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-scala.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-sql.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-sql.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-tex.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-tex.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-vb.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-vb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-vhdl.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-vhdl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-wiki.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-wiki.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-xq.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-xq.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/lang-yaml.js" afterPath="$PROJECT_DIR$/_site/js/prettify/lang-yaml.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/native_debug.cmd" afterPath="$PROJECT_DIR$/native_debug.cmd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/native_debug.cmd" afterPath="$PROJECT_DIR$/_site/native_debug.cmd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/post.js" afterPath="$PROJECT_DIR$/_site/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/prettify.css" afterPath="$PROJECT_DIR$/_site/js/prettify/prettify.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/js/prettify/prettify.js" afterPath="$PROJECT_DIR$/_site/js/prettify/prettify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/fe/template.md" afterPath="$PROJECT_DIR$/_posts/fe/template.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/life/template.md" afterPath="$PROJECT_DIR$/_posts/life/template.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/product/template.md" afterPath="$PROJECT_DIR$/_posts/product/template.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/wiki.html" afterPath="$PROJECT_DIR$/_site/wiki.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md" afterPath="$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md" />
     </list>
     <ignored path="korbinzhao.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,20 +23,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="2015-8-23-mac-os-x-shortcut.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="2015-8-23-mac-os-x-shortcut.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.9259257">
-              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.9275053">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-6-2-nodejs-express-mongodb-website.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-6-2-nodejs-express-mongodb-website.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/fe/2015-6-2-nodejs-express-mongodb-website.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39872068">
+            <state vertical-scroll-proportion="-6.9259257">
               <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding />
             </state>
@@ -135,6 +52,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/_posts/fe/2015-8-8-sublime-lessc.md" />
+        <option value="$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md" />
       </list>
     </option>
   </component>
@@ -281,13 +199,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290653" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -310,18 +228,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md">
+    <entry file="file://$PROJECT_DIR$/_posts/fe/2015-6-2-nodejs-express-mongodb-website.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.9259257">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/fe/2015-6-2-nodejs-express-mongodb-website.md">
+    <entry file="file://$PROJECT_DIR$/_posts/fe/2015-8-23-mac-os-x-shortcut.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39872068">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.9275053">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>

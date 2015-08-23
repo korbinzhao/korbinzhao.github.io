@@ -7,6 +7,8 @@ category: fe
 
 
 
+Mac OS X 的快捷键会有效提升我们的办公效率，下面是常用的部分快捷键的汇总，并在文章的最后附有详细的系列学习视频
+
 command+H : 隐藏该程序
 
 command＋option＋H: 隐藏当前应用外的其它所有应用
@@ -46,14 +48,7 @@ option＋拖动文件：复制
 
 在英文输入法状态下长按韵母字母，就可以呼出带有声调的字母符号
 
-
 －－－－－－－－－－－－－－－－－－－－－－
 
-推荐的学习视频：（深入浅出 Mac OSX 中文教程)［http://www.youku.com/playlist_show/id_18654878.html］
+推荐的学习视频：[深入浅出 Mac OSX 中文教程](http://www.youku.com/playlist_show/id_18654878.html)
 
-
-
-
-
-
-[Joebon]:    http://joebon.tk  "Joebon"
