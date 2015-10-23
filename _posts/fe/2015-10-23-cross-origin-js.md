@@ -5,9 +5,9 @@ description: 所谓跨域，或者异源，是指主机名（域名）、协议�
 category: fe
 ---
 
-所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。
+所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。以下列举几种跨域方式。
 
-## CORS
+## 1.CORS
 
 Cross-Origin Resource Sharing，跨域资源共享，简称 CORS。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。跨域资源共享是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。
 
@@ -25,7 +25,7 @@ CORS(Cross-Origin Resource Sharing,􏰛源􏰉源共􏰠)是 W3C 的一个工作
 
 注：CORS支持GET/POST请求方式
 
-## JSONP
+## 2.JSONP
 
 JSONP 是 JSON with padding(填充式 JSON 或参数式 JSON)的简写。
 
@@ -53,7 +53,7 @@ Jsonp正是利用这种特性来实现跨域的：在页面中引入要跨域访
 	  
 注：JSONP只支持GET请求方式
 
-## 修改document.domain来跨子域
+## 3.修改document.domain来跨子域
 
 www.a.com/1.html和a.com/2.html是不同域的，要使他们可以跨域访问，可通过修改document.domain来实现，即在两个页面中都设置：
 	
@@ -61,7 +61,7 @@ www.a.com/1.html和a.com/2.html是不同域的，要使他们可以跨域访问�
 
 需要注意的是document.domain只能往父级修改，如a.com改为www.a.com是不被允许的，这也是此方法的局限性，只使用于跨子域访问。
 
-## 使用window.name来跨域访问
+## 4.使用window.name来跨域访问
 
 window.name是同一浏览器窗口下载入的所有页面共享的数据字段，所有窗口都可以读写此字段的内容。
 
