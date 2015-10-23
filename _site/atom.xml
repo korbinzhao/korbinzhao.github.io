@@ -1,20 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
-   <title>joebon.tk</title>
-   <link href="http://joebon.tk/atom.xml" rel="self" type="application/atom+xml"/>
-   <link href="http://joebon.tk" rel="alternate" type="text/html" />
-<<<<<<< HEAD
-   <updated>2015-07-12T20:41:51+08:00</updated>
-=======
-   <updated>2015-06-02T20:09:25+08:00</updated>
->>>>>>> 664a0bef0862cd45dd69cbe738c2b6199de19441
-   <id>http://joebon.tk</id>
+   <title>joebon.cc</title>
+   <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
+   <link href="http://joebon.cc" rel="alternate" type="text/html" />
+   <updated>2015-10-23T12:52:28+08:00</updated>
+   <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>JS跨域问题解决方式</title>
+     <link href="http://beiyuu.com/cross-origin-js"/>
+     <updated>2015-10-23T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/cross-origin-js</id>
+     <content type="html">&lt;p&gt;所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。&lt;/p&gt;
+
+&lt;h2&gt;CORS&lt;/h2&gt;
+
+&lt;p&gt;Cross-Origin Resource Sharing，跨域资源共享，简称 CORS。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。跨域资源共享是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。&lt;/p&gt;
+
+&lt;p&gt;CORS(Cross-Origin Resource Sharing,􏰛源􏰉源共􏰠)是 W3C 的一个工作􏰡案,定义了在必须访问跨源资源时,浏览器与服􏰁务器应该如何􏰢沟通。CORS背􏰣后的基本思想,就是使用自定义的HTTP头部让浏览器与服􏰁务器进行沟􏰢通,从而决定请求或响应是应该成功,还是应该失败。&lt;/p&gt;
+
+&lt;p&gt;具体如下：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一个简单的使用GET或POST发􏰀的请求,它没有自定义的头部,而主体内容是text/plain。在发送􏰀该请求时,需要给它􏰤加一个􏰥额外的Origin头部,其中包含请求􏰝面的源信息(协􏰦议、域名和􏰧端口),以便服􏰁务器根据这个头部信息来决定是否给予响应。下面是 Origin 头部的一个示例:&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt; 消费者发送一个Origin报头到提供者端：Origin: http://www.a.com；&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;提供者发送一个Access-Control-Allow-Origin响应报头给消费者，如果值为“*”或Origin对应的站点，则表示同意共享资源给消费者，如果值为null或者不存在Access-Control-Allow-Origin报头，则表示不同意共享资源给消费者；&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果没有这个头部,或者有这个头部但源信息不匹配,浏览器就会驳􏰩回请求。正常情况下,浏览器会处理请求&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;注：CORS支持GET/POST请求方式&lt;/p&gt;
+
+&lt;h2&gt;JSONP&lt;/h2&gt;
+
+&lt;p&gt;JSONP 是 JSON with padding(填充式 JSON 或参数式 JSON)的简写。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;callback({ &quot;name&quot;: &quot;Nicholas&quot; });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于一段JavaScript脚本来说，其“源”与它存储的地址无关，而取决于脚本被加载的页面，例如我们在页面中使用script引入存储在其他域的脚本文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;http://www.a.com/index.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里脚本与当前页面是同源的。除了script，还有img、iframe、link等都具有跨域加载资源的能力。&lt;/p&gt;
+
+&lt;p&gt;Jsonp正是利用这种特性来实现跨域的：在页面中引入要跨域访问的来源，并定义回调函数处理跨域访问得到的json数据。&lt;/p&gt;
+
+&lt;p&gt;示例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var script = document.createElement(&quot;script&quot;);
+  script.src = &quot;http://freegeoip.net/json/?callback=handleResponse&quot;;
+  document.body.insertBefore(script, document.body.firstChild);
+
+  function handleResponse(response){
+    console.log(&quot;You are at IP address &quot; + response.ip + &quot;, which is in &quot; +
+        response.city + &quot;, &quot; + response.region_name);
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注：JSONP只支持GET请求方式&lt;/p&gt;
+
+&lt;h2&gt;修改document.domain来跨子域&lt;/h2&gt;
+
+&lt;p&gt;www.a.com/1.html和a.com/2.html是不同域的，要使他们可以跨域访问，可通过修改document.domain来实现，即在两个页面中都设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;document.domain=&quot;a.com&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;需要注意的是document.domain只能往父级修改，如a.com改为www.a.com是不被允许的，这也是此方法的局限性，只使用于跨子域访问。&lt;/p&gt;
+
+&lt;h2&gt;使用window.name来跨域访问&lt;/h2&gt;
+
+&lt;p&gt;window.name是同一浏览器窗口下载入的所有页面共享的数据字段，所有窗口都可以读写此字段的内容。&lt;/p&gt;
+
+&lt;p&gt;所以假设a.com要访问b.com的数据，只需要在b.com中将数据放在window.name中，然后a.com从中取出即可。此方法适用于像iframe这样的嵌套页面架构。&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://segmentfault.com/a/1190000003784372&quot;&gt;浅谈js跨域问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;&quot;&gt;JavaScript高级程序设计&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Mac OS X 快捷键</title>
+     <link href="http://beiyuu.com/mac-os-x-shortcut"/>
+     <updated>2015-08-23T00:00:00+08:00</updated>
+     <id>http://beiyuu.com/mac-os-x-shortcut</id>
+     <content type="html">&lt;p&gt;Mac OS X 的快捷键会有效提升我们的办公效率，下面是常用的部分快捷键的汇总，并在文章的最后附有详细的系列学习视频&lt;/p&gt;
+
+&lt;p&gt;command+H : 隐藏该程序&lt;/p&gt;
+
+&lt;p&gt;command＋option＋H: 隐藏当前应用外的其它所有应用&lt;/p&gt;
+
+&lt;p&gt;command+, : 呼出应用程序设置&lt;/p&gt;
+
+&lt;p&gt;command+option+v : 剪切&lt;/p&gt;
+
+&lt;p&gt;command+delete: 移到废纸篓&lt;/p&gt;
+
+&lt;p&gt;command+i : 显示简介&lt;/p&gt;
+
+&lt;p&gt;command＋option＋i：查看选中的多个文件的简介&lt;/p&gt;
+
+&lt;p&gt;command+上/下 : 跳到顶部底部&lt;/p&gt;
+
+&lt;p&gt;command＋前／后： 跳到行首行尾&lt;/p&gt;
+
+&lt;p&gt;command＋option＋shift＋v：只粘贴文本，不粘贴样式&lt;/p&gt;
+
+&lt;p&gt;fn+delete: 向后删除&lt;/p&gt;
+
+&lt;p&gt;拖动文件：剪切&lt;/p&gt;
+
+&lt;p&gt;option＋拖动文件：复制&lt;/p&gt;
+
+&lt;p&gt;选中+space（或三指点击触控板） ： 预览&lt;/p&gt;
+
+&lt;p&gt;选中多个文件＋右键 ： 新建文件夹并将选中文件放进去&lt;/p&gt;
+
+&lt;p&gt;在显示简介中修改默认文件打开方式&lt;/p&gt;
+
+&lt;p&gt;四指向上推，呼出MissionControl，按住option添加桌面，四指左右滑动（或command+左/右），切换
+桌面&lt;/p&gt;
+
+&lt;p&gt;四指下滑，展示当前应用的所有打开窗口&lt;/p&gt;
+
+&lt;p&gt;在英文输入法状态下长按韵母字母，就可以呼出带有声调的字母符号&lt;/p&gt;
+
+&lt;p&gt;－－－－－－－－－－－－－－－－－－－－－－&lt;/p&gt;
+
+&lt;p&gt;推荐的学习视频：&lt;a href=&quot;http://www.youku.com/playlist_show/id_18654878.html&quot;&gt;深入浅出 Mac OSX 中文教程&lt;/a&gt;&lt;/p&gt;
+</content>
+   </entry>
    
    <entry>
      <title>nodejs+mongdb+express建站学习中所踩得坑</title>
@@ -470,100 +603,6 @@ addTouchEventListenser:function(){
 &lt;p&gt;侧滑本就是手机上很舒适自然的一个体验，想想你会不会没事解锁手机，桌面划两下，再锁屏呢？&lt;/p&gt;
 
 &lt;p&gt;希望能有更多的PM、设计师和开发者认同，赶紧给自己的APP加上这个舒适的Feature吧！&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>谈谈刚需和360影视</title>
-     <link href="http://beiyuu.com/needs-video"/>
-     <updated>2012-11-22T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/needs-video</id>
-     <content type="html">&lt;h2&gt;很久以前&lt;/h2&gt;
-
-&lt;p&gt;很欠的说，一年半之前，我非常想做影视导航站，构思也近完整。当时试用了几个同类站，基本上能确定，这些产品经理不追美剧。&lt;a href=&quot;http://v.360.cn&quot;&gt;360影视&lt;/a&gt;在2011年4月下旬发布，跟我的想法同期，不过我发现他却是几个月之后了。&lt;/p&gt;
-
-&lt;h2&gt;需求很简单&lt;/h2&gt;
-
-&lt;p&gt;对于追剧集的来说，需求其实很简单：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;找到需要的剧集&lt;/li&gt;
-&lt;li&gt;在线看地址或下载链接（在线最好）&lt;/li&gt;
-&lt;li&gt;记住我看到哪了&lt;/li&gt;
-&lt;li&gt;更新及时&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;这样简单的需求，那么多站做的我连吐槽的兴趣都没有。好吧，360影视满足了上面的需求，所以我用他，又因为我用，所以才吐槽：&lt;/p&gt;
-
-&lt;h2&gt;吐槽360影视&lt;/h2&gt;
-
-&lt;h3&gt;一个剧集&lt;/h3&gt;
-
-&lt;p&gt;各站对一个剧集有多季的处理，除了豆瓣电影可以方便完整的链接到其他季，其他各站几乎都独立了每一季，这是糟糕的体验，人为增大&lt;strong&gt; “找到需要的剧集” &lt;/strong&gt;的难度。看下图：
-&lt;img src=&quot;/images/360video/sp-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-我是不会明白这样做的好处，得到的只是难受、难受。&lt;/p&gt;
-
-&lt;h3&gt;new标识&lt;/h3&gt;
-
-&lt;p&gt;new标识绝对是互联网上最被滥用的图标之一。有些地方用的真让人莫名的恼火：
-&lt;img src=&quot;/images/360video/baidu-new.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-这是百度首页网址导航的new标识，难以理解，猜测他根据我的浏览记录来决定是否显示new，但是Big Bang我看过了却还显示，所以这个逻辑行不通，只好猜测他是根据绝对时间的new程度来显示，这就无法满足&lt;strong&gt; “记住我看到哪了” &lt;/strong&gt;需求，如果我有很久一段时间没看，提示失去了参考意义，而且点一下链接，new就会消失，我只能呵呵了。完全不可用。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/360video/2b-sohu.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-再看搜狐视频的new标识，3、4集都标上了new，你却根本不管我到底看了没，看过3了，3上面的new还在，也是混乱了正常秩序，没有安全感，不靠谱。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/360video/2b-360.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-360影视的这个new的定义也很奇怪，我看过了new还在，过了两个星期了new也还在，我只能推断他的逻辑就是，最新的一集就是需要标new的那一集，真把用户当白痴了，不过他稍好一点的是，这个毫无意义的标识不会捣乱。&lt;/p&gt;
-
-&lt;p&gt;那到底怎样做才好呢，既然每个剧集里面会标明看过与否，那么在我正在追的美剧的集合页，明确的告诉我，我赶上最新一集某剧还差多少就好了啊。
-&lt;img src=&quot;/images/360video/new-out.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-看到这，也就能体会独立每一季出来有多恶心了。&lt;/p&gt;
-
-&lt;h3&gt;注册用户&lt;/h3&gt;
-
-&lt;p&gt;我明白，像这样一个刚需产品，又通过360浏览器导航过来的，大多都是低端用户，首页做成那个样子无可厚非，可是当我顶着极大的不情愿注册了用户之后，能不能稍微体谅下注册用户的心呢？&lt;/p&gt;
-
-&lt;p&gt;我猜想根据产品的设计，用户注册就是为了标记自己想看的剧集，方便更快更准的追剧，可是每次打开还是那个国产垃圾横行的首页，你让小清新们怎么看的上呢？&lt;/p&gt;
-
-&lt;p&gt;好啦，我就忍一下，多点一下“我的影视”吧：
-&lt;img src=&quot;/images/360video/360-home.jpg&quot; alt=&quot;ssh key success&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;发现问题没，把我主动标记了的影视放在下面，要把那些自作聪明的推荐作品放在上面，并且一个都没有推荐，这不是耍流氓的干活还是什么滴干活？&lt;/p&gt;
-
-&lt;p&gt;再综合上面new标识最后一条，基本上，网站的使用效率被这些恶心的细节全面拉低，需要很多无谓的操作，才能到达我的真正目的。&lt;/p&gt;
-
-&lt;h3&gt;安全感&lt;/h3&gt;
-
-&lt;p&gt;我最近比较喜欢用安全感这个概念，大意就是我在乎的事情你都能很好的解决，并不需要我过多的操心。
-&lt;img src=&quot;/images/360video/homeland.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-看过与否倒是一目了然，可当我只是看了几眼，并不想接着看下去，或者手贱点了后面的某一集，我就得人肉去记住，我没看过第一集，只是手贱点了一下，下次想看的时候得从第一集看，一定要记得，一定。&lt;/p&gt;
-
-&lt;p&gt;呵呵，那我还要你记干嘛呢？&lt;/p&gt;
-
-&lt;h2&gt;顺道吐槽社交&lt;/h2&gt;
-
-&lt;p&gt;看到这个需求人很多，在移动端尤甚。有个叫“段落”的电视导航应用，主要功能是电视节目早知道，现在电视节目有精彩到需要看着预告时间等的程度吗？我表示怀疑。不过“段落”主打的是社交，可以跟同时看“非诚勿扰”的观众交流哦~&lt;/p&gt;
-
-&lt;p&gt;我只想说，&lt;strong&gt;社你妈X交&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2&gt;真有那么困难吗&lt;/h2&gt;
-
-&lt;p&gt;是的，这个命题很难以理解，来看看百度视频的例子，美剧在百度的搜索量肯定不小：
-&lt;img src=&quot;/images/360video/baidu-search.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-继续吐槽那个无法理解的new标识，总体看起来不错哦，提供了好几个视频服务商，点开过的链接，自然的变不同颜色，看起来很自然，但是满足 &lt;strong&gt;“记住我看到哪儿”&lt;/strong&gt; 的需求还是不可靠，就没有安全感。&lt;/p&gt;
-
-&lt;p&gt;再看看假如我要追一个剧集，那么在百度视频里面该怎么做呢？
-&lt;img src=&quot;/images/360video/baidu-video.jpg&quot; alt=&quot;ssh key success&quot; /&gt;
-点了，好久，终于发现了这个藏起来的“订阅”按钮，订阅，订阅，呵呵，订阅！&lt;/p&gt;
-
-&lt;p&gt;在回到百度视频的首页，我是无法找到我刚才的“订阅”操作，对首页有任何影响，参考上面的“注册用户”一节，百度首页上也没什么特别的变化，所以，至此，我不知道这个订阅按钮到底有什么作用。&lt;/p&gt;
-
-&lt;p&gt;百度视频首页，在众多傻逼一样的new标识之下，我还是被吸引到了一个叫“我的随心看”的频道，以为可以快速打开我订阅的剧集，原来是“豆瓣猜”啊，混乱至极。&lt;/p&gt;
-
-&lt;h2&gt;结语&lt;/h2&gt;
-
-&lt;p&gt;本来想心平气和的吐槽下，毕竟360影视做的正常的地方还是有的，可是说着说着还是不免激动了，哎。&lt;/p&gt;
 </content>
    </entry>
    

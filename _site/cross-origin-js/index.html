@@ -5,7 +5,7 @@
     * Author:         BeiYuu
     -->
     <meta charset="utf-8" />
-    <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己 | joebon.cc</title>
+    <title>JS跨域问题解决方式 | joebon.cc</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,29 +42,85 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/first-douban-activity" title="第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己">第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</a></h1>
-        <p class="entry-date">2014-11-02</p>
-        <p>自从实习结束、工作确定之后，一直处于比较慵懒颓废的状态。前两天看到豆瓣同城上有这样一个活动，急需有个动力改变下状态的自己就怂恿另外两个同学一起报名。出于观摩和尝鲜的心态，也没有做什么准备，就这样轻松上阵。</p>
+        <h1 class="entry-title"><a href="/cross-origin-js" title="JS跨域问题解决方式">JS跨域问题解决方式</a></h1>
+        <p class="entry-date">2015-10-23</p>
+        <p>所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。</p>
 
-<p>经过一番寻找，终于在一栋大楼6楼的一个角落找到活动地点——城市星空咖啡馆，一个不怎么起眼的咖啡馆。经过一番介绍后，活动正式开始。这次活动为期10周，主要是以Coursera公开课为依托，大家每次进行演讲分享，互相寻找问题，随意聊天交流的活动。</p>
+<h2>CORS</h2>
 
-<p>一直都非常清楚演讲对于职业生涯乃至日常生活的重要性，作为一个日后要从事技术岗的不折不扣的工科生来说，表达能力一直是我的弱项，也一直希望能够得到有效的提升。虽然在求职准备时做过一段时间的尝试，和一个小伙伴做了大概三周的演讲练习，并且有将演讲过程录制下来，但是由于之后技术准备、实习面试等一系列事情的压力，最终还是半途而废。这次也是非常偶然的找到这样一个机会，希望能够坚持下来，做个改变。</p>
+<p>Cross-Origin Resource Sharing，跨域资源共享，简称 CORS。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。跨域资源共享是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。</p>
 
-<p>本次活动一共10个人参加，4个学生，5个刚刚参加工作的童鞋，还有一位很健谈很有趣的老者。活动主要由活动组织者和这位老者主导。组织者jianyan英语口语确实很好，洋洋洒洒为我们分享了Cousera第一周课程，这让有段时间未碰英语的我有点惭愧。“周一”是一位刚刚毕业的技术支持工程师，由于没戴眼镜只能看到大概轮廓，声音好听，思路清晰，笑起来很有感染力，这让我不由想起一位大学同学。她的一句话让我印象深刻：“人总是要不断尝试新的东西，不断让自己有所成长。”，这一点确实是这段时间十分颓废的我所要好好思考的。然后，邓琳为我们做了一个简短的很有趣的presentation，PPT简明有趣，笑容可人，声音甜美，这个演讲过程赏心悦目，最后也获得了Peter老师（老者）的赞赏。其他时间，基本被jianyan和Peter老师填满，我们时不时的会被要求提些建议。就这样，我完成了第一次豆瓣活动的打酱油之旅。</p>
+<p>CORS(Cross-Origin Resource Sharing,􏰛源􏰉源共􏰠)是 W3C 的一个工作􏰡案,定义了在必须访问跨源资源时,浏览器与服􏰁务器应该如何􏰢沟通。CORS背􏰣后的基本思想,就是使用自定义的HTTP头部让浏览器与服􏰁务器进行沟􏰢通,从而决定请求或响应是应该成功,还是应该失败。</p>
 
-<p>最后，谈谈这次活动的感受。虽然活动场所没有我想象中的高大上。但是遇到这样一批愿意不断尝试改变自己的小伙伴们确实是一件幸运的事情，整个活动没有出现冷场，所有的时间都被侃侃而谈所占据。这种感觉其实是我这样一个平时不太擅长言语的所喜欢的。由于成长环境的原因，我是一个不太会找话题，不太会逗趣的一个人。不过我一直希望能够通过接触更多新鲜的环境来慢慢改变自己。我一直希望能够达到一种状态：</p>
+<p>具体如下：</p>
 
 <ul>
-<li>拥有清晰的思考问题的逻辑</li>
-<li>能够条理清晰的表达出自己的观点</li>
-<li>聊天时，能找到对方感兴趣的话题</li>
-<li>富有幽默感</li>
+<li>一个简单的使用GET或POST发􏰀的请求,它没有自定义的头部,而主体内容是text/plain。在发送􏰀该请求时,需要给它􏰤加一个􏰥额外的Origin头部,其中包含请求􏰝面的源信息(协􏰦议、域名和􏰧端口),以便服􏰁务器根据这个头部信息来决定是否给予响应。下面是 Origin 头部的一个示例:</li>
 </ul>
 
 
-<p>虽然知道有些改变不容易，也不会很快有成效，但是我想慢慢改变。</p>
+<p> 消费者发送一个Origin报头到提供者端：Origin: http://www.a.com；</p>
 
-<p>One day I will be who I wanna be.</p>
+<ul>
+<li><p>提供者发送一个Access-Control-Allow-Origin响应报头给消费者，如果值为“*”或Origin对应的站点，则表示同意共享资源给消费者，如果值为null或者不存在Access-Control-Allow-Origin报头，则表示不同意共享资源给消费者；</p></li>
+<li><p>如果没有这个头部,或者有这个头部但源信息不匹配,浏览器就会驳􏰩回请求。正常情况下,浏览器会处理请求</p></li>
+</ul>
+
+
+<p>注：CORS支持GET/POST请求方式</p>
+
+<h2>JSONP</h2>
+
+<p>JSONP 是 JSON with padding(填充式 JSON 或参数式 JSON)的简写。</p>
+
+<pre><code>callback({ "name": "Nicholas" });
+</code></pre>
+
+<p>对于一段JavaScript脚本来说，其“源”与它存储的地址无关，而取决于脚本被加载的页面，例如我们在页面中使用script引入存储在其他域的脚本文件：</p>
+
+<pre><code>&lt;script src="http://www.a.com/index.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>这里脚本与当前页面是同源的。除了script，还有img、iframe、link等都具有跨域加载资源的能力。</p>
+
+<p>Jsonp正是利用这种特性来实现跨域的：在页面中引入要跨域访问的来源，并定义回调函数处理跨域访问得到的json数据。</p>
+
+<p>示例：</p>
+
+<pre><code>var script = document.createElement("script");
+  script.src = "http://freegeoip.net/json/?callback=handleResponse";
+  document.body.insertBefore(script, document.body.firstChild);
+
+  function handleResponse(response){
+    console.log("You are at IP address " + response.ip + ", which is in " +
+        response.city + ", " + response.region_name);
+  }
+</code></pre>
+
+<p>注：JSONP只支持GET请求方式</p>
+
+<h2>修改document.domain来跨子域</h2>
+
+<p>www.a.com/1.html和a.com/2.html是不同域的，要使他们可以跨域访问，可通过修改document.domain来实现，即在两个页面中都设置：</p>
+
+<pre><code>document.domain="a.com";
+</code></pre>
+
+<p>需要注意的是document.domain只能往父级修改，如a.com改为www.a.com是不被允许的，这也是此方法的局限性，只使用于跨子域访问。</p>
+
+<h2>使用window.name来跨域访问</h2>
+
+<p>window.name是同一浏览器窗口下载入的所有页面共享的数据字段，所有窗口都可以读写此字段的内容。</p>
+
+<p>所以假设a.com要访问b.com的数据，只需要在b.com中将数据放在window.name中，然后a.com从中取出即可。此方法适用于像iframe这样的嵌套页面架构。</p>
+
+<h2>参考资料</h2>
+
+<ol>
+<li><a href="http://segmentfault.com/a/1190000003784372">浅谈js跨域问题</a></li>
+<li><a href="">JavaScript高级程序设计</a></li>
+</ol>
+
 
 
         <div id="disqus_container">
