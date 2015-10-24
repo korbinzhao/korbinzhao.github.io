@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
-   <title>joebon.cc</title>
+   <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-10-23T13:10:38+08:00</updated>
+   <updated>2015-10-24T15:24:01+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
@@ -14,9 +14,9 @@
    
    <entry>
      <title>JS跨域问题解决方式</title>
-     <link href="http://beiyuu.com/cross-origin-js"/>
+     <link href="http://korbinzhao.github.io/cross-origin-js"/>
      <updated>2015-10-23T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/cross-origin-js</id>
+     <id>http://korbinzhao.github.io/cross-origin-js</id>
      <content type="html">&lt;p&gt;所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。以下列举几种跨域方式。&lt;/p&gt;
 
 &lt;h2&gt;1.CORS&lt;/h2&gt;
@@ -99,9 +99,9 @@
    
    <entry>
      <title>Mac OS X 快捷键</title>
-     <link href="http://beiyuu.com/mac-os-x-shortcut"/>
+     <link href="http://korbinzhao.github.io/mac-os-x-shortcut"/>
      <updated>2015-08-23T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/mac-os-x-shortcut</id>
+     <id>http://korbinzhao.github.io/mac-os-x-shortcut</id>
      <content type="html">&lt;p&gt;Mac OS X 的快捷键会有效提升我们的办公效率，下面是常用的部分快捷键的汇总，并在文章的最后附有详细的系列学习视频&lt;/p&gt;
 
 &lt;p&gt;command+H : 隐藏该程序&lt;/p&gt;
@@ -151,9 +151,9 @@
    
    <entry>
      <title>nodejs+mongdb+express建站学习中所踩得坑</title>
-     <link href="http://beiyuu.com/nodejs-express-mongodb-website"/>
+     <link href="http://korbinzhao.github.io/nodejs-express-mongodb-website"/>
      <updated>2015-06-02T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/nodejs-express-mongodb-website</id>
+     <id>http://korbinzhao.github.io/nodejs-express-mongodb-website</id>
      <content type="html">&lt;h2&gt;网站开发框架&lt;/h2&gt;
 
 &lt;p&gt;在网站开发之前，我们首先对网站开发框架进行设计。主要分为后端、前端、本地开发环境三部分。&lt;/p&gt;
@@ -276,9 +276,9 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
    
    <entry>
      <title>SVG入门</title>
-     <link href="http://beiyuu.com/introduction-to-svg"/>
+     <link href="http://korbinzhao.github.io/introduction-to-svg"/>
      <updated>2015-06-02T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/introduction-to-svg</id>
+     <id>http://korbinzhao.github.io/introduction-to-svg</id>
      <content type="html">&lt;h2&gt;SVG&lt;/h2&gt;
 
 &lt;p&gt;SVG是使用XML描述的矢量文件，全称可缩放矢量图形，用于描述二维矢量图形的一种图形格式。&lt;/p&gt;
@@ -327,9 +327,9 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
    
    <entry>
      <title>关于方法</title>
-     <link href="http://beiyuu.com/about-method"/>
+     <link href="http://korbinzhao.github.io/about-method"/>
      <updated>2014-12-05T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/about-method</id>
+     <id>http://korbinzhao.github.io/about-method</id>
      <content type="html">&lt;p&gt;有时候我们每天忙忙碌碌只是为了让自己觉得自己很努力，其实在徒然做着无用功。&lt;/p&gt;
 
 &lt;h2&gt;装作努力，只是一种心理慰藉&lt;/h2&gt;
@@ -368,9 +368,9 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
    
    <entry>
      <title>关于思考</title>
-     <link href="http://beiyuu.com/about-thinking"/>
+     <link href="http://korbinzhao.github.io/about-thinking"/>
      <updated>2014-11-21T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/about-thinking</id>
+     <id>http://korbinzhao.github.io/about-thinking</id>
      <content type="html">&lt;p&gt;这两天世界互联网大会在乌镇热热闹闹开起来了，国内互联网大佬云集，看了两场分享，激起自己的一些思考。&lt;/p&gt;
 
 &lt;h2&gt;关于演讲&lt;/h2&gt;
@@ -415,9 +415,9 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
    
    <entry>
      <title>Cocos2d-X 3.0 事件分发机制</title>
-     <link href="http://beiyuu.com/cocos2d-event-dispatcher"/>
+     <link href="http://korbinzhao.github.io/cocos2d-event-dispatcher"/>
      <updated>2014-11-15T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/cocos2d-event-dispatcher</id>
+     <id>http://korbinzhao.github.io/cocos2d-event-dispatcher</id>
      <content type="html">&lt;h2&gt;事件&lt;/h2&gt;
 
 &lt;p&gt;Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。&lt;/p&gt;
@@ -518,9 +518,9 @@ addTouchEventListenser:function(){
    
    <entry>
      <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</title>
-     <link href="http://beiyuu.com/first-douban-activity"/>
+     <link href="http://korbinzhao.github.io/first-douban-activity"/>
      <updated>2014-11-02T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/first-douban-activity</id>
+     <id>http://korbinzhao.github.io/first-douban-activity</id>
      <content type="html">&lt;p&gt;自从实习结束、工作确定之后，一直处于比较慵懒颓废的状态。前两天看到豆瓣同城上有这样一个活动，急需有个动力改变下状态的自己就怂恿另外两个同学一起报名。出于观摩和尝鲜的心态，也没有做什么准备，就这样轻松上阵。&lt;/p&gt;
 
 &lt;p&gt;经过一番寻找，终于在一栋大楼6楼的一个角落找到活动地点——城市星空咖啡馆，一个不怎么起眼的咖啡馆。经过一番介绍后，活动正式开始。这次活动为期10周，主要是以Coursera公开课为依托，大家每次进行演讲分享，互相寻找问题，随意聊天交流的活动。&lt;/p&gt;
@@ -547,9 +547,9 @@ addTouchEventListenser:function(){
    
    <entry>
      <title>平凡之路，重新出发</title>
-     <link href="http://beiyuu.com/restart"/>
+     <link href="http://korbinzhao.github.io/restart"/>
      <updated>2014-10-20T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/restart</id>
+     <id>http://korbinzhao.github.io/restart</id>
      <content type="html">&lt;h2&gt;摆脱迷茫&lt;/h2&gt;
 
 &lt;p&gt;2013年9月开始学习前端，转眼一年有余。一直没有时间将这段经历做个梳理，现在终于闲下来了。颓废了一段时间，重新拾起往日的激情和干劲，从现在开始为了下一个目标努力。&lt;/p&gt;
@@ -580,9 +580,9 @@ addTouchEventListenser:function(){
    
    <entry>
      <title>如果侧滑成为APP标配</title>
-     <link href="http://beiyuu.com/side-slide"/>
+     <link href="http://korbinzhao.github.io/side-slide"/>
      <updated>2012-12-26T00:00:00+08:00</updated>
-     <id>http://beiyuu.com/side-slide</id>
+     <id>http://korbinzhao.github.io/side-slide</id>
      <content type="html">&lt;p&gt;前两天这样感叹过：&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;

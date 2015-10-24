@@ -2,10 +2,10 @@
 <html>
 <head>
     <!--
-    * Author:         BeiYuu
+    * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>Cocos2d-X 3.0 事件分发机制 | joebon.cc</title>
+    <title>Cocos2d-X 3.0 事件分发机制 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -141,34 +141,52 @@ addTouchEventListenser:function(){
 <p><a href="http://cn.cocos2d-x.org/article/index?type=wiki&amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md">[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md</a></p>
 
 
-        <div id="disqus_container">
-            <div style="margin-bottom:20px" class="right">
-                <script type="text/javascript" charset="utf-8">
-                (function(){
-                  var _w = 86 , _h = 16;
-                  var param = {
-                    url:location.href,
-                    type:'6',
-                    count:'', /**是否显示分享数，1显示(可选)*/
-                    appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
-                    title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
-                    pic:'', /**分享图片的路径(可选)*/
-                    ralateUid:'1742737645', /**关联用户的UID，分享微博会@该用户(可选)*/
-                    language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
-                    rnd:new Date().valueOf()
-                  }
-                  var temp = [];
-                  for( var p in param ){
-                    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
-                  }
+        <!--<div id="disqus_container">-->
+            <!--<div style="margin-bottom:20px" class="right">-->
+                <!--<script type="text/javascript" charset="utf-8">-->
+                <!--(function(){-->
+                  <!--var _w = 86 , _h = 16;-->
+                  <!--var param = {-->
+                    <!--url:location.href,-->
+                    <!--type:'6',-->
+                    <!--count:'', /**是否显示分享数，1显示(可选)*/-->
+                    <!--appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/-->
+                    <!--title:'', /**分享的文字内容(可选，默认为所在页面的title)*/-->
+                    <!--pic:'', /**分享图片的路径(可选)*/-->
+                    <!--ralateUid:'1742737645', /**关联用户的UID，分享微博会@该用户(可选)*/-->
+                    <!--language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/-->
+                    <!--rnd:new Date().valueOf()-->
+                  <!--}-->
+                  <!--var temp = [];-->
+                  <!--for( var p in param ){-->
+                    <!--temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )-->
+                  <!--}-->
 
-                  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
-                })()
-                </script>
-            </div>
-            <!-- <a href="#" class="comment" onclick="return false;">点击查看评论</a> -->
-             <div id="disqus_thread"></div>
-        </div>
+                  <!--document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')-->
+                <!--})()-->
+                <!--</script>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; <a href="#" class="comment" onclick="return false;">点击查看评论</a> &ndash;&gt;-->
+             <!--<div id="disqus_thread"></div>-->
+        <!--</div>-->
+
+      <!-- 多说评论框 start -->
+      <div class="ds-thread" data-thread-key="/cocos2d-event-dispatcher" data-title="Cocos2d-X 3.0 事件分发机制" data-url="/cocos2d-event-dispatcher"></div>
+      <!-- 多说评论框 end -->
+      <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+      <script type="text/javascript">
+        var duoshuoQuery = {short_name:"joebon"};
+        (function() {
+          var ds = document.createElement('script');
+          ds.type = 'text/javascript';ds.async = true;
+          ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+          ds.charset = 'UTF-8';
+          (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+      </script>
+      <!-- 多说公共JS代码 end -->
+
     </div>
 
     <div class="sidenav">
@@ -211,7 +229,7 @@ addTouchEventListenser:function(){
     </div>
 </div>
 
-<script src="/js/post.js" type="text/javascript"></script>
+<!--<script src="/js/post.js" type="text/javascript"></script>-->
 
 
     <script type="text/javascript">
