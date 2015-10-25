@@ -4,13 +4,174 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-10-24T16:45:46+08:00</updated>
+   <updated>2015-10-25T20:49:09+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>前端模块化规范 - CommonJS、AMD & CMD</title>
+     <link href="http://korbinzhao.github.io/commonjs-amd-cmd"/>
+     <updated>2015-10-25T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/commonjs-amd-cmd</id>
+     <content type="html">&lt;p&gt;前端为什么会出现模块化这个概念，主要原因是随着前端项目的复杂性和项目团队规模的扩大，命名冲突和文件依赖成为影响前端开发效率的两个重要问题。模块化规范的另一个目的是提高JS程序的可移植性。&lt;/p&gt;
+
+&lt;h2&gt;CommonJS&lt;/h2&gt;
+
+&lt;p&gt;官方JavaScript规范定义的API主要是为了构建基于浏览器端的应用程序。在服务器端，并没有官方的API定义。&lt;/p&gt;
+
+&lt;p&gt;CommonJS定义了许多普通应用程序（主要指非浏览器应用）使用的API，它的终极目标是提供一个类似Python、Ruby和Java的标准库，从而开发者可以使用CommonJS API编写可以运行在不同JS解释器和不同主机环境的应用程序。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;NodeJS和CommonJS之间的关系&lt;/p&gt;
+
+&lt;p&gt;  CommonJS是一种规范，NodeJS是这种规范的实现。JavaScript作为本地变成语言这种特殊应用程序，也是随着NodeJS的火热而进入大众的视野。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;浏览器加载 CommonJS 模块的原理与实现&lt;/p&gt;
+
+&lt;p&gt;  npm的模块都是JS语言写的，但是浏览器用不了，因为浏览器不支持CommonJS格式。要想让浏览器用上这些模块，必须转换格式。&lt;/p&gt;
+
+&lt;p&gt;  浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  module
+  exports
+  require
+  global
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;  只要能够提供这四个变量，浏览器就能加载CommonJS模块。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Browserify的实现&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;知道了原理，就能做出工具了。Browserify（require(&#39;modules&#39;) in the browser）是目前最常用的CommonJS格式转换的工具。&lt;/p&gt;
+
+&lt;p&gt;举例：
+main.js模块加载foo.js模块&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// foo.js
+module.exports = function(x) {
+  console.log(x);
+};
+
+// main.js
+var foo = require(&quot;./foo&quot;);
+foo(&quot;Hi&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用下面的命令，就能将main.js转为浏览器可用的格式。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ browserify main.js &amp;gt; compiled.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Browserify到底做了什么？安装一下browser-unpack，就能看清楚了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ npm install browser-unpack -g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，将前面生成的compile.js解包。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ browser-unpack &amp;lt; compiled.js
+
+[
+  {
+    &quot;id&quot;:1,
+    &quot;source&quot;:&quot;module.exports = function(x) {\n  console.log(x);\n};&quot;,
+    &quot;deps&quot;:{}
+  },
+  {
+    &quot;id&quot;:2,
+    &quot;source&quot;:&quot;var foo = require(\&quot;./foo\&quot;);\nfoo(\&quot;Hi\&quot;);&quot;,
+    &quot;deps&quot;:{&quot;./foo&quot;:1},
+    &quot;entry&quot;:true
+  }
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到，browerify将所有模块放入一个数组，id属性是模块的编号，source属性是模块的源码，deps属性是模块的依赖。&lt;/p&gt;
+
+&lt;p&gt;因为main.js里面加载了foo.js，所以deps属性就制定./foo对应的1号模块。执行的时候，浏览器遇到require(&#39;./foo&#39;)语句，就自动执行1号模块的source属性，并就爱那个执行后的module.exports属性值输出。&lt;/p&gt;
+
+&lt;h2&gt;AMD&lt;/h2&gt;
+
+&lt;p&gt;AMD（异步模块定，Asynchronous Module Definition）格式总体的目标是为现在的开发者提供一个可用的模块化JS解决方案。&lt;/p&gt;
+
+&lt;p&gt;CommonJS通过引入模块化使得在服务器端编写JS应用成为可能，但是由于一个重大的局限，使得CommonJS规范不适用与浏览器环境。举例如下。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var math = require(&#39;math&#39;);
+　　math.add(2, 3);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第二行math.add(2, 3)，在第一行require(&#39;math&#39;)之后运行，因此必须等math.js加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。&lt;/p&gt;
+
+&lt;p&gt;这对服务器端不是一个问题，因为所有的模块都存放在本地硬盘，可以同步加载完成，等待时间就是硬盘的读取时间。但是，对于浏览器，这确实一个大问题，因为模块都放在服务器端，等待时间取决于网速的快慢，可能要等很长时间，浏览器处于“假死”状态。&lt;/p&gt;
+
+&lt;p&gt;因此，浏览器端的模块，不能采用“同步加载”（synchronous），只能采用“异步加载”（asynchronous）。这就是AMD规范诞生的背景。&lt;/p&gt;
+
+&lt;p&gt;AMD是“Asynchronous Module Definition”的缩写，意思就是“异步模块定义”。它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行。&lt;/p&gt;
+
+&lt;p&gt;AMD也采用require()语句加载模块，但是不同于CommonJS，他要求两个参数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require([module], callback);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。&lt;/p&gt;
+
+&lt;h2&gt;CMD&lt;/h2&gt;
+
+&lt;p&gt;CMD（Common Module Definition）模块定义规范，是@玉伯提出的一个类似于AMD的规范，该规范明确了模块的基本书写格式和基本交互规则。&lt;/p&gt;
+
+&lt;h3&gt;AMD和CMD的区别&lt;/h3&gt;
+
+&lt;p&gt;下面来看下@玉伯给出的官方解释。&lt;/p&gt;
+
+&lt;p&gt;AMD和CMD等规范的目的都是为了JS的模块化开发，特别是在浏览器端的。目前这些规范的实现都能达成浏览器端模块化开发的目的。&lt;/p&gt;
+
+&lt;p&gt;区别在于：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;对于依赖的模块，AMD是提前执行，CMD是延迟执行。不过RequireJS从2.0开始，也改成了可以延迟执行（根据写法不同，处理方式不同）。CMD推崇as lazy as possible。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CMD推崇依赖就近，AMD推崇依赖前置。如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; // CMD
+ define(function(require, exports, module) {   
+     var a = require(&#39;./a&#39;)   
+     a.doSomething()   
+     // 此处略去 100 行   
+     var b = require(&#39;./b&#39;) // 依赖可以就近书写   
+     b.doSomething()   
+     // ... 
+ })
+
+ // AMD 默认推荐的是
+ define([&#39;./a&#39;, &#39;./b&#39;], function(a, b) {  
+     // 依赖必须一开始就写好    
+     a.doSomething()    
+     // 此处略去 100 行    
+     b.doSomething()    
+     ...
+ })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; 虽然AMD也支持CMD的写法，同时还支持require作为依赖项传递，但RequireJS官方文档里默认上面的模块定义写法。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;AMD的API默认是一个当多个用，CMD的API严格区分，推崇职责单一。比如AMD里，require分全局require和局部require，都叫require。CMD里，没有全局require，而是根据模块系统的完备性，提供seajs.use来实现模块系统的加载启动。CMD里，每个API都简单纯粹。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/fullhouse/archive/2011/07/15/2107416.html&quot;&gt;什么是CommonJS？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.feeldesignstudio.com/2013/09/javascript-module-pattern-commonjs/&quot;&gt;JavaScript模块化开发（二）——CommonJS规范&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html&quot;&gt;浏览器加载 CommonJS 模块的原理与实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html&quot;&gt;Javascript模块化编程（二）：AMD规范&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.zhihu.com/question/20351507&quot;&gt;AMD 和 CMD 的区别有哪些？- 知乎&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>JS跨域问题解决方式</title>
@@ -106,23 +267,23 @@
 
 &lt;p&gt;前两天，团队新近的6个新人全部转正面试结束。老板ZY把我们同组的6个人叫到一起，开了个简单的交流会。此前的转正面试加上最近2次交流会，有一些收获，记录一下，给以后工作中的自己提个醒。&lt;/p&gt;
 
-&lt;h3&gt;从业务中抽离出来做些自己的事情&lt;/h3&gt;
+&lt;h2&gt;从业务中抽离出来做些自己的事情&lt;/h2&gt;
 
 &lt;p&gt;我们的日常业务是很忙的。要学会从繁重的业务中抽身出来，去做些个人成长、技术成长的事情。说白了，只做业务的话说实话，最后只是简单一些重复劳动，如果不能自己抽出时间进行学习、积累的话，自己很难会有成长，对于之后的KPI考核、薪酬、晋升其实是没有什么好处的。&lt;/p&gt;
 
 &lt;p&gt;这一点是自从入职后，每次开交流会团队老大YX和HR都会返回强调的。只做业务，没有自己的核心竞争力的话，个人的不可替代性就太强了，对于团队的价值就非常小。&lt;/p&gt;
 
-&lt;h3&gt;工作中思考&lt;/h3&gt;
+&lt;h2&gt;工作中思考&lt;/h2&gt;
 
 &lt;p&gt;思考是工作中非常重要的一个能力，不能在工作中有自己的思考，那么你就只能是别人眼中的一个工具。这里的思考既有对前端团队内部效率、工具的思考，也有对自己所负责业务的思考。&lt;/p&gt;
 
-&lt;h3&gt;将自己的思考写出来&lt;/h3&gt;
+&lt;h2&gt;将自己的思考写出来&lt;/h2&gt;
 
 &lt;p&gt;一些事情自己能想到以及想清楚和真正把想法写出来是完全两种不同的概念。很多时候，我们只是自我感觉把有些东西想清楚了，但是真的当我们需要临场表达的时候常常是毫无逻辑、丢三落四或者混乱不堪的。这说明我们还没有把自己的思路真正的理清楚。那么，平时自己有所思考的时候，把自己的想法写出来吧！&lt;/p&gt;
 
 &lt;p&gt;写作可以让你对自己的过往的思考有一个清晰的回顾和整理，并且当我们回过头来看自己的过往的想法时也是一种意义非法的事情。&lt;/p&gt;
 
-&lt;h3&gt;拓展自己的舒服边界-团队中的充分交流&lt;/h3&gt;
+&lt;h2&gt;拓展自己的舒服边界-团队中的充分交流&lt;/h2&gt;
 
 &lt;p&gt;作为一个资深的、被很多人认为很内向的人，在面对长辈和领导时总是会有一种莫名的紧张，会表现的很内向，这个毛病伴随了我20+年。&lt;/p&gt;
 
@@ -132,7 +293,7 @@
 
 &lt;p&gt;能想到的一个比较好的方式，&lt;strong&gt;就是在自己迟疑要不要说某句话或者和某人交流的时候，放弃迟疑，果断迈出第一步吧。&lt;/strong&gt;改变是一点点发生的。&lt;/p&gt;
 
-&lt;h3&gt;将自己的实力充分表现出来&lt;/h3&gt;
+&lt;h2&gt;将自己的实力充分表现出来&lt;/h2&gt;
 
 &lt;p&gt;最后一点感触很深的是，无论你多牛掰，不表现出来，不让你身边的人、老版、HR看到，一切都是白搭的。所以工作中很苦逼的一种状态会是，你每天累得像孙子一样，老板却看不到你的实力、成果。&lt;/p&gt;
 
@@ -585,39 +746,6 @@ addTouchEventListenser:function(){
 &lt;p&gt;虽然知道有些改变不容易，也不会很快有成效，但是我想慢慢改变。&lt;/p&gt;
 
 &lt;p&gt;One day I will be who I wanna be.&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>平凡之路，重新出发</title>
-     <link href="http://korbinzhao.github.io/restart"/>
-     <updated>2014-10-20T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/restart</id>
-     <content type="html">&lt;h2&gt;摆脱迷茫&lt;/h2&gt;
-
-&lt;p&gt;2013年9月开始学习前端，转眼一年有余。一直没有时间将这段经历做个梳理，现在终于闲下来了。颓废了一段时间，重新拾起往日的激情和干劲，从现在开始为了下一个目标努力。&lt;/p&gt;
-
-&lt;p&gt;说起自己前端学习之路，还是从自己的专业背景开始说起吧！本科阴差阳错的读了材料成型专业，后来有幸转到工业工程，开始了为期两年的半工科半管理的学习之路。也就是这两年遇到了一帮有想法有追求的同学们。这和我一直期待的状态不谋而合，回忆起来大三一年可谓是我目前为止最充实最开心的一段经历。又是一次机缘巧合，保送读研，专业信息管理。这无疑对我又意味着一次转折。因为它直接决定了我现在的职业发展方向。&lt;/p&gt;
-
-&lt;p&gt;进入研一的自己对于未来的职场依旧迷茫，于是整个研一基本是一个探索阶段，于是有了后来西门子、IBM两家公司的实习经历，综合自己过往经历和师兄师姐的经验。最终发现前端开发才是自己喜欢并且有很好发展前景的岗位。&lt;/p&gt;
-
-&lt;h2&gt;初涉前端&lt;/h2&gt;
-
-&lt;p&gt;借用一位前辈对于前端的描述：“相对后端，前端入门要容易些；但是要想成为前端大牛，则需要比后端付出更多的努力。也就是说，前端的学习曲线更像一个对数函数。”因此，对于一个想以前端为职业方向的新手来说，一年的学习时间足够了。《JavaScript高级程序设计》是一个不错的入门级书籍，讲解细致且通俗易懂。前期对于前端的学习主要以这本书为主，再加上其他前端书籍以及网上的资料、博客作为辅助。实习面试也是很不错的个人提升的途径，通过面试可以了解到企业具体的技术需求现状以及自己的不足。没经过一次面试，都感觉自己成长很多。最终拿到淘宝UED的实习Offer。&lt;/p&gt;
-
-&lt;h2&gt;阿里实习&lt;/h2&gt;
-
-&lt;p&gt;怀着无比激动的心情，开始了为期3个月淘宝UED实习。阿里给我的感觉是自由、开放、主动。整个办公环境就像是一个超级大学，园区有如诗如画的园林绿化，有活泼调皮又略带文艺的壁画，有略显吵闹的园区广播，有免费穿梭自行车，有设备齐全的健身房，味道不错的饭堂。。虽然工作时常紧张，但是待在这种办公环境下，始终觉得是一种惬意的感觉。&lt;/p&gt;
-
-&lt;p&gt;工作方面，淘宝UED给我的最大的感觉就是完善的开发环境和开发流程，这些很大程度上降低了开发的成本。虽然，学习这些工具确实要花费很多时间，但是这却让之后的开发事半功倍。另外一个感觉就是阿里人对于技术的追求。通过与带我的师兄的交流，总会被师兄思考问题的视角和逻辑触动，切实感觉自己还有很多需要学习提升的地方。因此，我对于三个月实习的感受更多是个人的自我重新认识和提升。并且，也非常幸运能够拿到正式offer。&lt;/p&gt;
-
-&lt;h2&gt;重新出发&lt;/h2&gt;
-
-&lt;p&gt;实习结束，返回学校。拥有了更多弥补自身不足的时间，确实要好好利用这段时间去做更多的积累。为之后更好的适应工作、职业发展做好准备。&lt;/p&gt;
-
-&lt;p&gt;在转正面试上，圆心给我提了2个建议：1.找到自己感兴趣的方向；2.积累与分享。出于对自己学习的积累与分享，于是开通了这个个人博客。所以，重新出发，从博客开始吧！&lt;/p&gt;
-
-&lt;p&gt;很久没写东西了，文字越来越不听自己的使唤了。今天就先到这里吧！&lt;/p&gt;
 </content>
    </entry>
    

@@ -23,39 +23,39 @@ $(document).ready(function(){
 
     $('pre').addClass('prettyprint linenums'); //添加Google code Hight需要的class
 
-    //***********************
-    //**评论的代码也删掉哦***
-    // $('#disqus_container .comment').on('click',function(){
-    //     $(this).html('加载中...');
-
-        // var that = this;
-
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'korbinzhao'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-
-        console.log('hello');
-
-        // setTimeout(function(){
-        //     $(that).remove();
-        // },1000);
-        
-    
-    // });
-    //**评论的代码也删掉哦***
-    //***********************
+    ////***********************
+    ////**评论的代码也删掉哦***
+    //// $('#disqus_container .comment').on('click',function(){
+    ////     $(this).html('加载中...');
+    //
+    //    // var that = this;
+    //
+    //    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    //    var disqus_shortname = 'korbinzhao'; // required: replace example with your forum shortname
+    //
+    //    /* * * DON'T EDIT BELOW THIS LINE * * */
+    //    (function() {
+    //        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    //        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    //        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    //    })();
+    //
+    //    console.log('hello');
+    //
+    //    // setTimeout(function(){
+    //    //     $(that).remove();
+    //    // },1000);
+    //
+    //
+    //// });
+    ////**评论的代码也删掉哦***
+    ////***********************
 
     $('.entry a').each(function(index,element){
         var href = $(this).attr('href');
         if(href){
             if(href.indexOf('#') == 0){
-            }else if ( href.indexOf('/') == 0 || href.toLowerCase().indexOf('korbinzhao.github.io')>-1 ){
+            }else if ( href.indexOf('/') == 0 || href.toLowerCase().indexOf('korbinzhao.gith')>-1 ){
             }else if ($(element).has('img').length){
             }else{
                 $(this).attr('target','_blank');
