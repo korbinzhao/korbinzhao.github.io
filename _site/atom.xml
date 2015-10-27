@@ -4,13 +4,87 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-10-25T20:49:09+08:00</updated>
+   <updated>2015-10-27T21:43:58+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>原生JS实现页面滚动方向检测</title>
+     <link href="http://korbinzhao.github.io/js-scroll-direction"/>
+     <updated>2015-10-27T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/js-scroll-direction</id>
+     <content type="html">&lt;p&gt;判断页面滚动方向是一个常见的需求，下面展示一个使用原生JS方式判断页面滚动方向的解决方式。&lt;/p&gt;
+
+&lt;h2&gt;html&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;http://g.tbcdn.cn/tb/kimi/0.0.233/kimi.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+
+&amp;lt;body style=&quot;height: 6000px;&quot;&amp;gt;
+    &amp;lt;div class=&quot;nav&quot; style=&quot;position:fixed; top:0;left:0;width: 100%;height: 60px;background-color: pink;&quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;/body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;js&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;  var $nav = $(&#39;.nav&#39;);
+  var $result = $(&#39;.result&#39;);
+
+  //页面滚动监听事件
+  window.onscroll = function(e){
+    $result.html(&#39;swipeDown&#39;);
+    scrollFunc();
+    if(scrollDirection == &#39;down&#39;){
+      $nav.css({
+        position: &#39;absolute&#39;
+      });
+    }
+    else if(scrollDirection == &#39;up&#39;){
+      $nav.css({
+        position: &#39;fixed&#39;
+      });
+    }
+  }
+  var scrollAction = {x: &#39;undefined&#39;, y: &#39;undefined&#39;}, scrollDirection;
+
+  //判断页面滚动方向
+  function scrollFunc() {
+    if (typeof scrollAction.x == &#39;undefined&#39;) {
+      scrollAction.x = window.pageXOffset;
+      scrollAction.y = window.pageYOffset;
+    }
+    var diffX = scrollAction.x - window.pageXOffset;
+    var diffY = scrollAction.y - window.pageYOffset;
+    if (diffX &amp;lt; 0) {
+    // Scroll right
+      scrollDirection = &#39;right&#39;;
+    } else if (diffX &amp;gt; 0) {
+    // Scroll left
+      scrollDirection = &#39;left&#39;;
+    } else if (diffY &amp;lt; 0) {
+    // Scroll down
+      scrollDirection = &#39;down&#39;;
+    } else if (diffY &amp;gt; 0) {
+    // Scroll up
+      scrollDirection = &#39;up&#39;;
+    } else {
+    // First scroll event
+    }
+    scrollAction.x = window.pageXOffset;
+    scrollAction.y = window.pageYOffset;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;github地址&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;https://github.com/korbinzhao/exercise/blob/master/js-scroll-direction.html
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+   </entry>
    
    <entry>
      <title>前端模块化规范 - CommonJS、AMD & CMD</title>
@@ -717,35 +791,6 @@ addTouchEventListenser:function(){
 &lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&quot;&gt;[1] http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&quot;&gt;[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&lt;/a&gt;&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>第一次豆瓣活动：Coursera公开课之Public Speaking小分队——找回爱交流的自己</title>
-     <link href="http://korbinzhao.github.io/first-douban-activity"/>
-     <updated>2014-11-02T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/first-douban-activity</id>
-     <content type="html">&lt;p&gt;自从实习结束、工作确定之后，一直处于比较慵懒颓废的状态。前两天看到豆瓣同城上有这样一个活动，急需有个动力改变下状态的自己就怂恿另外两个同学一起报名。出于观摩和尝鲜的心态，也没有做什么准备，就这样轻松上阵。&lt;/p&gt;
-
-&lt;p&gt;经过一番寻找，终于在一栋大楼6楼的一个角落找到活动地点——城市星空咖啡馆，一个不怎么起眼的咖啡馆。经过一番介绍后，活动正式开始。这次活动为期10周，主要是以Coursera公开课为依托，大家每次进行演讲分享，互相寻找问题，随意聊天交流的活动。&lt;/p&gt;
-
-&lt;p&gt;一直都非常清楚演讲对于职业生涯乃至日常生活的重要性，作为一个日后要从事技术岗的不折不扣的工科生来说，表达能力一直是我的弱项，也一直希望能够得到有效的提升。虽然在求职准备时做过一段时间的尝试，和一个小伙伴做了大概三周的演讲练习，并且有将演讲过程录制下来，但是由于之后技术准备、实习面试等一系列事情的压力，最终还是半途而废。这次也是非常偶然的找到这样一个机会，希望能够坚持下来，做个改变。&lt;/p&gt;
-
-&lt;p&gt;本次活动一共10个人参加，4个学生，5个刚刚参加工作的童鞋，还有一位很健谈很有趣的老者。活动主要由活动组织者和这位老者主导。组织者jianyan英语口语确实很好，洋洋洒洒为我们分享了Cousera第一周课程，这让有段时间未碰英语的我有点惭愧。“周一”是一位刚刚毕业的技术支持工程师，由于没戴眼镜只能看到大概轮廓，声音好听，思路清晰，笑起来很有感染力，这让我不由想起一位大学同学。她的一句话让我印象深刻：“人总是要不断尝试新的东西，不断让自己有所成长。”，这一点确实是这段时间十分颓废的我所要好好思考的。然后，邓琳为我们做了一个简短的很有趣的presentation，PPT简明有趣，笑容可人，声音甜美，这个演讲过程赏心悦目，最后也获得了Peter老师（老者）的赞赏。其他时间，基本被jianyan和Peter老师填满，我们时不时的会被要求提些建议。就这样，我完成了第一次豆瓣活动的打酱油之旅。&lt;/p&gt;
-
-&lt;p&gt;最后，谈谈这次活动的感受。虽然活动场所没有我想象中的高大上。但是遇到这样一批愿意不断尝试改变自己的小伙伴们确实是一件幸运的事情，整个活动没有出现冷场，所有的时间都被侃侃而谈所占据。这种感觉其实是我这样一个平时不太擅长言语的所喜欢的。由于成长环境的原因，我是一个不太会找话题，不太会逗趣的一个人。不过我一直希望能够通过接触更多新鲜的环境来慢慢改变自己。我一直希望能够达到一种状态：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;拥有清晰的思考问题的逻辑&lt;/li&gt;
-&lt;li&gt;能够条理清晰的表达出自己的观点&lt;/li&gt;
-&lt;li&gt;聊天时，能找到对方感兴趣的话题&lt;/li&gt;
-&lt;li&gt;富有幽默感&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;虽然知道有些改变不容易，也不会很快有成效，但是我想慢慢改变。&lt;/p&gt;
-
-&lt;p&gt;One day I will be who I wanna be.&lt;/p&gt;
 </content>
    </entry>
    
