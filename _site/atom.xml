@@ -4,13 +4,68 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-10-27T21:43:58+08:00</updated>
+   <updated>2015-11-01T23:17:31+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>网站分析指标</title>
+     <link href="http://korbinzhao.github.io/key-indicator-website-analysis"/>
+     <updated>2015-11-01T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/key-indicator-website-analysis</id>
+     <content type="html">&lt;h2&gt;1. UV（Unique Vistor）&lt;/h2&gt;
+
+&lt;p&gt;UV是指唯一的访问者。00:00-24:00内相同的UV只被计算一次。&lt;/p&gt;
+
+&lt;h3&gt;网站分析工具如何辨别UV&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过服务器
+服务器从浏览器接收到的每次请求都会包含IP、请求时间、浏览器版本、操作系统版本等很多信息，服务器可以根据某些共同特征，来判断是否是同一个UV。不过根据IP判断UV并不十分准确，尤其是在公用IP的局域网环境下。&lt;/li&gt;
+&lt;li&gt;通过cookie
+浏览器第一次访问某个网站服务器时，服务器会给浏览器发送一个cookie，这个cookie会分配给你一个独一无二的编号，并且会记录你访问服务器的信息，例如访问时间、访问的网页、是否登录、登录的账号信息等。当浏览器再一次访问服务器时，服务器获取到cookie，并对里面的信息进行更新，但是给你的编号是不会变的。cookie中拥有相同编号的两个请求会被认定为同一个visitor。这个方法比上一个更精确些，但是在浏览器禁用cookie或者用户经常删除cookie的情况下，这种方式也将失效。&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;2. PV（Page View）&lt;/h2&gt;
+
+&lt;p&gt;PV（page view），即页面浏览量，或点击量。一个PV指的是一次从网站下载一个页面的请求（A page view or page impression is a request to load a single page of an Internet site.）。&lt;/p&gt;
+
+&lt;h2&gt;3. Bounce Rate&lt;/h2&gt;
+
+&lt;p&gt;Bounce Rate，指的是在对一个页面的所有访问中，只浏览却没有发生任何点击的访问所占的比率。这种跳失一般发生在用户误点跳转链接或是进入网页后发现内容非常不感兴趣时。&lt;/p&gt;
+
+&lt;p&gt;用一个公式来表示Bounce Rate，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Omniture的计算方法：
+
+Bounce Rate = Single Page Visits / Total Visits
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;不过Bounce Rate存在另一种计算方法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Google Analytics等工具的计算方法：
+
+Bounce Rate = Single PV Visits / Total Visits 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Page Visits 和 PV Visits的主要区别在于在用户刷新时，对visits的统计是否会+1. 举例说明，用户进入页面后在没有任何操作情况下，刷新一次页面Page Visits不会+1，而PV就会+1，使得PV变为2.&lt;/p&gt;
+
+&lt;p&gt;这两种计算方法的具体区别详见&lt;a href=&quot;http://www.woshipm.com/operate/83233.html&quot;&gt;网站分析的最基本度量&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2&gt;4. 跳失率&lt;/h2&gt;
+
+&lt;p&gt;业界有『exit rate』和『bounce rate』两个概念，其中『exit rate』指该网页是会话中『最后一页』的浏览占此网页总浏览量的百分比，而『bounce rate』是指该网页是会话中“唯一网页”的会话占从此网页开始的所有会话的百分比。&lt;/p&gt;
+
+&lt;h2&gt;PS：&lt;/h2&gt;
+
+&lt;p&gt;当然，以上这些概念只是行业通用的一些行业，有些甚至没有统一的界定和标准。每个公司都有自己的一套界定规范。如果你是身在职场的孩子，不妨详细了解下本公司对各网站分析指标的详细界定。&lt;/p&gt;
+</content>
+   </entry>
    
    <entry>
      <title>原生JS实现页面滚动方向检测</title>
@@ -688,109 +743,6 @@ mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
 &lt;p&gt;“自信来自于你知道自己要做什么。”&lt;/p&gt;
 
 &lt;p&gt;“每天用自己最充沛的精力，做有价值的事情。”&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>Cocos2d-X 3.0 事件分发机制</title>
-     <link href="http://korbinzhao.github.io/cocos2d-event-dispatcher"/>
-     <updated>2014-11-15T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/cocos2d-event-dispatcher</id>
-     <content type="html">&lt;h2&gt;事件&lt;/h2&gt;
-
-&lt;p&gt;Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。&lt;/p&gt;
-
-&lt;p&gt;事件监听器有以下几种：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;触摸事件&lt;/li&gt;
-&lt;li&gt;键盘响应事件&lt;/li&gt;
-&lt;li&gt;鼠标响应事件&lt;/li&gt;
-&lt;li&gt;自定义事件&lt;/li&gt;
-&lt;li&gt;加速计事件&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;h2&gt;事件分发&lt;/h2&gt;
-
-&lt;p&gt;在了解事件分发机制之前，我们首先要明确什么是事件分发。&lt;/p&gt;
-
-&lt;p&gt;对于事件分发，cocos2d官方定义为：当事件发生(例如，用户触摸屏幕，或者敲键盘)，EventDispatcher 会发布(Event objects)事件对象到合适的EventListeners，并调用你的回调。各个Event object包含事件的信息(比如，触摸点所在的坐标)。&lt;/p&gt;
-
-&lt;p&gt;我的理解是对于一个事件（比如触摸事件、键盘相应事件等）可以与任意对象绑定，那么当这个事件被用户触发时，此时应该执行哪一个对象的回调函数（比如此时我们在好几个sprite上同时绑定了touch事件，用户此时点击屏幕，用户此时想点击的到底是哪一个sprite），我们就需要作出判断。EventDispatcher做的就是这个事情。&lt;/p&gt;
-
-&lt;p&gt;以touch事件（触摸事件）为例，判断用户点击的是哪一个sprite的方法很简单，其实就是在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。不过此时又会出现另外一个问题，就是如果两个sprite有相互重叠的部分，而此时用户点击的恰恰是重叠部分，那么怎么判断到底点击的是哪一个sprite呢？这里是通过priority（分为两种：SceneGraphPriority和FixedPriority）来解决的，优先级高的sprite优先执行它所对应的事件监听器的回调函数。这样就形成了一个按照优先级高低排列的sprite队列等待依次执行用户触发的事件，而这中间则通过swallowTouches（吞没事件）属性来控制是否继续向优先级低的sprite传递事件。这就形成了一个完整的事件分发机制。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;tip:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;SceneGraphPriority(显示优先级)：根据屏幕显示的“遮盖”实际情况，进行有序的函数回调。zOrder越大，优先级越大。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;FixedPriority(固定优先级)：依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;&lt;strong&gt;总结一下：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;通过点击位置进行点击范围判断，来确定执行哪一个sprite的事件监听器&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如果该位置存在重叠的sprite绑定了相同的事件，则依据优先级（SceneGraphPriority显示优先级或FixedPriority固定优先级）来顺序执行函数回调&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;通过设置swallowTouches属性为true，并在onTouchBegan中返回true或者false来决定是否阻止事件的顺序传递。如果onTouchBegan返回true，且swallowTouches为true，则事件被吞没，事件的顺序传递则被阻止。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;h2&gt;实例&lt;/h2&gt;
-
-&lt;p&gt;新建一个sprite，并为其添加一个touch事件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var SushiSprite = cc.Sprite.extend({
-    onEnter:function () {
-        cc.log(&quot;onEnter&quot;);
-        this._super();
-    },
-
-    onExit:function () {
-        cc.log(&quot;onExit&quot;);
-    }
-});
-
-addTouchEventListenser:function(){
-    this.touchListener = cc.EventListener.create({
-        event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        // When &quot;swallow touches&quot; is true, then returning &#39;true&#39; from the onTouchBegan method will &quot;swallow&quot; the touch event, preventing other listeners from using it.
-        swallowTouches: true,
-        //onTouchBegan event callback function                      
-        onTouchBegan: function (touch, event) { 
-            var pos = touch.getLocation();
-            var target = event.getCurrentTarget();  
-            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
-                cc.log(&quot;touched&quot;)
-                return true;
-            }
-            return false;
-        }
-    cc.eventManager.addListener(this.touchListener,this);
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面的代码：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;首先通过使用cc.EventListener.create创建了一个Touch事件监听器touchListener&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;然后，通过cc.eventManager.addListener注册监听器到事件管理器。cc.EventListener.create扩展出一个用户监听器。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;event属性，定义这个监听器监听的类型。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;swallowTouches属性设置是否吃掉事件，事件被吃掉后不会递给下一层监听器。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;onTouchBegan方法处理触摸点击按下事件，我们在这里可以获取到触摸点的坐标pos。event.getCurrentTarget()获取当前事件的接受者，并判断当前的是否点击到了SushiSprite。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在touch事件中，我们还可以添加onTouchMoved/onTouchEnded方法监听touch移动和结束的回调。如果onTouchBegan返回false后onTouchMoved/onTouchEnded不会执行。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。&lt;/p&gt;
-
-&lt;h2&gt;参考文献&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&quot;&gt;[1] http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&quot;&gt;[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md&lt;/a&gt;&lt;/p&gt;
 </content>
    </entry>
    
