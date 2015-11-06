@@ -5,7 +5,7 @@
     * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>Cocos2d-X 3.0 事件分发机制 | Joebon's world</title>
+    <title>Date对象的浏览器兼容性问题 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,103 +42,57 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/cocos2d-event-dispatcher" title="Cocos2d-X 3.0 事件分发机制">Cocos2d-X 3.0 事件分发机制</a></h1>
-        <p class="entry-date">2014-11-15</p>
-        <h2>事件</h2>
+        <h1 class="entry-title"><a href="/date-cross-browser-safari-chrome" title="Date对象的浏览器兼容性问题">Date对象的浏览器兼容性问题</a></h1>
+        <p class="entry-date">2015-11-06</p>
+        <h2>new Date()、Date.parse()方法在浏览器中的兼容性问题</h2>
 
-<p>Cocos2d-JS v3.x中事件分发机制进行了重写，事件可以与任意对象绑定，而不是只有Layer才能获取。对象创建自己的事件监听器，然后加入到全局的事件管理器统一管理。</p>
+<p>   Date在不同浏览器中对于传入的时间字符串的格式要求是不一样的。比如在chrome浏览器的控制台中输入以下内容，会得到相应结果：</p>
 
-<p>事件监听器有以下几种：</p>
-
-<ul>
-<li>触摸事件</li>
-<li>键盘响应事件</li>
-<li>鼠标响应事件</li>
-<li>自定义事件</li>
-<li>加速计事件</li>
-</ul>
-
-
-<h2>事件分发</h2>
-
-<p>在了解事件分发机制之前，我们首先要明确什么是事件分发。</p>
-
-<p>对于事件分发，cocos2d官方定义为：当事件发生(例如，用户触摸屏幕，或者敲键盘)，EventDispatcher 会发布(Event objects)事件对象到合适的EventListeners，并调用你的回调。各个Event object包含事件的信息(比如，触摸点所在的坐标)。</p>
-
-<p>我的理解是对于一个事件（比如触摸事件、键盘相应事件等）可以与任意对象绑定，那么当这个事件被用户触发时，此时应该执行哪一个对象的回调函数（比如此时我们在好几个sprite上同时绑定了touch事件，用户此时点击屏幕，用户此时想点击的到底是哪一个sprite），我们就需要作出判断。EventDispatcher做的就是这个事情。</p>
-
-<p>以touch事件（触摸事件）为例，判断用户点击的是哪一个sprite的方法很简单，其实就是在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。不过此时又会出现另外一个问题，就是如果两个sprite有相互重叠的部分，而此时用户点击的恰恰是重叠部分，那么怎么判断到底点击的是哪一个sprite呢？这里是通过priority（分为两种：SceneGraphPriority和FixedPriority）来解决的，优先级高的sprite优先执行它所对应的事件监听器的回调函数。这样就形成了一个按照优先级高低排列的sprite队列等待依次执行用户触发的事件，而这中间则通过swallowTouches（吞没事件）属性来控制是否继续向优先级低的sprite传递事件。这就形成了一个完整的事件分发机制。</p>
-
-<p><strong>tip:</strong></p>
-
-<ul>
-<li><p>SceneGraphPriority(显示优先级)：根据屏幕显示的“遮盖”实际情况，进行有序的函数回调。zOrder越大，优先级越大。</p></li>
-<li><p>FixedPriority(固定优先级)：依据手动设定的 Priority 值来决定事件相应的优先级，值越小优先级越高</p></li>
-</ul>
-
-
-<p><strong>总结一下：</strong></p>
-
-<ol>
-<li><p>通过点击位置进行点击范围判断，来确定执行哪一个sprite的事件监听器</p></li>
-<li><p>如果该位置存在重叠的sprite绑定了相同的事件，则依据优先级（SceneGraphPriority显示优先级或FixedPriority固定优先级）来顺序执行函数回调</p></li>
-<li><p>通过设置swallowTouches属性为true，并在onTouchBegan中返回true或者false来决定是否阻止事件的顺序传递。如果onTouchBegan返回true，且swallowTouches为true，则事件被吞没，事件的顺序传递则被阻止。</p></li>
-</ol>
-
-
-<h2>实例</h2>
-
-<p>新建一个sprite，并为其添加一个touch事件：</p>
-
-<pre><code>var SushiSprite = cc.Sprite.extend({
-    onEnter:function () {
-        cc.log("onEnter");
-        this._super();
-    },
-
-    onExit:function () {
-        cc.log("onExit");
-    }
-});
-
-addTouchEventListenser:function(){
-    this.touchListener = cc.EventListener.create({
-        event: cc.EventListener.TOUCH_ONE_BY_ONE,
-        // When "swallow touches" is true, then returning 'true' from the onTouchBegan method will "swallow" the touch event, preventing other listeners from using it.
-        swallowTouches: true,
-        //onTouchBegan event callback function                      
-        onTouchBegan: function (touch, event) { 
-            var pos = touch.getLocation();
-            var target = event.getCurrentTarget();  
-            if ( cc.rectContainsPoint(target.getBoundingBox(),pos)) {
-                cc.log("touched")
-                return true;
-            }
-            return false;
-        }
-    cc.eventManager.addListener(this.touchListener,this);
-});
+<pre><code>Date.parse('2015-11-11 00:00:00')
+//-&gt;1447171200000
+Date.parse('2015/11/11 00:00:00')
+//-&gt;1447171200000
+new Date('2015-11-11 00:00:00')
+//-&gt;Wed Nov 11 2015 00:00:00 GMT+0800 (CST)
+new Date('2015/11/11 00:00:00')
+//-&gt;Wed Nov 11 2015 00:00:00 GMT+0800 (CST)
 </code></pre>
 
-<p>上面的代码：</p>
+<p>  可以发现，chrome对于'-'和'/'分割日期的形式都是支持的，能够返回正确的毫秒数或者时间格式。</p>
 
-<ol>
-<li><p>首先通过使用cc.EventListener.create创建了一个Touch事件监听器touchListener</p></li>
-<li><p>然后，通过cc.eventManager.addListener注册监听器到事件管理器。cc.EventListener.create扩展出一个用户监听器。</p></li>
-<li><p>event属性，定义这个监听器监听的类型。</p></li>
-<li><p>swallowTouches属性设置是否吃掉事件，事件被吃掉后不会递给下一层监听器。</p></li>
-<li><p>onTouchBegan方法处理触摸点击按下事件，我们在这里可以获取到触摸点的坐标pos。event.getCurrentTarget()获取当前事件的接受者，并判断当前的是否点击到了SushiSprite。</p></li>
-<li><p>在touch事件中，我们还可以添加onTouchMoved/onTouchEnded方法监听touch移动和结束的回调。如果onTouchBegan返回false后onTouchMoved/onTouchEnded不会执行。</p></li>
-</ol>
+<p>  下面在safari浏览器中输入相同内容，查看对应结果：</p>
 
+<pre><code>&gt; Date.parse('2015-11-11 00:00:00')
+&lt; NaN = $1
+&gt; Date.parse('2015/11/11 00:00:00')
+&lt; 1447171200000 = $2
+&gt; new Date('2015-11-11 00:00:00')
+&lt; Invalid Date = $3
+&gt; new Date('2015/11/11 00:00:00')
+&lt; Wed Nov 11 2015 00:00:00 GMT+0800 (CST) = $4
+</code></pre>
 
-<p>tip: 在onTouchBegan方法中获取点击点的坐标pos,然后通过cc.rectContainsPoint(target.getBoundingBox(),pos)判断点击的点是否在SushiSprite上。</p>
+<p>   可以发现，safari仅对'/'分割日期的形式支持，对'-'分割日期的形式并不支持。</p>
 
-<h2>参考文献</h2>
+<p>  通过以上实验，我们可以观察出chrome和safari对于不同格式的时间字符串的支持情况。chrome同时支持'-'和'/'分割日期的时间字符串；safari不支持'-'分割日期的时间字符串。</p>
 
-<p><a href="http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md">[1] http://cn.cocos2d-x.org/article/index?type=cocos2d-x&amp;url=/doc/cocos-docs-master/manual/framework/cocos2d-js/3-jumping-into-cocos2d-js/3-6-creating-user-interaction-with-event-manager/zh.md</a></p>
+<p> ## 一个简单有效的解决方法</p>
 
-<p><a href="http://cn.cocos2d-x.org/article/index?type=wiki&amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md">[2] http://cn.cocos2d-x.org/article/index?type=wiki&amp;url=/doc/cocos-docs-master/manual/framework/native/wiki/eventdispatcher-mechanism/zh.md</a></p>
+<p>  下面是一个比较好的解决方案：</p>
+
+<pre><code>var arr = "2010-03-15 10:30:00".split(/[- / :]/),
+    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+
+  console.log(date);
+  //-&gt; Mon Mar 15 2010 10:30:00 GMT+0000 (GMT Standard Time)
+</code></pre>
+
+<p>   该方法为先将时间字符串用split方法进行分割拼装为一个数组，再将每个数组的项作为传参传入new Date()方法，从而将不同形式的字符串转换成有效的时间。
+   该方法对于所有浏览器生效。</p>
+
+<h2>参考资料：</h2>
+
+<p><a href="http://stackoverflow.com/questions/5324178/javascript-date-parsing-on-iphone">http://stackoverflow.com/questions/5324178/javascript-date-parsing-on-iphone</a></p>
 
 
         <!--<div id="disqus_container">-->
@@ -171,7 +125,7 @@ addTouchEventListenser:function(){
         <!--</div>-->
 
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="/cocos2d-event-dispatcher" data-title="Cocos2d-X 3.0 事件分发机制" data-url="http://joebon.cc/cocos2d-event-dispatcher"></div>
+      <div class="ds-thread" data-thread-key="/date-cross-browser-safari-chrome" data-title="Date对象的浏览器兼容性问题" data-url="http://joebon.cc/date-cross-browser-safari-chrome"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">
