@@ -4,7 +4,7 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-11-06T19:16:21+08:00</updated>
+   <updated>2015-11-06T19:19:56+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
@@ -49,7 +49,7 @@ new Date(&#39;2015/11/11 00:00:00&#39;)
 
 &lt;p&gt;  通过以上实验，我们可以观察出chrome和safari对于不同格式的时间字符串的支持情况。chrome同时支持&#39;-&#39;和&#39;/&#39;分割日期的时间字符串；safari不支持&#39;-&#39;分割日期的时间字符串。&lt;/p&gt;
 
-&lt;p&gt; ## 一个简单有效的解决方法&lt;/p&gt;
+&lt;h2&gt;一个简单有效的解决方法&lt;/h2&gt;
 
 &lt;p&gt;  下面是一个比较好的解决方案：&lt;/p&gt;
 
