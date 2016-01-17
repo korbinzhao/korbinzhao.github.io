@@ -5,7 +5,7 @@
     * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>和PD、运营、设计师和用研们的一顿饭 | Joebon's world</title>
+    <title>模拟form表单上传图片 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,23 +42,82 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/a-meal-with-colleagues" title="和PD、运营、设计师和用研们的一顿饭">和PD、运营、设计师和用研们的一顿饭</a></h1>
-        <p class="entry-date">2015-11-16</p>
-        <p>受PD的邀请，今晚一帮同事去她家做客。去之前，其实心里很是忐忑，自己面对一帮陌生人总会多多少少有些逃避的心理。但是理智告诉我，还是必须得去的，虽然平时工作很忙，经常陷入某个难缠的bug好久，让自己越发的有些寡言少语。一来这不是我想要的状态，二来长此以往是非常不健康的。</p>
+        <h1 class="entry-title"><a href="/upload-image-simulate-post-form" title="模拟form表单上传图片">模拟form表单上传图片</a></h1>
+        <p class="entry-date">2016-01-17</p>
+        <p>浏览器端：
+html：</p>
 
-<h2>经过</h2>
+<pre><code> &lt;form id="fileupload" class="fileupload form-upload" style="display:none;" enctype="multipart/form-data" method="post" action="javascript:;" role = "form"&gt;\
+    &lt;input type = "file" name = "files" class="file-input" /&gt; \
+    &lt;input type="hidden" name="modulename" value=""/&gt;\
+    &lt;input type="button" class="upload-btn J_Uploadimg"  value="上传截图"/&gt;\
+&lt;/form&gt;\
+</code></pre>
 
-<p>去之前买了点水果带过去，否则空着手去做客太说不过去了。幸好买了，其实大家过去也都多多少少带了些东西，比如水果、红酒。PD家离我住的地方倒也非常近，打了车5分钟就到小区门口了，从小区门口进去一直走，穿过漆黑一片的小路，最近好不容易找到PD的家。</p>
+<p>JS：</p>
 
-<p>小区配套挺差的，连个路灯都没开，附近可以吃饭消遣的地方看起来也不多。但是，已进入房间，顿时眼前一亮，装修不同，真的可以给同样的房子带来完全不同的感觉。超大的客厅（把原来的客厅和一个卧室打通连在一起），客厅中间放着沙发、对面是超大的电视屏幕，后面是一张很大的工作长桌，客人多的时候可以用来当做餐桌（当然，这次就是这样做的），房间内到处都是简约却充满文艺气息的装饰品，房子位于顶楼，复式结构，二楼虽然只是楼顶屋檐下面的一点空间，但是布局合理，丝毫没有压抑的感觉，而且还有2个天窗，天气好的时候抬头就可以看到星星。一句话总结，这房子完全像是设计师精心设计过的房子，但是事实上只是房子的主人——另一个PD的设计，果然是一个充满设计师气质的PD。</p>
+<pre><code>var $fileUpload = $(".fileupload");
 
-<p>晚饭完全有一个帅帅的运营下厨，扬州人，之前还合作过，其实想说我和扬州还有些渊源，后来忍住没说。最后7点半，前前后后到了有十来个人。晚餐超级丰盛，三文鱼、酸菜鱼、蒜蓉油虾、香橙鸡肉沙拉、啤酒红烧肉、红焖茄子、蒜炒白菜、毛豆米、拍黄瓜、焗海蟹、烤鸡翅、各种糕点。。。我只想说城里人真会吃。还没开始吃饭，下厨的运营就开了一瓶红酒，其他人根据自己喜好选择红酒、果汁。席间还尝试了“peng”一下的喝法，就是用一种叫不出名字的国外的白酒兑上雪碧，手掌按住杯口，往桌子上猛地一按，“peng”的一下，然后往酒里撒点盐，一饮而尽。第一次尝试这种喝法，还挺爽的。</p>
+var formData = new FormData($fileUpload[0]);
 
-<h2>感想</h2>
+    $.ajax({
+        url: '/api/upload_img',
+        type: 'POST',   
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            nanobar.go(100);
+            //异步化
+            if(data.success){
+                $('#J_MsgCenter').html($.substitute('&lt;span class="label label-success"&gt;{message}&lt;/span&gt;',{message:data.message}));
+            }
+            else{
+                $('#J_MsgCenter').html($.substitute('&lt;span class="label label-danger"&gt;{message}&lt;/span&gt;',{message:data.message}));
+            }   
+            node.removeClass('disabled');
+            if(node.attr('data-reload')){
+                window.location.reload();
+            }
+            console.log('imgUploader upload success, data:', data);
+        },
+        error: function(){
+            $("#spanMessage").html("与服务器通信发生错误");
+        }
+    });
+</code></pre>
 
-<p>其实呢，之所有有冲动把简单的一顿饭写出来，就是想谈谈感受。在技术团队待久了，每天对着电脑敲代码，需要说话的场景不是很多，再加上技术团队整体在性格上会比较沉闷，在生活品质和乐趣上的追求也没有其他团队那么多。让我这段时间总感觉有些无聊，心情莫名低落，即使好不容易有点时间也宁愿宅着，有一种非常懒散拖延的状态。这种状态于工作、于生活都不是太好的。所以这里提醒下自己，多走出去，多和不同背景、不同岗位的人交流，这不仅有利于拓宽自己的视野，也会让自己更开心一点。正如今天的这次简单的聚会，虽然去之前略感忐忑，去之后却感觉很享受这个过程，每个人仿佛都有着自己独特的故事、自己独特的生活乐趣，这也是我想经历和正在追求的。</p>
+<p>服务器端：</p>
 
-<p>另外，和有趣的人一起，你也会变得有趣。现在的我有点太无聊了，自己都受不了自己。我需要和有趣的人在一起。</p>
+<pre><code>module.exports = function (req, res, next) {
+
+new Promise(function(resolve, reject){
+
+res.append('Access-Control-Allow-Origin', '*');
+
+var form = new multiparty.Form();
+
+form.parse(req, function(err, fields, files) {
+
+  console.log('fields:');
+  console.log(fields);
+
+  console.log('files:');
+  console.log(files);
+
+  var modulename = fields.modulename[0];
+
+  var modulePath = path.join(work_path, 'module', modulename);
+  var imgPath = files.files[0].path;
+
+  uploadImg(imgPath, modulePath, resolve, reject);
+
+});
+</code></pre>
+
+<p>  })</p>
 
 
         <!--<div id="disqus_container">-->
@@ -91,7 +150,7 @@
         <!--</div>-->
 
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="/a-meal-with-colleagues" data-title="和PD、运营、设计师和用研们的一顿饭" data-url="http://joebon.cc/a-meal-with-colleagues"></div>
+      <div class="ds-thread" data-thread-key="/upload-image-simulate-post-form" data-title="模拟form表单上传图片" data-url="http://joebon.cc/upload-image-simulate-post-form"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">

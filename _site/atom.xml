@@ -4,13 +4,95 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-01-17T21:49:46+08:00</updated>
+   <updated>2016-01-17T22:17:19+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>模拟form表单上传图片</title>
+     <link href="http://korbinzhao.github.io/upload-image-simulate-post-form"/>
+     <updated>2016-01-17T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/upload-image-simulate-post-form</id>
+     <content type="html">&lt;p&gt;浏览器端：
+html：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; &amp;lt;form id=&quot;fileupload&quot; class=&quot;fileupload form-upload&quot; style=&quot;display:none;&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot; action=&quot;javascript:;&quot; role = &quot;form&quot;&amp;gt;\
+    &amp;lt;input type = &quot;file&quot; name = &quot;files&quot; class=&quot;file-input&quot; /&amp;gt; \
+    &amp;lt;input type=&quot;hidden&quot; name=&quot;modulename&quot; value=&quot;&quot;/&amp;gt;\
+    &amp;lt;input type=&quot;button&quot; class=&quot;upload-btn J_Uploadimg&quot;  value=&quot;上传截图&quot;/&amp;gt;\
+&amp;lt;/form&amp;gt;\
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;JS：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var $fileUpload = $(&quot;.fileupload&quot;);
+
+var formData = new FormData($fileUpload[0]);
+
+    $.ajax({
+        url: &#39;/api/upload_img&#39;,
+        type: &#39;POST&#39;,   
+        data: formData,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            nanobar.go(100);
+            //异步化
+            if(data.success){
+                $(&#39;#J_MsgCenter&#39;).html($.substitute(&#39;&amp;lt;span class=&quot;label label-success&quot;&amp;gt;{message}&amp;lt;/span&amp;gt;&#39;,{message:data.message}));
+            }
+            else{
+                $(&#39;#J_MsgCenter&#39;).html($.substitute(&#39;&amp;lt;span class=&quot;label label-danger&quot;&amp;gt;{message}&amp;lt;/span&amp;gt;&#39;,{message:data.message}));
+            }   
+            node.removeClass(&#39;disabled&#39;);
+            if(node.attr(&#39;data-reload&#39;)){
+                window.location.reload();
+            }
+            console.log(&#39;imgUploader upload success, data:&#39;, data);
+        },
+        error: function(){
+            $(&quot;#spanMessage&quot;).html(&quot;与服务器通信发生错误&quot;);
+        }
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;服务器端：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = function (req, res, next) {
+
+new Promise(function(resolve, reject){
+
+res.append(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;);
+
+var form = new multiparty.Form();
+
+form.parse(req, function(err, fields, files) {
+
+  console.log(&#39;fields:&#39;);
+  console.log(fields);
+
+  console.log(&#39;files:&#39;);
+  console.log(files);
+
+  var modulename = fields.modulename[0];
+
+  var modulePath = path.join(work_path, &#39;module&#39;, modulename);
+  var imgPath = files.files[0].path;
+
+  uploadImg(imgPath, modulePath, resolve, reject);
+
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;  })&lt;/p&gt;
+</content>
+   </entry>
    
    <entry>
      <title>剪切板粘贴上传图片功能的实现</title>
@@ -652,58 +734,6 @@ foo(&quot;Hi&quot;);
 &lt;p&gt;最后一点感触很深的是，无论你多牛掰，不表现出来，不让你身边的人、老版、HR看到，一切都是白搭的。所以工作中很苦逼的一种状态会是，你每天累得像孙子一样，老板却看不到你的实力、成果。&lt;/p&gt;
 
 &lt;p&gt;所以，适时的把自己的实力、观点表达出来吧~&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>Mac OS X 快捷键</title>
-     <link href="http://korbinzhao.github.io/mac-os-x-shortcut"/>
-     <updated>2015-08-23T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/mac-os-x-shortcut</id>
-     <content type="html">&lt;p&gt;Mac OS X 的快捷键会有效提升我们的办公效率，下面是常用的部分快捷键的汇总，并在文章的最后附有详细的系列学习视频&lt;/p&gt;
-
-&lt;p&gt;command+H : 隐藏该程序&lt;/p&gt;
-
-&lt;p&gt;command＋option＋H: 隐藏当前应用外的其它所有应用&lt;/p&gt;
-
-&lt;p&gt;command+, : 呼出应用程序设置&lt;/p&gt;
-
-&lt;p&gt;command+option+v : 剪切&lt;/p&gt;
-
-&lt;p&gt;command+delete: 移到废纸篓&lt;/p&gt;
-
-&lt;p&gt;command+i : 显示简介&lt;/p&gt;
-
-&lt;p&gt;command＋option＋i：查看选中的多个文件的简介&lt;/p&gt;
-
-&lt;p&gt;command+上/下 : 跳到顶部底部&lt;/p&gt;
-
-&lt;p&gt;command＋前／后： 跳到行首行尾&lt;/p&gt;
-
-&lt;p&gt;command＋option＋shift＋v：只粘贴文本，不粘贴样式&lt;/p&gt;
-
-&lt;p&gt;fn+delete: 向后删除&lt;/p&gt;
-
-&lt;p&gt;拖动文件：剪切&lt;/p&gt;
-
-&lt;p&gt;option＋拖动文件：复制&lt;/p&gt;
-
-&lt;p&gt;选中+space（或三指点击触控板） ： 预览&lt;/p&gt;
-
-&lt;p&gt;选中多个文件＋右键 ： 新建文件夹并将选中文件放进去&lt;/p&gt;
-
-&lt;p&gt;在显示简介中修改默认文件打开方式&lt;/p&gt;
-
-&lt;p&gt;四指向上推，呼出MissionControl，按住option添加桌面，四指左右滑动（或command+左/右），切换
-桌面&lt;/p&gt;
-
-&lt;p&gt;四指下滑，展示当前应用的所有打开窗口&lt;/p&gt;
-
-&lt;p&gt;在英文输入法状态下长按韵母字母，就可以呼出带有声调的字母符号&lt;/p&gt;
-
-&lt;p&gt;－－－－－－－－－－－－－－－－－－－－－－&lt;/p&gt;
-
-&lt;p&gt;推荐的学习视频：&lt;a href=&quot;http://www.youku.com/playlist_show/id_18654878.html&quot;&gt;深入浅出 Mac OSX 中文教程&lt;/a&gt;&lt;/p&gt;
 </content>
    </entry>
    
