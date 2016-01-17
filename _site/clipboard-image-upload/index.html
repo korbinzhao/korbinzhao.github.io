@@ -5,7 +5,7 @@
     * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>SVG入门 | Joebon's world</title>
+    <title>剪切板粘贴上传图片功能的实现 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,50 +42,89 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/introduction-to-svg" title="SVG入门">SVG入门</a></h1>
-        <p class="entry-date">2015-06-02</p>
-        <h2>SVG</h2>
+        <h1 class="entry-title"><a href="/clipboard-image-upload" title="剪切板粘贴上传图片功能的实现">剪切板粘贴上传图片功能的实现</a></h1>
+        <p class="entry-date">2016-01-17</p>
+        <p>平时的开发中我们难免要上传一些网页截图，传统的选择文件上传使用起来不方便，这里介绍一种使用js和node实现的剪切板黏贴上传图片功能。当我们需要上传截图时，只需手动截图后commond/ctrl+v即可完成图片上传。这种方式将大大减少我们在上传图片过程中花费的时间。</p>
 
-<p>SVG是使用XML描述的矢量文件，全称可缩放矢量图形，用于描述二维矢量图形的一种图形格式。</p>
+<p>要实现剪切板黏贴上传功能，首先我们要先能获取到在剪切板中的图片，这里给大家介绍一个很好用的js插件：<a href="https://github.com/jorgenbs/ImageClipboard">ImageClipboard</a>。</p>
 
-<p><strong>位图&amp;矢量图</strong></p>
+<h2>ImageClipboard</h2>
 
-<p>位图（BMP、PNG、JPG等）是基于颜色的描述，由一个个像素点组成；矢量图（SVG、AI等）是基于数学的描述，根据几何特征来绘制图形，矢量可以是一个点或一条线，矢量图只能靠软件生成，特点是放大后图像不会失真，和分辨率无关。</p>
+<p><a href="https://github.com/jorgenbs/ImageClipboard">ImageClipboard</a>是一款在chrome、firefox和opera上有效的可以将剪切板中的图片黏贴到网页上的工具。</p>
 
-<p><img src="/images/introduction-to-svg/svg.png" title="svg" alt="svg" /></p>
+<h3>安装</h3>
 
-<h2>SVG示例</h2>
+<p>可以使用bower很简单的安装，如果没有安装bower，请先安装bower,安装使用说明见：<a href="http://javascript.ruanyifeng.com/tool/bower.html">bower：客户端库管理工具</a>。</p>
 
-<p>simple.svg</p>
-
-<pre><code>&lt;svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"&gt;
-&lt;!--face--&gt;
-&lt;circle cx="100" cy="100" r="90" fill="#39F"/&gt;
-&lt;!--eyes--&gt;
-&lt;circle cx="70" cy="80" r="20" fill="white"/&gt;
-&lt;circle cx="130" cy="80" r="20" fill="white"/&gt;
-&lt;circle cx="65" cy="75" r="10" fill="black"/&gt;
-&lt;circle cx="125" cy="75" r="10" fill="black"/&gt;
-&lt;!--smile--&gt;
-&lt;path d="M 50 140 A 60 60 0 0 0 150 140" stroke="white" stroke-width="3" fill="none" /&gt;
-&lt;/svg&gt;
+<pre><code>bower install image-clipboard
 </code></pre>
 
-<h2>SVG的使用方式</h2>
+<h3>使用：将剪切板中的图片黏贴到网页中去</h3>
 
-<ul>
-<li>浏览器直接打开</li>
-<li>在HTML中使用img标签引用</li>
-<li>直接在HTML中使用SVG</li>
-<li>作为CSS背景</li>
-</ul>
+<pre><code>&lt;div id="box"&gt;&lt;/div&gt;
+&lt;script type="text/javascript" src="ImageClipBoard.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
 
+ var clipboard = new ImageClipboard('#box', function (base64) {
+    //do stuff with pasted image
+ });
 
-<h2>基本操作API</h2>
+  //onpaste-callback can also be passed as second argument
+  //in the constructor above.
+ clipboard.onpaste = function (base64) {
+    //do stuff with the pasted image
+  });
 
-<p>创建图形，需要使用document.createElementNS()方法</p>
+  //you can also pass in single DOM-element instead of 
+  //query as the first parameter.
 
-<pre><code>document.createElementNS(ns, tagName)
+&lt;/script&gt;
+</code></pre>
+
+<p>  运行以上代码后，div#box中会插入一个img标签，src即为当前剪切板中图片。</p>
+
+<h2>剪切板中图片的获取与上传</h2>
+
+<p>通过ImageClipboard，我们可以以base64的形式获取到剪切板中的图片，然后将base64数据作为参数通过POST的方式传输到服务器端。</p>
+
+<h3>浏览器端代码：</h3>
+
+<pre><code>this.props.clipboard.onpaste = function (base64) {
+  //do stuff with the pasted image
+  //console.log(base64)
+
+  $.ajax({
+    url: 'http://localhost:2929/api/upload-img',
+    dataType: 'JSON',
+    data: {
+      imgData: base64},
+    type: 'POST',
+    success: function(data) {
+      console.log(data);
+    }
+  });
+
+};
+</code></pre>
+
+<h3>服务器端代码</h3>
+
+<p>服务器端获取到base64数据，即可将base64数据转为图片存储或者传送到其他服务器。</p>
+
+<pre><code>export default function uploadImg(req, res) {
+
+  new Promise((resolve, reject) =&gt; {
+
+    var fs = require('fs');
+    var base64Data = req.body.imgData.replace(/^data:image\/png;base64,/, "");
+
+    fs.writeFile("out.png", base64Data, 'base64', function(err) {
+      console.log(err);
+    });  
+
+  });
+
+}
 </code></pre>
 
 
@@ -119,7 +158,7 @@
         <!--</div>-->
 
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="/introduction-to-svg" data-title="SVG入门" data-url="http://joebon.cc/introduction-to-svg"></div>
+      <div class="ds-thread" data-thread-key="/clipboard-image-upload" data-title="剪切板粘贴上传图片功能的实现" data-url="http://joebon.cc/clipboard-image-upload"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">

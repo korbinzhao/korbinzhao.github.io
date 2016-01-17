@@ -4,13 +4,103 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2015-11-23T01:17:51+08:00</updated>
+   <updated>2016-01-17T21:49:46+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>剪切板粘贴上传图片功能的实现</title>
+     <link href="http://korbinzhao.github.io/clipboard-image-upload"/>
+     <updated>2016-01-17T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/clipboard-image-upload</id>
+     <content type="html">&lt;p&gt;平时的开发中我们难免要上传一些网页截图，传统的选择文件上传使用起来不方便，这里介绍一种使用js和node实现的剪切板黏贴上传图片功能。当我们需要上传截图时，只需手动截图后commond/ctrl+v即可完成图片上传。这种方式将大大减少我们在上传图片过程中花费的时间。&lt;/p&gt;
+
+&lt;p&gt;要实现剪切板黏贴上传功能，首先我们要先能获取到在剪切板中的图片，这里给大家介绍一个很好用的js插件：&lt;a href=&quot;https://github.com/jorgenbs/ImageClipboard&quot;&gt;ImageClipboard&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2&gt;ImageClipboard&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jorgenbs/ImageClipboard&quot;&gt;ImageClipboard&lt;/a&gt;是一款在chrome、firefox和opera上有效的可以将剪切板中的图片黏贴到网页上的工具。&lt;/p&gt;
+
+&lt;h3&gt;安装&lt;/h3&gt;
+
+&lt;p&gt;可以使用bower很简单的安装，如果没有安装bower，请先安装bower,安装使用说明见：&lt;a href=&quot;http://javascript.ruanyifeng.com/tool/bower.html&quot;&gt;bower：客户端库管理工具&lt;/a&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bower install image-clipboard
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;使用：将剪切板中的图片黏贴到网页中去&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&quot;box&quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;script type=&quot;text/javascript&quot; src=&quot;ImageClipBoard.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+
+ var clipboard = new ImageClipboard(&#39;#box&#39;, function (base64) {
+    //do stuff with pasted image
+ });
+
+  //onpaste-callback can also be passed as second argument
+  //in the constructor above.
+ clipboard.onpaste = function (base64) {
+    //do stuff with the pasted image
+  });
+
+  //you can also pass in single DOM-element instead of 
+  //query as the first parameter.
+
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;  运行以上代码后，div#box中会插入一个img标签，src即为当前剪切板中图片。&lt;/p&gt;
+
+&lt;h2&gt;剪切板中图片的获取与上传&lt;/h2&gt;
+
+&lt;p&gt;通过ImageClipboard，我们可以以base64的形式获取到剪切板中的图片，然后将base64数据作为参数通过POST的方式传输到服务器端。&lt;/p&gt;
+
+&lt;h3&gt;浏览器端代码：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;this.props.clipboard.onpaste = function (base64) {
+  //do stuff with the pasted image
+  //console.log(base64)
+
+  $.ajax({
+    url: &#39;http://localhost:2929/api/upload-img&#39;,
+    dataType: &#39;JSON&#39;,
+    data: {
+      imgData: base64},
+    type: &#39;POST&#39;,
+    success: function(data) {
+      console.log(data);
+    }
+  });
+
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;服务器端代码&lt;/h3&gt;
+
+&lt;p&gt;服务器端获取到base64数据，即可将base64数据转为图片存储或者传送到其他服务器。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export default function uploadImg(req, res) {
+
+  new Promise((resolve, reject) =&amp;gt; {
+
+    var fs = require(&#39;fs&#39;);
+    var base64Data = req.body.imgData.replace(/^data:image\/png;base64,/, &quot;&quot;);
+
+    fs.writeFile(&quot;out.png&quot;, base64Data, &#39;base64&#39;, function(err) {
+      console.log(err);
+    });  
+
+  });
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+   </entry>
    
    <entry>
      <title>关于生活方式</title>
@@ -614,131 +704,6 @@ foo(&quot;Hi&quot;);
 &lt;p&gt;－－－－－－－－－－－－－－－－－－－－－－&lt;/p&gt;
 
 &lt;p&gt;推荐的学习视频：&lt;a href=&quot;http://www.youku.com/playlist_show/id_18654878.html&quot;&gt;深入浅出 Mac OSX 中文教程&lt;/a&gt;&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>nodejs+mongdb+express建站学习中所踩得坑</title>
-     <link href="http://korbinzhao.github.io/nodejs-express-mongodb-website"/>
-     <updated>2015-06-02T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/nodejs-express-mongodb-website</id>
-     <content type="html">&lt;h2&gt;网站开发框架&lt;/h2&gt;
-
-&lt;p&gt;在网站开发之前，我们首先对网站开发框架进行设计。主要分为后端、前端、本地开发环境三部分。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;网站后端由nodejs支撑，同时安装nodejs框架express，数据库选择mongodb，同时选择对mongodb进行快速建模的工具mongoose，后端模板引擎选择jade，日期和时间的格式化选择moment.js，express、mongoose、jade、moment.js都通过npm模块安装包来安装。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;前端选择jQuery类库、Bootstrap样式框架，jQuery和Bootstrap都属于前端静态资源，使用Bower来安装它们，Bower也是一个npm安装模块，因此也需要使用npm安装。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;本地开发环境用到less的编译、cssmin样式合并、JSHint前后端单元测试的实现等。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-
-&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/website-framework.png&quot; title=&quot;website framework&quot; alt=&quot;website framework&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;视频教程详见&lt;a href=&quot;http://www.imooc.com/learn/75&quot; title=&quot;imooc.com&quot;&gt;imooc.com&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;nodejs的安装&lt;/h2&gt;
-
-&lt;p&gt;开发前需要先安装[nodejs]，通过nodejs官网即可完成nodejs的安装。&lt;/p&gt;
-
-&lt;h2&gt;mongodb的安装&lt;/h2&gt;
-
-&lt;p&gt;mongodb是一个高性能、开源、无模式的文档型数据库（非关系型数据库），是当前NoSql数据库中比较热门的一种。mongodb中的一条记录就是一个文档（document），它的数据结构由键值对组成。mongodb文档和JSON对象很相似。&lt;/p&gt;
-
-&lt;p&gt;拓展：NoSql，全称是Not Only Sql，指的是非关系型数据库。下一代数据库主要解决几个要点：非关系型、分布式、开源、水平可拓展。&lt;/p&gt;
-
-&lt;p&gt;开发前mongodb需要单独安装。这也是我在不了解情况下踩过的一个坑，mongoose是mongodb的快速建模工具，通过npm安装mongoose并不会同时安装mongodb，且在安装完成mongobd后，在运行node app.&lt;/p&gt;
-
-&lt;p&gt;首先安装&lt;a href=&quot;https://www.mongodb.org/&quot; title=&quot;mongodb&quot;&gt;mongodb&lt;/a&gt;,js本地查看网站效果前，必须前行启动mongodb，并与node连接起来。在项目文件夹imooc下新建data文件夹用于存放mongdb数据。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd d:/fe_exercise/imooc
-mkdir data
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;进入mongodb的安装目录 D:\Program Files\MongoDB 2.6 Standard下的bin文件夹中执行：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd d:/Program Files/MongoDB 2.6 Standard/bin
-mongod --dbpath &quot;d:/fe_exercise/imooc/data&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;出现以下结果则证明连接成功。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/mongodb-node-link.png&quot; title=&quot;mongodb-node-link&quot; alt=&quot;mongodb-node-link&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;每次本地查看网站前，用命令行启动mongodb，并将mongodb和node连接是一件很麻烦的事情。可以通过一种相对简单方法可以简化这个过程。具体方法如下：&lt;/p&gt;
-
-&lt;p&gt;新建一个名为mongodb.cmd的文件，文件内容如下。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;:: 定位到D盘
-d:
-:: 切换到mongodb的数据库目录
-cd Program files\MongoDB 2.6 Standard\data
-:: 删除数据库锁定记录文件
-if exist mongod.lock del mongod.lock missing
-:: 切换到mongodb的bin目录
-cd ..\bin
-:: 配置mongodb的文档存储目录
-mongod --dbpath &quot;D:\fe_exercise\imooc\data&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;双击运行，即可完成启动mongodb，连接mongodb和node的过程。&lt;/p&gt;
-
-&lt;h2&gt;mongodb可视化管理工具：rockmongo的安装与配置&lt;/h2&gt;
-
-&lt;p&gt;rockmongo是一个用PHP5写的mongodb可视化管理工具。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;下载rockmongo&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://rockmongo.com/downloads&quot; title=&quot;rockmongo&quot;&gt;rockmongo官网&lt;/a&gt;目前无法访问，可选择另一种替代方式：直接访问&lt;a href=&quot;https://github.com/iwind/rockmongo&quot; title=&quot;rockmongo&quot;&gt;rockmongo github地址&lt;/a&gt;，选择一个版本进行下载，本文选用1.1.7版本。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;安装PHP环境&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;rockmongo的运行需要PHP环境，本文选用&lt;a href=&quot;http://pan.baidu.com/s/1c0dInYg&quot; title=&quot;appserv&quot;&gt;AppServ 2.5.1&lt;/a&gt;进行PHP、Apache等环境的打包安装，AppServ是PHP网页架站工具组合包，所包含的软件有：Apache、Apache Monitor、MySQL、PHPMyAdmin等。AppServ 2.5.1中PHP版本为PHP 5.2。下载AppServ点击安装，本文选用安装目录为C:/AppServ。&lt;/p&gt;
-
-&lt;p&gt;将上文中从github上下载的rockmongo 1.1.7文件夹重命名为rockmongo，放到AppServ安装目录下的www文件夹中：C:/AppServ/www。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;下载mongodb-php拓展&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;根据所安装的PHP版本选择相应的mongo-php驱动拓展，本文PHP版本为5.2，因此选择PHP 5.2 VC6 Thread-Safe Mongo extension：&lt;a href=&quot;http://pan.baidu.com/s/1eQo33kI&quot; title=&quot;mongo-php-driver&quot;&gt;mongo-php-driver&lt;/a&gt;，将下载目录中的php_mongo.dll文件copy到C:/AppServ/php5/ext中。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;修改php.ini文件&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在php.ini文件中添加extension=php_mongo.dll&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;重启Apache服务&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;重启Apache服务&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;修改rockmongo中的文件config..php&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;设置以下内容的USERNAME和PASSWORD，将两者均设为root&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$MONGO[&quot;servers&quot;][$i][&quot;control_users&quot;][&quot;root&quot;] = &quot;root&quot;;//one of control users [&quot;USERNAME&quot;]=PASSWORD, works only if mongo_auth=false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;使用rockmongo登录mongodb&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;访问http://localhost/rockmongo,界面如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/login.png&quot; title=&quot;login&quot; alt=&quot;login&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;登录后界面如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/nodejs-express-mongondb-website/dbview.png&quot; title=&quot;dbview&quot; alt=&quot;dbview&quot; /&gt;&lt;/p&gt;
-
-&lt;h2&gt;项目结构的初始化&lt;/h2&gt;
-
-&lt;p&gt;进入项目目录，运行Node.js command prompt,运行以下代码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;- imooc/
- &amp;gt; npm install express
- &amp;gt; npm install jade
- &amp;gt; npm install mongoose
- &amp;gt; npm install bower -g
- &amp;gt; npm install bootstrap
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过npm对项目中使用的框架和模块进行安装之后就可以正式开始项目开发了。具体项目源码见&lt;a href=&quot;https://github.com/korbinzhao/exercise/tree/master/imooc&quot; title=&quot;imooc github&quot;&gt;github仓库&lt;/a&gt;。&lt;/p&gt;
 </content>
    </entry>
    
