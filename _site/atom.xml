@@ -4,7 +4,7 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-01-17T22:17:19+08:00</updated>
+   <updated>2016-01-17T22:18:40+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
@@ -88,9 +88,9 @@ form.parse(req, function(err, fields, files) {
   uploadImg(imgPath, modulePath, resolve, reject);
 
 });
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;  })&lt;/p&gt;
+})
+&lt;/code&gt;&lt;/pre&gt;
 </content>
    </entry>
    
