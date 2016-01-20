@@ -4,13 +4,117 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-01-18T11:37:46+08:00</updated>
+   <updated>2016-01-20T20:54:06+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>字符编码扫盲及escape, encodeURI 和 encodeURIComponent方法比较</title>
+     <link href="http://korbinzhao.github.io/comparing-escape-encodeURI-and-encodeURIComponent"/>
+     <updated>2016-01-20T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/comparing-escape-encodeURI-and-encodeURIComponent</id>
+     <content type="html">&lt;h2&gt;字符编码：ASCII，Unicode和UTF-8&lt;/h2&gt;
+
+&lt;p&gt;在正式说转码之前，先了解下字符编码。下面是阮一峰网络日志的一篇文章的摘抄。&lt;/p&gt;
+
+&lt;h3&gt;1.ASCII码&lt;/h3&gt;
+
+&lt;p&gt;在计算机内部，所有的信息都最终表示为一个二进制字符串。每一个二进制（bit）有0和1两种状态，一个字节由8个二进制位组成，所以共256(2&lt;sup&gt;8&lt;/sup&gt;)种状态。&lt;/p&gt;
+
+&lt;p&gt;ASCII码是定义了英文字符和二进制位之间关系的字符编码。ASCII码一共规定了128个字符的编码，比如空格是32（二进制00100000）。这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后7位，最前面一位统一规定为0；&lt;/p&gt;
+
+&lt;h3&gt;2.非ASCII编码&lt;/h3&gt;
+
+&lt;p&gt;英文用128个符号编码就够了，但是用来表示其他语言，128个符号是不够的。比如，在法语中，字母上方有注音符号，它就无法用ASCII码表示。于是，一些欧洲国家就决定，利用字节中闲置的最高位编入新的符号。比如，法语中的é的编码为130（二进制10000010）。这样一来，这些欧洲国家使用的编码体系，可以表示最多256个符号。&lt;/p&gt;
+
+&lt;p&gt;但是，这里又出现了新的问题。不同的国家有不同的字母，因此，哪怕它们都使用256个符号的编码方式，代表的字母却不一样。比如，130在法语编码中代表了é，在希伯来语编码中却代表了字母Gimel (ג)，在俄语编码中又会代表另一个符号。但是不管怎样，所有这些编码方式中，0--127表示的符号是一样的，不一样的只是128--255的这一段。&lt;/p&gt;
+
+&lt;p&gt;至于亚洲国家的文字，使用的符号就更多了，汉字就多达10万左右。一个字节只能表示256种符号，肯定是不够的，就必须使用多个字节表达一个符号。比如，简体中文常见的编码方式是GB2312，使用两个字节表示一个汉字，所以理论上最多可以表示256x256=65536个符号。&lt;/p&gt;
+
+&lt;h3&gt;3.Unicode&lt;/h3&gt;
+
+&lt;p&gt;正如上一节所说，世界上存在着多种编码方式，同一个二进制数字可以被解释成不同的符号。因此，要想打开一个文本文件，就必须知道它的编码方式，否则用错误的编码方式解读，就会出现乱码。&lt;/p&gt;
+
+&lt;p&gt;可以想象，如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是Unicode，就像它的名字表示的，这是一种所有符号的编码。&lt;/p&gt;
+
+&lt;p&gt;Unicode当然是一个很大的集合，现在的规模可以容纳100多万个符号。每个符号的编码都不一样。&lt;/p&gt;
+
+&lt;h3&gt;Unicode的问题&lt;/h3&gt;
+
+&lt;p&gt;需要注意的是，Unicode只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储。&lt;/p&gt;
+
+&lt;p&gt;比如，汉字&quot;严&quot;的unicode是十六进制数4E25，转换成二进制数足足有15位（100111000100101），也就是说这个符号的表示至少需要2个字节。表示其他更大的符号，可能需要3个字节或者4个字节，甚至更多。&lt;/p&gt;
+
+&lt;p&gt;这里就有两个严重的问题，第一个问题是，如何才能区别Unicode和ASCII？计算机怎么知道三个字节表示一个符号，而不是分别表示三个符号呢？第二个问题是，我们已经知道，英文字母只用一个字节表示就够了，如果Unicode统一规定，每个符号用三个或四个字节表示，那么每个英文字母前都必然有二到三个字节是0，这对于存储来说是极大的浪费，文本文件的大小会因此大出二三倍，这是无法接受的。&lt;/p&gt;
+
+&lt;p&gt;它们造成的结果是：1）出现了Unicode的多种存储方式，也就是说有许多种不同的二进制格式，可以用来表示Unicode。2）Unicode在很长一段时间内无法推广，直到互联网的出现。&lt;/p&gt;
+
+&lt;p&gt;转码问题是一个经常让人头疼的问题，下面比较下escape(), encodeURI() 和 encodeURIComponent()三种方法的不同以及使用场景。&lt;/p&gt;
+
+&lt;h3&gt;5.UTF-8&lt;/h3&gt;
+
+&lt;p&gt;互联网的普及，强烈要求出现一种统一的编码方式。UTF-8就是在互联网上使用最广的一种Unicode的实现方式。其他实现方式还包括UTF-16（字符用两个字节或四个字节表示）和UTF-32（字符用四个字节表示），不过在互联网上基本不用。重复一遍，这里的关系是，UTF-8是Unicode的实现方式之一。&lt;/p&gt;
+
+&lt;p&gt;UTF-8最大的一个特点，就是它是一种变长的编码方式。它可以使用1~4个字节表示一个符号，根据不同的符号而变化字节长度。&lt;/p&gt;
+
+&lt;p&gt;UTF-8的编码规则很简单，只有二条：&lt;/p&gt;
+
+&lt;p&gt;1）对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。&lt;/p&gt;
+
+&lt;p&gt;2）对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。
+下表总结了编码规则，字母x表示可用编码的位。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Unicode符号范围(十六进制) | UTF-8编码方式（二进制）
+--------------------|------------------------
+0000 0000-0000 007F | 0xxxxxxx
+0000 0080-0000 07FF | 110xxxxx 10xxxxxx
+0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;跟据上表，解读UTF-8编码非常简单。如果一个字节的第一位是0，则这个字节单独就是一个字符；如果第一位是1，则连续有多少个1，就表示当前字符占用多少个字节。&lt;/p&gt;
+
+&lt;h2&gt;escape(), encodeURI() 和 encodeURIComponent()方法比较&lt;/h2&gt;
+
+&lt;h3&gt;escape()方法&lt;/h3&gt;
+
+&lt;p&gt;escape方法返回一个Unicode格式的字符串。所有的空格、标点符号、特殊字符和其他非ASCII字符都会被替换为%xx格式的编码，其中xx是相应字符的16进制数字。比如，一个空格会被转码为&quot;%20&quot;。&lt;/p&gt;
+
+&lt;p&gt;该方法不会对 ASCII 字母和数字进行编码，也不会对下面这些 ASCII 标点符号进行编码： - _ . ! ~ * &#39; ( ) 。其他所有的字符都会被转义序列替换。&lt;/p&gt;
+
+&lt;h3&gt;encodeURI()方法&lt;/h3&gt;
+
+&lt;p&gt;encodeURI() 函数可把字符串作为 URI 进行编码。某些字符将被十六进制的转义序列进行替换。&lt;/p&gt;
+
+&lt;p&gt;该方法不会对 ASCII 字母和数字进行编码，也不会对这些 ASCII 标点符号进行编码： - _ . ! ~ * &#39; ( ) 。&lt;/p&gt;
+
+&lt;p&gt;该方法的目的是对 URI 进行完整的编码，因此对以下在 URI 中具有特殊含义的 ASCII 标点符号，encodeURI() 函数是不会进行转义的：;/?:@&amp;amp;=+$,#&lt;/p&gt;
+
+&lt;p&gt;注：
+decodeURI(undefined) === &#39;undefined&#39;; //true&lt;/p&gt;
+
+&lt;h3&gt;encodeURIComponent()方法&lt;/h3&gt;
+
+&lt;p&gt; encodeURIComponent() 函数 与 encodeURI() 函数的区别之处，前者假定它的参数是 URI 的一部分（比如协议、主机名、路径或查询字符串）。因此 encodeURIComponent() 函数将转义用于分隔 URI 各个部分的标点符号。&lt;/p&gt;
+
+&lt;h2&gt;总结&lt;/h2&gt;
+
+&lt;p&gt; 通过对三个函数的分析，我们可以知道：escape()除了 ASCII 字母、数字和特定的符号外，对传进来的字符串全部进行转义编码，因此如果想对URL编码，最好不要使用此方法。而encodeURI() 用于编码整个URI,因为URI中的合法字符都不会被编码转换。encodeURIComponent方法在编码单个URIComponent（指请求参数）应当是最常用的，它可以讲参数中的中文、特殊字符进行转义，而不会影响整个URL。&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html&quot;&gt;字符编码笔记：ASCII，Unicode和UTF-8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://xkr.us/articles/javascript/encode-compare/&quot;&gt;Comparing escape(), encodeURI(), and encodeURIComponent()&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/qiantuwuliang/archive/2009/07/19/1526687.html&quot;&gt;escape()、encodeURI()、encodeURIComponent()区别详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>模拟form表单上传图片</title>
@@ -691,49 +795,6 @@ foo(&quot;Hi&quot;);
 &lt;li&gt;&lt;a href=&quot;&quot;&gt;JavaScript高级程序设计&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-</content>
-   </entry>
-   
-   <entry>
-     <title>入职了，转正了</title>
-     <link href="http://korbinzhao.github.io/become-a-regular-worker"/>
-     <updated>2015-10-23T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/become-a-regular-worker</id>
-     <content type="html">&lt;p&gt;正式入职3个月，经过了转正面试，接连有了两次转正后的交流会。今晚这次交流比较有感触，所以特别记一下。&lt;/p&gt;
-
-&lt;p&gt;前两天，团队新近的6个新人全部转正面试结束。老板ZY把我们同组的6个人叫到一起，开了个简单的交流会。此前的转正面试加上最近2次交流会，有一些收获，记录一下，给以后工作中的自己提个醒。&lt;/p&gt;
-
-&lt;h2&gt;从业务中抽离出来做些自己的事情&lt;/h2&gt;
-
-&lt;p&gt;我们的日常业务是很忙的。要学会从繁重的业务中抽身出来，去做些个人成长、技术成长的事情。说白了，只做业务的话说实话，最后只是简单一些重复劳动，如果不能自己抽出时间进行学习、积累的话，自己很难会有成长，对于之后的KPI考核、薪酬、晋升其实是没有什么好处的。&lt;/p&gt;
-
-&lt;p&gt;这一点是自从入职后，每次开交流会团队老大YX和HR都会返回强调的。只做业务，没有自己的核心竞争力的话，个人的不可替代性就太强了，对于团队的价值就非常小。&lt;/p&gt;
-
-&lt;h2&gt;工作中思考&lt;/h2&gt;
-
-&lt;p&gt;思考是工作中非常重要的一个能力，不能在工作中有自己的思考，那么你就只能是别人眼中的一个工具。这里的思考既有对前端团队内部效率、工具的思考，也有对自己所负责业务的思考。&lt;/p&gt;
-
-&lt;h2&gt;将自己的思考写出来&lt;/h2&gt;
-
-&lt;p&gt;一些事情自己能想到以及想清楚和真正把想法写出来是完全两种不同的概念。很多时候，我们只是自我感觉把有些东西想清楚了，但是真的当我们需要临场表达的时候常常是毫无逻辑、丢三落四或者混乱不堪的。这说明我们还没有把自己的思路真正的理清楚。那么，平时自己有所思考的时候，把自己的想法写出来吧！&lt;/p&gt;
-
-&lt;p&gt;写作可以让你对自己的过往的思考有一个清晰的回顾和整理，并且当我们回过头来看自己的过往的想法时也是一种意义非法的事情。&lt;/p&gt;
-
-&lt;h2&gt;拓展自己的舒服边界-团队中的充分交流&lt;/h2&gt;
-
-&lt;p&gt;作为一个资深的、被很多人认为很内向的人，在面对长辈和领导时总是会有一种莫名的紧张，会表现的很内向，这个毛病伴随了我20+年。&lt;/p&gt;
-
-&lt;p&gt;要解决这个问题，用今天ZY的一句话来说，就是要拓展自己的舒服边界。每个人都有自己的舒服边界，有的人舒服边界大一些，则表现出来就外向一点，有的人舒服边界小一些，则表现出来就内向一点。&lt;/p&gt;
-
-&lt;p&gt;没办法，平时不能太懒，要多花点时间和团队其他成员交流。&lt;/p&gt;
-
-&lt;p&gt;能想到的一个比较好的方式，&lt;strong&gt;就是在自己迟疑要不要说某句话或者和某人交流的时候，放弃迟疑，果断迈出第一步吧。&lt;/strong&gt;改变是一点点发生的。&lt;/p&gt;
-
-&lt;h2&gt;将自己的实力充分表现出来&lt;/h2&gt;
-
-&lt;p&gt;最后一点感触很深的是，无论你多牛掰，不表现出来，不让你身边的人、老版、HR看到，一切都是白搭的。所以工作中很苦逼的一种状态会是，你每天累得像孙子一样，老板却看不到你的实力、成果。&lt;/p&gt;
-
-&lt;p&gt;所以，适时的把自己的实力、观点表达出来吧~&lt;/p&gt;
 </content>
    </entry>
    
