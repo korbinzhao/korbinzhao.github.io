@@ -4,13 +4,82 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-01-20T20:54:06+08:00</updated>
+   <updated>2016-04-05T17:39:30+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>nodejs 中间件 & 插件</title>
+     <link href="http://korbinzhao.github.io/middleware&plugins"/>
+     <updated>2016-04-05T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/middleware&plugins</id>
+     <content type="html">&lt;h2&gt;中间件&lt;/h2&gt;
+
+&lt;p&gt;中间件是一种独立的系统软件或服务程序，分布式应用软件借助这种软件在不同的技术之间共享资源。中间件位于客户机/ 服务器的操作系统之上，管理计算机资源和网络通讯。是连接两个独立应用程序或独立系统的软件。相连接的系统，即使它们具有不同的接口，但通过中间件相互之间仍能交换信息。执行中间件的一个关键途径是信息传递。通过中间件，应用程序可以工作于多平台或 OS 环境。例如：IBM MQSeries，CICS/TXSeries&lt;/p&gt;
+
+&lt;h3&gt;如何理解 &quot;中间件&quot; ?&lt;/h3&gt;
+
+&lt;p&gt;我的理解是这样的，中间件就是类似于一个过滤器的东西，在客户端和应用程序之间的一个处理请求和响应的的方法。&lt;/p&gt;
+
+&lt;p&gt;如果把一个http处理过程比作是污水处理，中间件就像是一层层的过滤网。每个中间件在http处理过程中通过改写request或（和）response的数据，状态，实现了特定的功能。&lt;/p&gt;
+
+&lt;p&gt;以 koa 中间件为例：&lt;/p&gt;
+
+&lt;p&gt;Koa的中间件很像Express的中间件，也是对HTTP请求进行处理的函数，但是必须是一个Generator函数。而且，Koa的中间件是一个级联式（Cascading）的结构，也就是说，属于是层层调用，第一个中间件调用第二个中间件，第二个调用第三个，以此类推。上游的中间件必须等到下游的中间件返回结果，才会继续执行，这点很像递归。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var koa = require(&#39;koa&#39;);
+var http = require(&#39;http&#39;);
+var app = koa();
+
+app.use(function *(next){
+ console.log(&#39;&amp;gt;&amp;gt; one&#39;);
+ yield next;
+ console.log(&#39;&amp;lt;&amp;lt; one&#39;);
+});
+
+app.use(function *(next){
+ console.log(&#39;&amp;gt;&amp;gt; two&#39;);
+ this.body = &#39;two&#39;;
+ yield next;
+ console.log(&#39;&amp;lt;&amp;lt; two&#39;);
+});
+
+app.use(function *(next){
+  console.log(&#39;&amp;gt;&amp;gt; three&#39;);
+  yield next;
+  console.log(&#39;&amp;lt;&amp;lt; three&#39;);
+});
+
+http.createServer(app.callback()).listen(3000);
+
+console.log(&#39;server start at port 3000&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;插件&lt;/h2&gt;
+
+&lt;p&gt;插件是一种遵循一定规范的应用程序接口编写出来的程序。很多软件都有插件，插件有无数种。例如在IE中，安装相关的插件后，WEB浏览器能够直接调用插件程序，用于处理特定类型的文件。IE浏览器常见的插件例如：Flash插件、RealPlayer插件、MMS插件、MIDI五线谱插件、ActiveX插件等等；再比如Winamp的DFX，也是插件。还有很多插件都是程序员新开发的。&lt;/p&gt;
+
+&lt;h2&gt;组件&lt;/h2&gt;
+
+&lt;p&gt;组件和插件的区别是，插件是属于程序接口的程序，组件在ASP中就是控件、对象，ASP/IIS的标准安装提供了11个可安装组件。ASP的FSO组件，编程的朋友都如雷贯耳吧，它就是最常用的Scripting.FileSystemObject对象。&lt;/p&gt;
+
+&lt;h2&gt;套件&lt;/h2&gt;
+
+&lt;p&gt;套件（package）Java提供package机制 ，它就像是一个管理容器，可以将您所定义的名称区隔管理在package下，而不会有相互冲突的发生，例如您定义了一个dimension2d与dimension3d的package，在它们之下都有一个Point类别，但由于属于不同的package，所以这两个名称并不会有所冲突。&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/bigbearbb/p/4221378.html&quot;&gt;大熊君大话NodeJS之------Connect中间件模块（第一季）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/enshrineZither/p/4093872.html&quot;&gt;中间件、插件、组件、套件之间的差别&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>字符编码扫盲及escape, encodeURI 和 encodeURIComponent方法比较</title>
@@ -708,91 +777,6 @@ foo(&quot;Hi&quot;);
 &lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/05/commonjs-in-browser.html&quot;&gt;浏览器加载 CommonJS 模块的原理与实现&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html&quot;&gt;Javascript模块化编程（二）：AMD规范&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.zhihu.com/question/20351507&quot;&gt;AMD 和 CMD 的区别有哪些？- 知乎&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>JS跨域问题解决方式</title>
-     <link href="http://korbinzhao.github.io/cross-origin-js"/>
-     <updated>2015-10-23T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/cross-origin-js</id>
-     <content type="html">&lt;p&gt;所谓跨域，或者异源，是指主机名（域名）、协议、端口号只要有其一不同，就为不同的域（或源）。浏览器中有一个基本的策略，叫同源策略，即限制“源”自A的脚本只能操作“同源”页面的DOM。以下列举几种跨域方式。&lt;/p&gt;
-
-&lt;h2&gt;1.CORS&lt;/h2&gt;
-
-&lt;p&gt;Cross-Origin Resource Sharing，跨域资源共享，简称 CORS。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。跨域资源共享是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。&lt;/p&gt;
-
-&lt;p&gt;CORS(Cross-Origin Resource Sharing,􏰛源􏰉源共􏰠)是 W3C 的一个工作􏰡案,定义了在必须访问跨源资源时,浏览器与服􏰁务器应该如何􏰢沟通。CORS背􏰣后的基本思想,就是使用自定义的HTTP头部让浏览器与服􏰁务器进行沟􏰢通,从而决定请求或响应是应该成功,还是应该失败。&lt;/p&gt;
-
-&lt;p&gt;具体如下：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一个简单的使用GET或POST发􏰀的请求,它没有自定义的头部,而主体内容是text/plain。在发送􏰀该请求时,需要给它􏰤加一个􏰥额外的Origin头部,其中包含请求􏰝面的源信息(协􏰦议、域名和􏰧端口),以便服􏰁务器根据这个头部信息来决定是否给予响应。下面是 Origin 头部的一个示例:&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt; 消费者发送一个Origin报头到提供者端：Origin: http://www.a.com；&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;提供者发送一个Access-Control-Allow-Origin响应报头给消费者，如果值为“*”或Origin对应的站点，则表示同意共享资源给消费者，如果值为null或者不存在Access-Control-Allow-Origin报头，则表示不同意共享资源给消费者；&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如果没有这个头部,或者有这个头部但源信息不匹配,浏览器就会驳􏰩回请求。正常情况下,浏览器会处理请求&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;注：CORS支持GET/POST请求方式&lt;/p&gt;
-
-&lt;h2&gt;2.JSONP&lt;/h2&gt;
-
-&lt;p&gt;JSONP 是 JSON with padding(填充式 JSON 或参数式 JSON)的简写。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;callback({ &quot;name&quot;: &quot;Nicholas&quot; });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对于一段JavaScript脚本来说，其“源”与它存储的地址无关，而取决于脚本被加载的页面，例如我们在页面中使用script引入存储在其他域的脚本文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;http://www.a.com/index.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这里脚本与当前页面是同源的。除了script，还有img、iframe、link等都具有跨域加载资源的能力。&lt;/p&gt;
-
-&lt;p&gt;Jsonp正是利用这种特性来实现跨域的：在页面中引入要跨域访问的来源，并定义回调函数处理跨域访问得到的json数据。&lt;/p&gt;
-
-&lt;p&gt;示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var script = document.createElement(&quot;script&quot;);
-  script.src = &quot;http://freegeoip.net/json/?callback=handleResponse&quot;;
-  document.body.insertBefore(script, document.body.firstChild);
-
-  function handleResponse(response){
-    console.log(&quot;You are at IP address &quot; + response.ip + &quot;, which is in &quot; +
-        response.city + &quot;, &quot; + response.region_name);
-  }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：JSONP只支持GET请求方式&lt;/p&gt;
-
-&lt;h2&gt;3.修改document.domain来跨子域&lt;/h2&gt;
-
-&lt;p&gt;www.a.com/1.html和a.com/2.html是不同域的，要使他们可以跨域访问，可通过修改document.domain来实现，即在两个页面中都设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;document.domain=&quot;a.com&quot;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;需要注意的是document.domain只能往父级修改，如a.com改为www.a.com是不被允许的，这也是此方法的局限性，只使用于跨子域访问。&lt;/p&gt;
-
-&lt;h2&gt;4.使用window.name来跨域访问&lt;/h2&gt;
-
-&lt;p&gt;window.name是同一浏览器窗口下载入的所有页面共享的数据字段，所有窗口都可以读写此字段的内容。&lt;/p&gt;
-
-&lt;p&gt;所以假设a.com要访问b.com的数据，只需要在b.com中将数据放在window.name中，然后a.com从中取出即可。此方法适用于像iframe这样的嵌套页面架构。&lt;/p&gt;
-
-&lt;h2&gt;参考资料&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://segmentfault.com/a/1190000003784372&quot;&gt;浅谈js跨域问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;JavaScript高级程序设计&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
