@@ -4,7 +4,7 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-05-11T20:48:06+08:00</updated>
+   <updated>2016-05-11T20:55:53+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
@@ -324,7 +324,16 @@ function processTaskList(taskStartTime) {
      <link href="http://korbinzhao.github.io/convert-numeric-chracter-reference-to-actual-character"/>
      <updated>2016-05-11T00:00:00+08:00</updated>
      <id>http://korbinzhao.github.io/convert-numeric-chracter-reference-to-actual-character</id>
-     <content type="html">&lt;h2&gt;Numeric Character Reference&lt;/h2&gt;
+     <content type="html">&lt;p&gt;开发过程中遇到一种奇怪的编码格式:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;amp;#27599;&amp;amp;#26085;&amp;amp;#19968;&amp;amp;#33394;|&amp;amp;#34013;&amp;amp;#30333;~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用decode/unescape/decodeURI解码均无效.研究一番,总结一下.&lt;/p&gt;
+
+&lt;p&gt;实际上上面这种奇怪的编码格式并不是编码,而是一种叫做 NCR(Numeric Character Reference) 的标记结构.&lt;/p&gt;
+
+&lt;h2&gt;Numeric Character Reference&lt;/h2&gt;
 
 &lt;p&gt;看看维基百科的解释：&lt;/p&gt;
 

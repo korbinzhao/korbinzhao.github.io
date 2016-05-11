@@ -44,7 +44,16 @@
     <div class="entry">
         <h1 class="entry-title"><a href="/convert-numeric-chracter-reference-to-actual-character" title="将 NCR 字符转换为真实字符的方法">将 NCR 字符转换为真实字符的方法</a></h1>
         <p class="entry-date">2016-05-11</p>
-        <h2>Numeric Character Reference</h2>
+        <p>开发过程中遇到一种奇怪的编码格式:</p>
+
+<pre><code>&amp;#27599;&amp;#26085;&amp;#19968;&amp;#33394;|&amp;#34013;&amp;#30333;~
+</code></pre>
+
+<p>使用decode/unescape/decodeURI解码均无效.研究一番,总结一下.</p>
+
+<p>实际上上面这种奇怪的编码格式并不是编码,而是一种叫做 NCR(Numeric Character Reference) 的标记结构.</p>
+
+<h2>Numeric Character Reference</h2>
 
 <p>看看维基百科的解释：</p>
 

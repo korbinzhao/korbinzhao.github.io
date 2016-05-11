@@ -1,9 +1,17 @@
 ---
 layout: post
 title: 将 NCR 字符转换为真实字符的方法
-description: 存在感对于每个人的生活有多么的重要，可能平时并不是太关注，其实他就是生活的全部
+description: 开发过程中遇到一种奇怪的编码格式, 使用decode/unescape/decodeURI解码均无效.研究一番,总结一下.
 category: fe
 ---
+
+开发过程中遇到一种奇怪的编码格式:
+
+    &#27599;&#26085;&#19968;&#33394;|&#34013;&#30333;~
+
+使用decode/unescape/decodeURI解码均无效.研究一番,总结一下.
+
+实际上上面这种奇怪的编码格式并不是编码,而是一种叫做 NCR(Numeric Character Reference) 的标记结构.
 
 ## Numeric Character Reference
 
