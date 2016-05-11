@@ -50,55 +50,55 @@
 
 <p>我们在谈到加载性能时，一般关注的是页面的首屏加载速度。</p>
 
-<ul>
-<li><p>webp</p>
+<h3>webp</h3>
 
-<p>  <a href="https://developers.google.com/speed/webp/">WebP</a>，是一种支持有损压缩和无损压缩的图片文件格式。根据 Google 官方的数据，无损压缩后的 WebP 比 PNG 文件少了 26％ 的文件大小，有损压缩在具有同等SSIM索引的情况下WebP 比 JPEG 文件少25-34%的文件大小。</p></li>
-<li><p>iconfont</p>
+<p><a href="https://developers.google.com/speed/webp/">WebP</a>，是一种支持有损压缩和无损压缩的图片文件格式。根据 Google 官方的数据，无损压缩后的 WebP 比 PNG 文件少了 26％ 的文件大小，有损压缩在具有同等SSIM索引的情况下WebP 比 JPEG 文件少25-34%的文件大小。</p>
 
-<p>  iconfont 对于前端来说有很多优点，自由变化大小、矢量不失真、自由修改颜色、可以添加一些视觉效果，如阴影、旋转、透明度，兼容 IE6.</p>
+<h3>iconfont</h3>
 
-<p>  可通过 <a href="http://www.iconfont.cn/">iconfont</a> 平台使用，使用格式如下：</p>
+<p>iconfont 对于前端来说有很多优点，自由变化大小、矢量不失真、自由修改颜色、可以添加一些视觉效果，如阴影、旋转、透明度，兼容 IE6.</p>
 
-<pre><code>  @font-face {
-      font-family: "iconfont";
-      src: url('iconfont.eot'); /* IE9*/
-      src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-      url('iconfont.woff') format('woff'), /* chrome、firefox */
-      url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-      url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
-  }
+<p>可通过 <a href="http://www.iconfont.cn/">iconfont</a> 平台使用，使用格式如下：</p>
+
+<pre><code>    @font-face {
+        font-family: "iconfont";
+        src: url('iconfont.eot'); /* IE9*/
+        src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('iconfont.woff') format('woff'), /* chrome、firefox */
+        url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+        url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+    }
 </code></pre>
 
-<p>  在移动端，目前只需引用一个 ttf 文件。</p>
+<p>在移动端，目前只需引用一个 ttf 文件。</p>
 
-<pre><code>  @font-face {
-      font-family: "iconfont";
-      src: url('iconfont.ttf') format('truetype');
-  }
+<pre><code>    @font-face {
+        font-family: "iconfont";
+        src: url('iconfont.ttf') format('truetype');
+    }
 </code></pre>
 
-<p>  小于 10K 的 ttf 文件建议 base64 在 css 文件中。例如：</p>
+<p>小于 10K 的 ttf 文件建议 base64 在 css 文件中。例如：</p>
 
-<pre><code>  @font-face {
-      font-family: "iconfont";
-      src: url('data:application/x-font-ttf;base64,AAEAAAAPAIAAAwBwRkZUTXCKsTYAAAD8AAAAHE9TLzJWulwpAAABGAAAAGBjbWFwzCYhagAAAXgAAAFKY3Z0IAyV/7YAAAmUAAAAJGZwZ20w956VAAAJuAAACZZnYXNwAAAAEAAACYwAAAAIZ2x5Zn46oOwAAALEAAADyGhlYWQHSlJcAAAGjAAAADZoaGVhBzID5wAABsQAAAAkaG10eAq0AM4AAAboAAAAFGxvY2EBjAI0AAAG/AAAAAxtYXhwAScKKwAABwgAAAAgbmFtZQV/3xUAAAcoAAACLnBvc3RMkaPUAAAJWAAAADRwcmVwpbm+ZgAAE1AAAACVAAAAAQAAAADMPaLPAAAAANImhzMAAAAA0iaHMwAEA/QB9AAFAAACmQLMAAAAjwKZAswAAAHrADMBCQAAAgAGAwAAAAAAAAAAAAEQAAAAAAAAAAAAAABQZkVkAMAAeOZFAyz/LABcAxgAHwAAAAEAAAAAAxgAAAAAACAAAQAAAAMAAAADAAAAHAABAAAAAABEAAMAAQAAABwABAAoAAAABgAEAAEAAgB45kX//wAAAHjmRf///4sZvwABAAAAAAAAAAABBgAAAQAAAAAAAAABAgAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIgAAATICqgADAAcAKUAmAAAAAwIAEErLbBDLLIAADorLbBELLIAATorLbBFLLIBADorLbBGLLIBATorLbBHLLIAADsrLbBILLIAATsrLbBJLLIBADsrLbBKLLIBATsrLbBLLLIAADcrLbBMLLIAATcrLbBNLLIBADcrLbBOLLIBATcrLbBPLLIAADkrLbBQLLIAATkrLbBRLLIBADkrLbBSLLIBATkrLbBTLLIAADwrLbBULLIAATwrLbBVLLIBADwrLbBWLLIBATwrLbBXLLIAADgrLbBYLLIAATgrLbBZLLIBADgrLbBaLLIBATgrLbBbLLAwKy6xJAEUKy2wXCywMCuwNCstsF0ssDArsDUrLbBeLLAAFrAwK7A2Ky2wXyywMSsusSQBFCstsGAssDErsDQrLbBhLLAxK7A1Ky2wYiywMSuwNistsGMssDIrLrEkARQrLbBkLLAyK7A0Ky2wZSywMiuwNSstsGYssDIrsDYrLbBnLLAzKy6xJAEUKy2waCywMyuwNCstsGkssDMrsDUrLbBqLLAzK7A2Ky2waywrsAhlsAMkUHiwARUwLQAAS7gAyFJYsQEBjlm5CAAIAGMgsAEjRCCwAyNwsA5FICBLuAAOUUuwBlNaWLA0G7AoWWBmIIpVWLACJWGwAUVjI2KwAiNEswoJBQQrswoLBQQrsw4PBQQrWbIEKAlFUkSzCg0GBCuxBgFEsSQBiFFYsECIWLEGA0SxJgGIUVi4BACIWLEGAURZWVlZuAH/hbAEjbEFAEQAAAA=') format('truetype');
-  }
-</code></pre></li>
-<li><p>sprite 图片</p>
+<pre><code>    @font-face {
+        font-family: "iconfont";
+        src: url('data:application/x-font-ttf;base64,AAEAAAAPAIAAAwBwRkZUTXCKsTYAAAD8AAAAHE9TLzJWulwpAAABGAAAAGBjbWFwzCYhagAAAXgAAAFKY3Z0IAyV/7YAAAmUAAAAJGZwZ20w956VAAAJuAAACZZnYXNwAAAAEAAACYwAAAAIZ2x5Zn46oOwAAALEAAADyGhlYWQHSlJcAAAGjAAAADZoaGVhBzID5wAABsQAAAAkaG10eAq0AM4AAAboAAAAFGxvY2EBjAI0AAAG/AAAAAxtYXhwAScKKwAABwgAAAAgbmFtZQV/3xUAAAcoAAACLnBvc3RMkaPUAAAJWAAAADRwcmVwpbm+ZgAAE1AAAACVAAAAAQAAAADMPaLPAAAAANImhzMAAAAA0iaHMwAEA/QB9AAFAAACmQLMAAAAjwKZAswAAAHrADMBCQAAAgAGAwAAAAAAAAAAAAEQAAAAAAAAAAAAAABQZkVkAMAAeOZFAyz/LABcAxgAHwAAAAEAAAAAAxgAAAAAACAAAQAAAAMAAAADAAAAHAABAAAAAABEAAMAAQAAABwABAAoAAAABgAEAAEAAgB45kX//wAAAHjmRf///4sZvwABAAAAAAAAAAABBgAAAQAAAAAAAAABAgAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIgAAATICqgADAAcAKUAmAAAAAwIAEErLbBDLLIAADorLbBELLIAATorLbBFLLIBADorLbBGLLIBATorLbBHLLIAADsrLbBILLIAATsrLbBJLLIBADsrLbBKLLIBATsrLbBLLLIAADcrLbBMLLIAATcrLbBNLLIBADcrLbBOLLIBATcrLbBPLLIAADkrLbBQLLIAATkrLbBRLLIBADkrLbBSLLIBATkrLbBTLLIAADwrLbBULLIAATwrLbBVLLIBADwrLbBWLLIBATwrLbBXLLIAADgrLbBYLLIAATgrLbBZLLIBADgrLbBaLLIBATgrLbBbLLAwKy6xJAEUKy2wXCywMCuwNCstsF0ssDArsDUrLbBeLLAAFrAwK7A2Ky2wXyywMSsusSQBFCstsGAssDErsDQrLbBhLLAxK7A1Ky2wYiywMSuwNistsGMssDIrLrEkARQrLbBkLLAyK7A0Ky2wZSywMiuwNSstsGYssDIrsDYrLbBnLLAzKy6xJAEUKy2waCywMyuwNCstsGkssDMrsDUrLbBqLLAzK7A2Ky2waywrsAhlsAMkUHiwARUwLQAAS7gAyFJYsQEBjlm5CAAIAGMgsAEjRCCwAyNwsA5FICBLuAAOUUuwBlNaWLA0G7AoWWBmIIpVWLACJWGwAUVjI2KwAiNEswoJBQQrswoLBQQrsw4PBQQrWbIEKAlFUkSzCg0GBCuxBgFEsSQBiFFYsECIWLEGA0SxJgGIUVi4BACIWLEGAURZWVlZuAH/hbAEjbEFAEQAAAA=') format('truetype');
+    }
+</code></pre>
 
-<p>  Sprite 图片（又称：雪碧图）被运用在众多使用了很多小图标的网站上。sprite 图将众多小图标集成到一张图片上。通过减少请求数提升了性能。在移动端，使用雪碧图时也要注意图片尺寸不能过大，因为图片越大，解码内存消耗就越大，如果过大反而会影响性能。</p>
+<h3>sprite 图片</h3>
 
-<p>  解码内存消耗（decoded in memory)的计算公式： （w x h x 4）宽 x 高 x 每个像素4个字节数</p>
+<p>Sprite 图片（又称：雪碧图）被运用在众多使用了很多小图标的网站上。sprite 图将众多小图标集成到一张图片上。通过减少请求数提升了性能。在移动端，使用雪碧图时也要注意图片尺寸不能过大，因为图片越大，解码内存消耗就越大，如果过大反而会影响性能。</p>
 
-<p>  如果设备 DPI 大于1，还需要乘以 DPI 系数，如 Retina 设备 乘以 4 ，RetinaHD 设备乘以 9.</p>
+<p>解码内存消耗（decoded in memory)的计算公式： （w x h x 4）宽 x 高 x 每个像素4个字节数</p>
 
-<p>  <img src="http://gtms02.alicdn.com/tps/i2/TB11_q7HVXXXXbTXVXXWwRTPpXX-1577-730.png" alt="" /></p>
+<p>如果设备 DPI 大于1，还需要乘以 DPI 系数，如 Retina 设备 乘以 4 ，RetinaHD 设备乘以 9.</p>
 
-<p>  考虑到解码内存消耗，合理的生成紧凑的 Sprite 图，既可以带来更少的请求数，又可以保证尽量低的消耗。</p></li>
-<li><p>按需加载</p></li>
-</ul>
+<p><img src="http://gtms02.alicdn.com/tps/i2/TB11_q7HVXXXXbTXVXXWwRTPpXX-1577-730.png" alt="" /></p>
 
+<p>考虑到解码内存消耗，合理的生成紧凑的 Sprite 图，既可以带来更少的请求数，又可以保证尽量低的消耗。</p>
+
+<h3>按需加载</h3>
 
 <h2>渲染性能</h2>
 
@@ -139,61 +139,61 @@
 
 <p>本例中，该帧耗时过长，会导致卡顿。</p>
 
-<ul>
-<li><p>JS 分析</p>
+<h4>JS 分析</h4>
 
-<p>  发现了运行时间很长的 JS 代码，那么你可以开启 DevTools 中顶部的 JS Profiler 选项：</p>
+<p>发现了运行时间很长的 JS 代码，那么你可以开启 DevTools 中顶部的 JS Profiler 选项：</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1UtwrLFXXXXcXXpXXXXXXXXXX-307-88.jpg" alt="" /></p>
+<p><img src="https://img.alicdn.com/tps/TB1UtwrLFXXXXcXXpXXXXXXXXXX-307-88.jpg" alt="" /></p>
 
-<p>  开启后，会看到更多细节：</p>
+<p>开启后，会看到更多细节：</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1Tp.pLFXXXXcOXpXXXXXXXXXX-766-462.png" alt="" /></p>
+<p><img src="https://img.alicdn.com/tps/TB1Tp.pLFXXXXcOXpXXXXXXXXXX-766-462.png" alt="" /></p>
 
-<p>  其中，浅绿色的为函数调用的链路，更详细的，可以切换至 Call Tree 的 Tab 页：</p>
+<p>其中，浅绿色的为函数调用的链路，更详细的，可以切换至 Call Tree 的 Tab 页：</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1fyMbLFXXXXX9aXXXXXXXXXXX-760-283.png" alt="" /></p></li>
-<li><p>render 分析</p>
+<p><img src="https://img.alicdn.com/tps/TB1fyMbLFXXXXX9aXXXXXXXXXXX-760-283.png" alt="" /></p>
 
-<p>  render 部分包括 Recalculate Style 和 Layout ，如果发现 render 部分耗时过长，需要分别从这两部分进行分析。</p>
+<h4>render 分析</h4>
 
-<p>  如果某一帧触发了强制 layout ， Timeline 会用红色角标标出:</p>
+<p>render 部分包括 Recalculate Style 和 Layout ，如果发现 render 部分耗时过长，需要分别从这两部分进行分析。</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1lEEELFXXXXXbXXXXXXXXXXXX-507-174.png" alt="" /></p>
+<p>如果某一帧触发了强制 layout ， Timeline 会用红色角标标出:</p>
 
-<p>  如何需要具体分析 Recalculate Style ， 可以选中 Recalculate Style 部分，下面详细列出了受影响的元素个数、触发 Recalculate Style 函数一级警告提示：</p>
+<p><img src="https://img.alicdn.com/tps/TB1lEEELFXXXXXbXXXXXXXXXXXX-507-174.png" alt="" /></p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1NCIsLFXXXXbjXpXXXXXXXXXX-853-216.png" alt="" /></p>
+<p>如何需要具体分析 Recalculate Style ， 可以选中 Recalculate Style 部分，下面详细列出了受影响的元素个数、触发 Recalculate Style 函数一级警告提示：</p>
 
-<p>  更加直观的函数调用，可以切换至 Bottom-Up 的 Tab 页，来查看逆向的调用，方便定位触发的函数位置：</p>
+<p><img src="https://img.alicdn.com/tps/TB1NCIsLFXXXXbjXpXXXXXXXXXX-853-216.png" alt="" /></p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1KBEALFXXXXbsXXXXXXXXXXXX-812-169.png" alt="" /></p>
+<p>更加直观的函数调用，可以切换至 Bottom-Up 的 Tab 页，来查看逆向的调用，方便定位触发的函数位置：</p>
 
-<p>  如果需要分析 Layout ，可以选中 Layout 部分，同 Recalculate Style 一样。</p></li>
-<li><p>paint 分析</p>
+<p><img src="https://img.alicdn.com/tps/TB1KBEALFXXXXbsXXXXXXXXXXXX-812-169.png" alt="" /></p>
 
-<p>  你可以选中 Timeline 中绿色的 paint 部分：</p>
+<p>如果需要分析 Layout ，可以选中 Layout 部分，同 Recalculate Style 一样。</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1hUMnLFXXXXagXFXXXXXXXXXX-573-574.png" alt="" /></p>
+<h4>paint 分析</h4>
 
-<p>  summary 会展示绘制的总体情况，包括绘制的元素、元素本身绘制耗时、元素子元素绘制耗时。</p>
+<p>你可以选中 Timeline 中绿色的 paint 部分：</p>
 
-<p>  更加详细的信息，可以切换至 Paint Profiler ，包括了每个具体 Paint 的调用和 Paint 区域截图：</p>
+<p><img src="https://img.alicdn.com/tps/TB1hUMnLFXXXXagXFXXXXXXXXXX-573-574.png" alt="" /></p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB15bUeLFXXXXbEXVXXXXXXXXXX-736-348.png" alt="" /></p></li>
-<li><p>composite 分析</p>
+<p>summary 会展示绘制的总体情况，包括绘制的元素、元素本身绘制耗时、元素子元素绘制耗时。</p>
 
-<p>  分析 composite （合成）时，需要选中一帧：</p>
+<p>更加详细的信息，可以切换至 Paint Profiler ，包括了每个具体 Paint 的调用和 Paint 区域截图：</p>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1sar9LFXXXXcWaXXXXXXXXXXX-680-119.png" alt="" /></p>
+<p><img src="https://img.alicdn.com/tps/TB15bUeLFXXXXbEXVXXXXXXXXXX-736-348.png" alt="" /></p>
 
-<p>  点击这个 Layers 选项卡，你会看到一个新的视图。在这个视图中，你可以对这一帧中的所有渲染层进行扫描、缩放等操作，同时还能看到每个渲染层被创建的原因：</p>
+<h4>composite 分析</h4>
 
-<p>  <img src="https://img.alicdn.com/tps/TB1yV7uLFXXXXaMXpXXXXXXXXXX-979-356.png" alt="" /></p>
+<p>分析 composite （合成）时，需要选中一帧：</p>
 
-<p>  有了这个视图，你就能知道页面中到底有多少个渲染层。如果你在对页面滚动或者渐变效果的性能分析中发现渲染层的合并过程耗费了太多时间（相对于4-5毫秒的预期），那么久可以从这个视图中看到页面中有多少个渲染层，何时被创建，从而对渲染层的数量进行优化。</p></li>
-</ul>
+<p><img src="https://img.alicdn.com/tps/TB1sar9LFXXXXcWaXXXXXXXXXXX-680-119.png" alt="" /></p>
 
+<p>点击这个 Layers 选项卡，你会看到一个新的视图。在这个视图中，你可以对这一帧中的所有渲染层进行扫描、缩放等操作，同时还能看到每个渲染层被创建的原因：</p>
+
+<p><img src="https://img.alicdn.com/tps/TB1yV7uLFXXXXaMXpXXXXXXXXXX-979-356.png" alt="" /></p>
+
+<p>有了这个视图，你就能知道页面中到底有多少个渲染层。如果你在对页面滚动或者渐变效果的性能分析中发现渲染层的合并过程耗费了太多时间（相对于4-5毫秒的预期），那么久可以从这个视图中看到页面中有多少个渲染层，何时被创建，从而对渲染层的数量进行优化。</p>
 
 <h3>Script - 优化JS的执行效率</h3>
 
@@ -236,17 +236,17 @@
 </code></pre></li>
 <li><p>分帧初始化：同样利用一帧的执行时间将模块的初始化或渲染函数分散到不同的帧中来执行，这样每个模块都有16.67ms的执行时间，而不是一股脑的堆在哪里等着执行。</p>
 
-<pre><code>     var rAF = window.requestAnimationFrame ||  window.webkitRequestAnimationFrame ||
-     function(c) {
-         setTimeout(c, 1 / 60 * 1000);
-     };
+<pre><code>      var rAF = window.requestAnimationFrame ||  window.webkitRequestAnimationFrame ||
+      function(c) {
+          setTimeout(c, 1 / 60 * 1000);
+      };
 
-     function render() {
-     self.$container.html(itemHtml);
-     self.$container.find('.J_LazyLoad').lazyload();
-     }
+      function render() {
+      self.$container.html(itemHtml);
+      self.$container.find('.J_LazyLoad').lazyload();
+      }
 
-     rAF(render);
+      rAF(render);
 </code></pre></li>
 </ul>
 
@@ -332,6 +332,43 @@ function processTaskList(taskStartTime) {
 <p>对于一个任务，如果换一种实现方式，浏览器的执行速度可以快100倍，这是非常酷的。比如读取一个元素的 offsetTop 属性就比计算它的 getBoundingClientRect() 要快。但一般情况下，在微优化上花再大的精力，整体上 JS 代码的性能也就获得若干毫秒的提升。这是不划算的。</p>
 
 <p>简而言之：慎用微优化。因为一般来说，它对你的 web 应用效果不大。</p>
+
+<h3>Style - 降低样式计算和复杂度</h3>
+
+<h3>Layout - 避免大规模、复杂布局</h3>
+
+<p>尽可能避免触发布局</p>
+
+<h3>Paint</h3>
+
+<p>如果触发了 Layout，那么一定会触发 Paint。这个很好理解，修改了元素的几何属性意味着元素要重新渲染，除此之外，改变元素的一些非几何属性，比如：背景、颜色、阴影等，不会触发 Layout，但是依然会触发 Paint。</p>
+
+<h3>composite</h3>
+
+<p>提升为合成层简单说来有以下几点好处：</p>
+
+<ul>
+<li>合成层的位图，会交由 GPU 合成，比 CPU 处理要快</li>
+<li>当需要 repaint 时，只需要 repaint 本身，不会影响到其他的层</li>
+<li>对于 transform 和 opacity 效果，不会触发 layout 和 paint</li>
+<li>对于诸如 fixed 的合成层，移动时不会触发 repaint</li>
+</ul>
+
+
+<p>利用合成层对于提升页面性能方面有很大的作用，因此我们也总结了一下几点优化建议。</p>
+
+<ul>
+<li>提升动画效果的元素</li>
+<li>使用 transform 或者 opacity 来实现动画效果</li>
+<li>减少绘制区域</li>
+<li><p>合理管理合成层</p>
+
+<p>  看完上面的文章，你会发现提升合成层会达到更好的性能。这看上去非常诱人，但是问题是，创建一个新的合成层并不是免费的，它得消耗额外的内存和管理资源。实际上，在内存资源有限的设备上，合成层带来的性能改善，肯能远远赶不上过多合成层开销给页面性能带来的负面影响。同时，由于每个渲染层的纹理都需要上传到 GPU 处理，因此我们还需要考虑 CPU 和 GPU 之间的带宽问题、以及有多大内存供 GPU 处理这些纹理的问题。</p></li>
+<li><p>防止层爆炸</p>
+
+<p>  通过之前的介绍，我们知道同合成层重叠也会使元素提升为合成层，虽然有浏览器的层压缩机制，但是也有很多无法进行压缩的情况。也就是说除了我们显式的声明的合成层，还可能由于重叠原因不经意间产生一些不在预期的合成层，极端一点可能会产生大量的额外合成层，出现层爆炸的现象。</p></li>
+</ul>
+
 
 <h2>参考资料</h2>
 
