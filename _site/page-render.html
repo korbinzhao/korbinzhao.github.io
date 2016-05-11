@@ -5,7 +5,7 @@
     * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>入职了，转正了 | Joebon's world</title>
+    <title>当页面渲染时，浏览器发生了什么 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,43 +42,156 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/become-a-regular-worker" title="入职了，转正了">入职了，转正了</a></h1>
-        <p class="entry-date">2015-10-23</p>
-        <p>正式入职3个月，经过了转正面试，接连有了两次转正后的交流会。今晚这次交流比较有感触，所以特别记一下。</p>
+        <h1 class="entry-title"><a href="/page-render" title="当页面渲染时，浏览器发生了什么">当页面渲染时，浏览器发生了什么</a></h1>
+        <p class="entry-date">2016-05-09</p>
+        <h2>当页面渲染时，浏览器发生了什么</h2>
 
-<p>前两天，团队新近的6个新人全部转正面试结束。老板ZY把我们同组的6个人叫到一起，开了个简单的交流会。此前的转正面试加上最近2次交流会，有一些收获，记录一下，给以后工作中的自己提个醒。</p>
+<ol>
+<li>根据服务器端的 HTML 代码，形成文档对象模型（DOM）</li>
+<li>加载并解析样式，形成 CSS 对象模型</li>
+<li>在文档对象模型和 CSS 对象模型基础上，生成一颗由一组待生成渲染的对象组成的渲染树</li>
+<li>对渲染树上的每个元素，计算其坐标，称之为布局</li>
+<li>最后，渲染树上的元素最终展现在浏览器上，称之为“painting”</li>
+</ol>
 
-<h2>从业务中抽离出来做些自己的事情</h2>
 
-<p>我们的日常业务是很忙的。要学会从繁重的业务中抽身出来，去做些个人成长、技术成长的事情。说白了，只做业务的话说实话，最后只是简单一些重复劳动，如果不能自己抽出时间进行学习、积累的话，自己很难会有成长，对于之后的KPI考核、薪酬、晋升其实是没有什么好处的。</p>
+<h2>渲染基础</h2>
 
-<p>这一点是自从入职后，每次开交流会团队老大YX和HR都会返回强调的。只做业务，没有自己的核心竞争力的话，个人的不可替代性就太强了，对于团队的价值就非常小。</p>
+<p>首先了解下 Blink 引擎是如何渲染页面的。</p>
 
-<h2>工作中思考</h2>
+<h3>Nodes 和 DOM 树</h3>
 
-<p>思考是工作中非常重要的一个能力，不能在工作中有自己的思考，那么你就只能是别人眼中的一个工具。这里的思考既有对前端团队内部效率、工具的思考，也有对自己所负责业务的思考。</p>
+<p>在 Blink 引擎中，页面内容是存储为由 Node 对象组成的树状结构，也就是 DOM 树。每一个 HTML element 元素都有一个 Node 对象与之对应，DOM 树的根节点永远都是 Document Node。</p>
 
-<h2>将自己的思考写出来</h2>
+<h3>从 Nodes 到 RenderObjects</h3>
 
-<p>一些事情自己能想到以及想清楚和真正把想法写出来是完全两种不同的概念。很多时候，我们只是自我感觉把有些东西想清楚了，但是真的当我们需要临场表达的时候常常是毫无逻辑、丢三落四或者混乱不堪的。这说明我们还没有把自己的思路真正的理清楚。那么，平时自己有所思考的时候，把自己的想法写出来吧！</p>
+<p>DOM 树中的每个 node 节点都有一个对应的 RenderObject 对象。RenderObject 存储在与 DOM 树相应的树形结构中 —— Render Tree。RenderObject 知道如何在屏幕上 paint node 内容，为实现这一操作，RenderObject 会调用其对应的 GraphicsContext 来执行必要的 draw 操作。其中，GraphicsContext 就是负责将像素写入位图（bitmap）中，这些位图最终展示在屏幕中。</p>
 
-<p>写作可以让你对自己的过往的思考有一个清晰的回顾和整理，并且当我们回过头来看自己的过往的想法时也是一种意义非法的事情。</p>
+<p>PS: draw != paint，draw 是将像素绘制到屏幕上，而 paint 是生成元素呈现的像素。</p>
 
-<h2>拓展自己的舒服边界-团队中的充分交流</h2>
+<h3>从 RenderObjects 到 RenderLayers</h3>
 
-<p>作为一个资深的、被很多人认为很内向的人，在面对长辈和领导时总是会有一种莫名的紧张，会表现的很内向，这个毛病伴随了我20+年。</p>
+<p>每一个 RenderObject 都直接或间接（通过其父对象）的同一个 RenderLayer 相关联。</p>
 
-<p>要解决这个问题，用今天ZY的一句话来说，就是要拓展自己的舒服边界。每个人都有自己的舒服边界，有的人舒服边界大一些，则表现出来就外向一点，有的人舒服边界小一些，则表现出来就内向一点。</p>
+<p>RenderLayer 的作用就是保证页面元素以正确的顺序合成（composited），这样才能正确的展现元素的重叠以及半透明元素等等。会有一些情形，为一些特殊的 RenderObjects 创建一个新的 RenderLayer。以下是常见的一定会新建 RenderLayer 的 RnederObject：</p>
 
-<p>没办法，平时不能太懒，要多花点时间和团队其他成员交流。</p>
+<ul>
+<li>页面的根节点对应的RenderObject</li>
+<li>有明确的 CSS 定位属性（relative、absolute 或者 transform）</li>
+<li>是透明的</li>
+<li>有 CSS overflow、CSS alpha（遮罩）或者 CSS reflection</li>
+<li>有 CSS 滤镜（filter）</li>
+<li>canvas 元素对应的 RenderObject</li>
+<li>video 元素对应的 RenderObject</li>
+</ul>
 
-<p>能想到的一个比较好的方式，<strong>就是在自己迟疑要不要说某句话或者和某人交流的时候，放弃迟疑，果断迈出第一步吧。</strong>改变是一点点发生的。</p>
 
-<h2>将自己的实力充分表现出来</h2>
+<p>其他的 RenderObjects 与其最近的拥有 RenderLayer 的父级 RenderObject，拥有同一个 RenderLayer。</p>
 
-<p>最后一点感触很深的是，无论你多牛掰，不表现出来，不让你身边的人、老版、HR看到，一切都是白搭的。所以工作中很苦逼的一种状态会是，你每天累得像孙子一样，老板却看不到你的实力、成果。</p>
+<h3>从 RenderLayers 到 GraphicsLayers</h3>
 
-<p>所以，适时的把自己的实力、观点表达出来吧~</p>
+<p>为利用合成器（compositer），满足如下条件的 RenderLayers，会被认为是一个独立的合成层。</p>
+
+<ul>
+<li>有 3D 或者 perspective transform 的 CSS 属性的层</li>
+<li>video 元素的层</li>
+<li>canvas 元素的层</li>
+<li>flash</li>
+<li>对 opacity 和 transform 对应了 CSS 动画的层</li>
+<li>使用了 CSS 滤镜（filters）的层</li>
+<li>有合成层后代的层</li>
+<li>同合成层重叠，且在该合成层上面（z-index）渲染的层</li>
+</ul>
+
+
+<p>如果 RenderLayer 是一个合成层，那么它有属于自己的单独的 GraphicsLayer，否则它和它最近的又有 GraphicsLayer 的父 layer 共用一个 GraphicsLayer。</p>
+
+<p>每一个GraphicsLayer都有一个GraphicsContext，其对应的RenderLayer会paint进GraphicsContext中。合成器（compositor）最终会负责，将由GraphicsContext输出的位图（bitmap）合并成最终屏幕显示的图案。</p>
+
+<h3>层压缩（Layer Squashing）</h3>
+
+<p>所有的规则都会有漏洞。正如上面提到的，GraphicsLayers会消耗内存和其他资源（随着GraphicsLayer树的大小增长，会使CPU执行时间越来越长）。当一些RenderLayer同一个成为独立合成层的RenderLayer重叠时，就会产生大量的额外的合成层（上节合成层产生条件的最后一条），十分消耗资源。</p>
+
+<p>我们把产生合成层的自身因素（比如有3D变换的层）称之为直接因素，将比如：合成层后代，同合成层重叠等条件成为简介因素。为了防止上述所说的“层爆炸”，当很多element覆盖在因直接因素产生的层之上时，浏览器的排版引擎，会将这些element的RenderLayers覆盖在这个直接因素产生的RenderLayer上，同时将他们压缩（squash）成一个“层”。这就防止了由覆盖引起的层爆炸。更多细节请看这里和这里</p>
+
+<h3>从GraphicsLayers到WebLayers再到CC Layers</h3>
+
+<p>chrome通过WebLayer和cc layer（chrome compositor layer）实现GraphicsLayers。</p>
+
+<h3>小结</h3>
+
+<p>总的来说，为rendering服务的有如下四种树形结构：</p>
+
+<ul>
+<li>DOM Tree，基本的模型</li>
+<li>RenderObject Tree，同DOM树的可见节点是一一对应的。RenderObject知道如何去paint其相对应的DOM节点</li>
+<li>RenderLayer Tree，由RenderLayers组成，这些RenderLayer对应于RenderObject树的RenderObject。这种对应关系是一对多的。</li>
+<li>GraphicsLayer Tree，由GraphicsLayers组成，这些GraphicsLayer对应于RenderLayer树的RenderLayer。这种对应关系是一对多的。</li>
+</ul>
+
+
+<p><img src="http://img1.tbcdn.cn/L1/461/1/b611c034f6ea0ad700a1319e52076c64316f21a0" alt="" /></p>
+
+<h2>重绘</h2>
+
+<p>当改变不会影响元素在网页中位置的样式，如 background-color, border-color, visibility 等，浏览器只会用新的样式将元素重绘一遍。</p>
+
+<h2>重排</h2>
+
+<p>当改变影响到文本内容或结构，或者元素位置时，就会发生重排。重排由以下事件触发：</p>
+
+<ul>
+<li>DOM 操作（元素的添加、删除、修改、改变顺序）</li>
+<li>内容变化，包括表单域内的文本变化</li>
+<li>CSS 属性的计算或改变</li>
+<li>添加删除样式表</li>
+<li>更改“类”的属性</li>
+<li>浏览器窗口的操作（缩放、滚动）</li>
+<li>伪类激活（:hover 等）</li>
+</ul>
+
+
+<h2>浏览器的优化渲染</h2>
+
+<ul>
+<li>浏览器会尽可能的将重绘、重构限制在改变元素的区域内。比如，固定或绝对定位的元素，重绘或重排只会影响元素本身或其子元素，静态定位元素会触发后续所有元素的重流。</li>
+<li><p>当 JS 有连续会造成重绘或重排的几段代码时，浏览器会缓存这些改变，在代码运行完毕后再将这些改变一次性应用。举个栗子：</p>
+
+<pre><code>  var $body = $('body');
+  $body.css('padding', '1px'); // reflow, repaint
+  $body.css('color', 'red'); // repaint
+  $body.css('margin', '2px'); // reflow, repaint
+  // only 1 reflow and repaint will actually happen
+</code></pre>
+
+<p>  以上代码只会触发一次重绘或重排。
+  <strong>值得注意的一点，改变元素的属性会触发强制性重排</strong>。如果我们在上面的代码中加入一行访问元素属性的代码，就会引起两次重排。</p>
+
+<pre><code>  var $body = $('body');
+  $body.css('padding', '1px');
+  $body.css('padding'); // reading a property, a forced  reflow
+  $body.css('color', 'red');
+  $body.css('margin', '2px');
+</code></pre></li>
+</ul>
+
+
+<h2>性能优化的实际意见</h2>
+
+<ul>
+<li>尽量减少 DOM 操作。在进行复杂的操作时，最好使用“孤立”的元素（与 DOM 脱离，仅保存在内存中的元素），操作完成后再加入 DOM 中。</li>
+<li>改变元素样式时，被操作的元素处于 DOM 渲染树的位置越深越好。</li>
+<li>尽量只给位置绝对或者固定定位的元素添加动画元素。</li>
+</ul>
+
+
+<h2>参考文献</h2>
+
+<ol>
+<li><a href="http://www.html-js.com/article/3000">有关网页渲染，每个前端开发者都该知道的那点事</a></li>
+<li><a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome">GPU Accelerated Compositing in Chrome</a></li>
+</ol>
+
 
 
         <!--<div id="disqus_container">-->
@@ -111,7 +224,7 @@
         <!--</div>-->
 
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="/become-a-regular-worker" data-title="入职了，转正了" data-url="http://joebon.cc/become-a-regular-worker"></div>
+      <div class="ds-thread" data-thread-key="/page-render" data-title="当页面渲染时，浏览器发生了什么" data-url="http://joebon.cc/page-render"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">
