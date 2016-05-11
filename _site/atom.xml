@@ -4,7 +4,7 @@
    <title>Joebon's world</title>
    <link href="http://joebon.cc/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://joebon.cc" rel="alternate" type="text/html" />
-   <updated>2016-05-11T19:06:43+08:00</updated>
+   <updated>2016-05-11T20:48:06+08:00</updated>
    <id>http://joebon.cc</id>
    <author>
      <name></name>
@@ -314,6 +314,71 @@ function processTaskList(taskStartTime) {
 &lt;li&gt;&lt;a href=&quot;http://www.iconfont.cn/&quot;&gt;iconfont&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://developer.chrome.com/devtools/docs/timeline&quot;&gt;chrome devtool timeline&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/rendering/?hl=zh-cn&quot;&gt;google render performance&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>将 NCR 字符转换为真实字符的方法</title>
+     <link href="http://korbinzhao.github.io/convert-numeric-chracter-reference-to-actual-character"/>
+     <updated>2016-05-11T00:00:00+08:00</updated>
+     <id>http://korbinzhao.github.io/convert-numeric-chracter-reference-to-actual-character</id>
+     <content type="html">&lt;h2&gt;Numeric Character Reference&lt;/h2&gt;
+
+&lt;p&gt;看看维基百科的解释：&lt;/p&gt;
+
+&lt;p&gt;A numeric character reference (NCR) is a common markup construct used in SGML and other SGML-related markup languages such as HTML and XML. It consists of a short sequence of characters that, in turn, represent a single character from the Universal Charact&lt;/p&gt;
+
+&lt;p&gt;NCR是一种常见的标记结构，用于SGML和其他SGML相似的标记语言，如HTML和XML。它由一个短的字符序列组成,代表一个字符（全球的文字字符）。&lt;/p&gt;
+
+&lt;p&gt;NCR编码是由一个与号(&amp;amp;)跟着一个井号(#), 然后跟着这个字符的Unicode编码值, 最后跟着一个分号组成的, 如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;amp;#dddd;
+&amp;amp;#xhhhh;
+&amp;amp;#name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中, dddd是字符编码的十进制表示, 而hhhh是字符的16进制表示.&lt;/p&gt;
+
+&lt;p&gt;以 HTML 为例，这三种转义序列都称作 character reference：
+前两种是 numeric character reference（NCR），数字取值为目标字符的 Unicode code point；以「&amp;amp;#」开头的后接十进制数字，以「&amp;amp;#x」开头的后接十六进制数字。
+后一种是 character entity reference，后接预先定义的 entity 名称，而 entity 声明了自身指代的字符。
+从 HTML 4 开始，NCR 以 Unicode 为准，与文档编码无关。&lt;/p&gt;
+
+&lt;p&gt;「中国」二字分别是 Unicode 字符 U+4E2D 和 U+56FD，十六进制表示的 code point 数值「4E2D」和「56FD」就是十进制的「20013」和「22269」。所以——&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;amp;#x4e2d;&amp;amp;#x56fd;
+&amp;amp;#20013;&amp;amp;#22269;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;——这两种 NCR 写法都会在显示时转换为「中国」二字。&lt;/p&gt;
+
+&lt;h2&gt;如何将 NCR 字符转换成真实字符&lt;/h2&gt;
+
+&lt;p&gt;方法如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var regex_num_set = /&amp;amp;#(\d+);/g;
+var str = &quot;Here is some text: &amp;amp;#27599;&amp;amp;#26085;&amp;amp;#19968;&amp;amp;#33394;|&amp;amp;#34013;&amp;amp;#30333;~&quot;
+
+
+str = str.replace(regex_num_set, function(_, $1) {
+  return String.fromCharCode($1);
+});
+
+
+document.write(&#39;&amp;lt;pre&amp;gt;&#39;+JSON.stringify(str,0,3));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上例子使用了 [String.prototype.replace()] 和 String.fromCharCode() 方法. 思路为将字符串中的 NCR 字符逐个获取到 &quot;&amp;amp;#&quot;和&quot;;&quot;间的 Unicode 字符编码值, 然后利用 String.fromCharCode() 方法, 将 Unicode 编码转为真实字符.&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/21390312&quot;&gt;&amp;amp;#x开头的是什么编码呢。浏览器可以解释它。如&amp;#20013;&amp;#22269;等同与中文&quot;中国&quot;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/35501026/converting-numeric-character-reference-to-actual-character/35501590#35501590&quot;&gt;Converting numeric character reference to actual character&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace&quot;&gt;String.prototype.replace()&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/shishm/archive/2011/11/24/2261996.html&quot;&gt;[字符编码]Numeric Character Reference和HTML Entities（一）&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
@@ -946,63 +1011,6 @@ form.parse(req, function(err, fields, files) {
 &lt;p&gt;其实呢，之所有有冲动把简单的一顿饭写出来，就是想谈谈感受。在技术团队待久了，每天对着电脑敲代码，需要说话的场景不是很多，再加上技术团队整体在性格上会比较沉闷，在生活品质和乐趣上的追求也没有其他团队那么多。让我这段时间总感觉有些无聊，心情莫名低落，即使好不容易有点时间也宁愿宅着，有一种非常懒散拖延的状态。这种状态于工作、于生活都不是太好的。所以这里提醒下自己，多走出去，多和不同背景、不同岗位的人交流，这不仅有利于拓宽自己的视野，也会让自己更开心一点。正如今天的这次简单的聚会，虽然去之前略感忐忑，去之后却感觉很享受这个过程，每个人仿佛都有着自己独特的故事、自己独特的生活乐趣，这也是我想经历和正在追求的。&lt;/p&gt;
 
 &lt;p&gt;另外，和有趣的人一起，你也会变得有趣。现在的我有点太无聊了，自己都受不了自己。我需要和有趣的人在一起。&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>Date对象的浏览器兼容性问题</title>
-     <link href="http://korbinzhao.github.io/date-cross-browser-safari-chrome"/>
-     <updated>2015-11-06T00:00:00+08:00</updated>
-     <id>http://korbinzhao.github.io/date-cross-browser-safari-chrome</id>
-     <content type="html">&lt;h2&gt;new Date()、Date.parse()方法在浏览器中的兼容性问题&lt;/h2&gt;
-
-&lt;p&gt;   Date在不同浏览器中对于传入的时间字符串的格式要求是不一样的。比如在chrome浏览器的控制台中输入以下内容，会得到相应结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Date.parse(&#39;2015-11-11 00:00:00&#39;)
-//-&amp;gt;1447171200000
-Date.parse(&#39;2015/11/11 00:00:00&#39;)
-//-&amp;gt;1447171200000
-new Date(&#39;2015-11-11 00:00:00&#39;)
-//-&amp;gt;Wed Nov 11 2015 00:00:00 GMT+0800 (CST)
-new Date(&#39;2015/11/11 00:00:00&#39;)
-//-&amp;gt;Wed Nov 11 2015 00:00:00 GMT+0800 (CST)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;  可以发现，chrome对于&#39;-&#39;和&#39;/&#39;分割日期的形式都是支持的，能够返回正确的毫秒数或者时间格式。&lt;/p&gt;
-
-&lt;p&gt;  下面在safari浏览器中输入相同内容，查看对应结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; Date.parse(&#39;2015-11-11 00:00:00&#39;)
-&amp;lt; NaN = $1
-&amp;gt; Date.parse(&#39;2015/11/11 00:00:00&#39;)
-&amp;lt; 1447171200000 = $2
-&amp;gt; new Date(&#39;2015-11-11 00:00:00&#39;)
-&amp;lt; Invalid Date = $3
-&amp;gt; new Date(&#39;2015/11/11 00:00:00&#39;)
-&amp;lt; Wed Nov 11 2015 00:00:00 GMT+0800 (CST) = $4
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;   可以发现，safari仅对&#39;/&#39;分割日期的形式支持，对&#39;-&#39;分割日期的形式并不支持。&lt;/p&gt;
-
-&lt;p&gt;  通过以上实验，我们可以观察出chrome和safari对于不同格式的时间字符串的支持情况。chrome同时支持&#39;-&#39;和&#39;/&#39;分割日期的时间字符串；safari不支持&#39;-&#39;分割日期的时间字符串。&lt;/p&gt;
-
-&lt;h2&gt;一个简单有效的解决方法&lt;/h2&gt;
-
-&lt;p&gt;  下面是一个比较好的解决方案：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var arr = &quot;2010-03-15 10:30:00&quot;.split(/[- / :]/),
-    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
-
-  console.log(date);
-  //-&amp;gt; Mon Mar 15 2010 10:30:00 GMT+0000 (GMT Standard Time)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;   该方法为先将时间字符串用split方法进行分割拼装为一个数组，再将每个数组的项作为传参传入new Date()方法，从而将不同形式的字符串转换成有效的时间。
-   该方法对于所有浏览器生效。&lt;/p&gt;
-
-&lt;h2&gt;参考资料：&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5324178/javascript-date-parsing-on-iphone&quot;&gt;http://stackoverflow.com/questions/5324178/javascript-date-parsing-on-iphone&lt;/a&gt;&lt;/p&gt;
 </content>
    </entry>
    

@@ -5,7 +5,7 @@
     * Author:         Joebon
     -->
     <meta charset="utf-8" />
-    <title>嗯，植发了 | Joebon's world</title>
+    <title>将 NCR 字符转换为真实字符的方法 | Joebon's world</title>
     <meta name="author" content="Joebon" />
     <meta name="renderer" content="webkit">
     <meta name="description" content="Joebon's Blog" />
@@ -42,51 +42,65 @@
 
 <div id="content">
     <div class="entry">
-        <h1 class="entry-title"><a href="/hair-transplant" title="嗯，植发了">嗯，植发了</a></h1>
-        <p class="entry-date">2016-04-28</p>
-        <h2>岁月是把杀猪刀</h2>
+        <h1 class="entry-title"><a href="/convert-numeric-chracter-reference-to-actual-character" title="将 NCR 字符转换为真实字符的方法">将 NCR 字符转换为真实字符的方法</a></h1>
+        <p class="entry-date">2016-05-11</p>
+        <h2>Numeric Character Reference</h2>
 
-<p>26岁就面临头发越来越少、额头越来越的境遇，森森的忧桑。小时候长得精致的我，看着一天天、一年年变丑的自己，领会到岁月是把杀猪刀的道理。</p>
+<p>看看维基百科的解释：</p>
 
-<p>先谈谈自己的脱发史吧，高中上学那会儿，可能因为压力大的原因，就发现头很油、头发很容易掉的问题，不过年纪轻嘛，也没往这方面想。大一大二头发都还挺正常的，到了大三、大四，突然发现自己头发好像留不长了，发型也变得越来越不好看。研究生阶段，整个问题就越发明显了。从脱发开始明显显现到现在也有5年的时间了。这段时间里，脱发也成为了最困扰自己的一个问题。</p>
+<p>A numeric character reference (NCR) is a common markup construct used in SGML and other SGML-related markup languages such as HTML and XML. It consists of a short sequence of characters that, in turn, represent a single character from the Universal Charact</p>
 
-<p>了解植发，是从去年开始的。之前去普通医院、皮肤医院都看过，给出的结论基本都是脂溢性脱发，药物治疗只有米诺地尔和非那雄胺比较有效。不过听说非那雄胺会对性功能产生影响，所以一直没敢用。之前用过大概3个月的米诺地尔，因为不了解的原因，主要用在了前额上，现在想想是完全徒劳无功的，因为前额的毛囊基本已经坏死了。当初如果用在头顶部的话，现在应该也会有点效果了。总之，用了一段时间的米诺地尔，一是太麻烦，二是使用位置不对，没啥效果，后来就没坚持下来。大概一年前，去了一家植发机构，大概了解了植发的原理、技术细节和价格。后来一是因为忙，二是不知道哪家植发机构靠谱，这个事情也就耽搁了下来。</p>
+<p>NCR是一种常见的标记结构，用于SGML和其他SGML相似的标记语言，如HTML和XML。它由一个短的字符序列组成,代表一个字符（全球的文字字符）。</p>
 
-<h2>决定植发了</h2>
+<p>NCR编码是由一个与号(&amp;)跟着一个井号(#), 然后跟着这个字符的Unicode编码值, 最后跟着一个分号组成的, 如:</p>
 
-<p>作为外貌协会会员，对自己的形象还是很在意的。有时照一眼镜子，可能影响一天的心情。这个心结其实让我在了解植发之初，就已经决定要走植发这条路了。不过一直迟迟没有做植发的一个重要原因是不知道如何去选择一家靠谱的植发机构。可能是因为里面广告贴比较多的原因吧，我不太相信植发论坛里的帖子，也没怎么逛过植发论坛。主要了解植发技术和植发机构的渠道是知乎，还有就是亲身的考察。今年4月份，我在网上了解的基础上看了2家杭州的植发机构。通过对比，发现技术、价格上其实都差不多。再加上，中间认识到一位做过植发的本科师兄，了解了他的植发经历，也看了植发一年后的效果。最终确定在师兄做植发的这家机构做植发手术。时间就定在我实地考察2家医院的3周后——2016.04.23。</p>
+<pre><code>&amp;#dddd;
+&amp;#xhhhh;
+&amp;#name;
+</code></pre>
 
-<h2>手术进行中</h2>
+<p>其中, dddd是字符编码的十进制表示, 而hhhh是字符的16进制表示.</p>
 
-<p>“铃铃铃~~~”，谁大早上的打电话？“*先生，你在路上了吗？”。。我擦，睡过头了。。</p>
+<p>以 HTML 为例，这三种转义序列都称作 character reference：
+前两种是 numeric character reference（NCR），数字取值为目标字符的 Unicode code point；以「&amp;#」开头的后接十进制数字，以「&amp;#x」开头的后接十六进制数字。
+后一种是 character entity reference，后接预先定义的 entity 名称，而 entity 声明了自身指代的字符。
+从 HTML 4 开始，NCR 以 Unicode 为准，与文档编码无关。</p>
 
-<p>好吧，这就是我手术当天的开始~ 史无前例高效的洗刷、穿衣、打车，还是晚了一个多小时才到医院。好在咨询医生人超好的帮我推迟了时间，还替我买了早餐。。只能说服务太周到了。与此同时，陷入2个闹钟都没被叫醒的深深自责中。。</p>
+<p>「中国」二字分别是 Unicode 字符 U+4E2D 和 U+56FD，十六进制表示的 code point 数值「4E2D」和「56FD」就是十进制的「20013」和「22269」。所以——</p>
 
-<p>手术开始前，先剃了个板寸，也就剩一两毫米吧。然后洗了头，画了发际线，进入手术室。</p>
+<pre><code>&amp;#x4e2d;&amp;#x56fd;
+&amp;#20013;&amp;#22269;
+</code></pre>
 
-<p>手术分为前后2个阶段，第一个阶段：取发；第二个阶段：植发。取发3个半小时，出来已经下午2点了。吃了饭，休息了大概半个多小时，重新进入手术室，进行下半程植发，一直到晚上8点半才结束，之前预测的手术时间在4、5个小时上，没想到这么久，据说是因为我自然卷的原因，取发比较慢，医生和我都累坏了。剩最后100单位的时候，还出现了个小意外，居然停电了，最后是在2部手机闪光灯的照射下完成了最后阶段的手术。</p>
+<p>——这两种 NCR 写法都会在显示时转换为「中国」二字。</p>
 
-<p>手术过程中，最痛苦的过程是打麻药的过程。由于是局部麻醉，要覆盖到所有的取发区和植发区，所以光打麻药就被扎了几十针。在靠近耳朵和鬓角的位置，打麻药是非常疼的，因为神经比较集中。麻药生效后，头皮就感觉不是自己的了，所以一天被扎了几千针也没有什么特别的痛感。</p>
+<h2>如何将 NCR 字符转换成真实字符</h2>
 
-<p>躺了一天，中间也不知道睡了醒，醒了睡反复了几次，最终手术宣告结束，植发3300+单位。</p>
+<p>方法如下:</p>
 
-<h2>术后当晚</h2>
+<pre><code>var regex_num_set = /&amp;#(\d+);/g;
+var str = "Here is some text: &amp;#27599;&amp;#26085;&amp;#19968;&amp;#33394;|&amp;#34013;&amp;#30333;~"
 
-<p>手术后已经接近晚上九点了，医院提供免费的住宿和饮食，就索性住下了。这里插一句，医院的服务和医生、护士的态度真的很好。他们的工作氛围也非常轻松愉快，还挺羡慕他们这种工作的感觉的。</p>
 
-<p>可能是因为做了鬓角的原因，当晚右前额+右眼，很疼，吃了止痛药也没啥作用。就是觉得又疼又困，后来迷迷糊糊很早就睡了。</p>
+str = str.replace(regex_num_set, function(_, $1) {
+  return String.fromCharCode($1);
+});
 
-<h2>术后前三天</h2>
 
-<p>到了术后第一天中午时分的样子，疼痛的感觉基本消除了。一夜不能翻身，枕着医院提供的U型枕睡了一晚，一个动作保持到天亮还挺累的。上午和住在一个房间的发友、护士聊聊天，下午换了纱布，在病房睡了一觉，然后就打道回府了。</p>
+document.write('&lt;pre&gt;'+JSON.stringify(str,0,3));
+</code></pre>
 
-<p>术后第二天，请假在家休养了一天。照镜子发现自己额头有三块地方明显陷进去了，而且是很明显的那种。回想一下，是手术过程中有医生一直负责用手指摁住我的额头的原因。当时心想，难不成以后就一直陷进去了，这医生指力如此过人，一看就不是俗人。第四天再看，凹陷已经完全恢复了，想想可能是因为水肿的原因。第三四天的时候，头顶明显发痒，一度有是在忍不住想去挠的冲动，还好忍住了。后来咨询医生，说是正常现象。痒了大概一两天，现在已经没啥感觉了。</p>
+<p>以上例子使用了 [String.prototype.replace()] 和 String.fromCharCode() 方法. 思路为将字符串中的 NCR 字符逐个获取到 "&amp;#"和";"间的 Unicode 字符编码值, 然后利用 String.fromCharCode() 方法, 将 Unicode 编码转为真实字符.</p>
 
-<p>术后一堆要注意的事情，医生都会交代。主要是饮食、活动、洗头等方面的注意点。</p>
+<h2>参考资料</h2>
 
-<p>当前时间是术后第四天，简单谈谈自己感受。植发手术虽然是个简单微创手术，但是整个过程还是有点遭罪的。医院的医生护士服务态度都超级好，这点让我小感动，这也是最终选择这家医院的一个重要原因。目前来说效果还为时尚早，后续每隔一段时间更新下自己的状况吧。为自己记录下这次经历，也为同病相怜者提供一点借鉴。</p>
+<ol>
+<li><a href="https://www.zhihu.com/question/21390312">&amp;#x开头的是什么编码呢。浏览器可以解释它。如&#20013;&#22269;等同与中文"中国"?</a></li>
+<li><a href="http://stackoverflow.com/questions/35501026/converting-numeric-character-reference-to-actual-character/35501590#35501590">Converting numeric character reference to actual character</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace">String.prototype.replace()</a></li>
+<li><a href="http://www.cnblogs.com/shishm/archive/2011/11/24/2261996.html">[字符编码]Numeric Character Reference和HTML Entities（一）</a></li>
+</ol>
 
-<p>----------------------华丽丽的分割线，目前是术后第四天-----------------------</p>
 
 
         <!--<div id="disqus_container">-->
@@ -119,7 +133,7 @@
         <!--</div>-->
 
       <!-- 多说评论框 start -->
-      <div class="ds-thread" data-thread-key="/hair-transplant" data-title="嗯，植发了" data-url="http://joebon.cc/hair-transplant"></div>
+      <div class="ds-thread" data-thread-key="/convert-numeric-chracter-reference-to-actual-character" data-title="将 NCR 字符转换为真实字符的方法" data-url="http://joebon.cc/convert-numeric-chracter-reference-to-actual-character"></div>
       <!-- 多说评论框 end -->
       <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
       <script type="text/javascript">
