@@ -6,8 +6,8 @@ paginate: 8
 permalink: /:title
 
 title: Joebon's world
-url: http://joebon.cc
+url: http://korbinzhao.github.io
 feed: /atom.xml
-author_info: <a href="http://joebon.cc/">Joebon</a>
+author_info: <a href="http://korbinzhao.github.io">Joebon</a>
 
 
