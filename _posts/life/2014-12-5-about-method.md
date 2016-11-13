@@ -2,7 +2,7 @@
 layout: post
 title: 关于方法
 description: 有时候我们每天忙忙碌碌只是为了让自己觉得自己很努力，其实在徒然做着无用功。
-category: product
+category: life
 ---
 有时候我们每天忙忙碌碌只是为了让自己觉得自己很努力，其实在徒然做着无用功。
 

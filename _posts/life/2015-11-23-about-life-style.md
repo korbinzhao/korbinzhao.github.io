@@ -2,7 +2,7 @@
 layout: post
 title: 关于生活方式
 description: 最近对生活方式有点感悟，正式因为意识到自己正拥有着一种槽糕的生活方式，并萌生了要改变的想法。
-category: product
+category: life
 ---
 
 
