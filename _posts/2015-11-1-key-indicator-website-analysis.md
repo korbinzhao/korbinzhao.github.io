@@ -3,9 +3,9 @@ layout: post
 title: 网站分析指标
 description: 我们在做一个网站或网页分析时，肯定会用到UV、PV、跳失率等概念。那么网站分析的一些关键指标到底具体指什么呢？
 categories: 
-- 产品
+- 产品经理
 tags: 
-- 产品
+- 产品经理
 ---
 
 
