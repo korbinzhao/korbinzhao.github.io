@@ -13,7 +13,6 @@ tags:
 ---
 
 
-
 前端数据监控一般分为性能数据监控和线上异常监控。本文对这两块数据的监控原理和方法进行整理说明。
 
 ## 性能数据
@@ -67,6 +66,8 @@ tags:
 * domComplete:DOM 树解析完成，且资源也准备就绪的时间，Document.readyState 变为 complete，并将抛出 readystatechange 相关事件
 * loadEventStart:load 事件发送给文档，也即 load 回调函数开始执行的时间,如果没有绑定 load 事件，值为 0
 * loadEventEnd:load 事件的回调函数执行完毕的时间,如果没有绑定 load 事件，值为 0
+
+DOMContentLoaded 和 load 事件的区别，详见 [DOMContentLoaded与load的区别](https://www.cnblogs.com/caizhenbo/p/6679478.html)。
 
 ### 统计方法
 
@@ -225,3 +226,4 @@ try{
 4. [研究首屏时间？你先要知道这几点细节](http://www.alloyteam.com/2016/01/points-about-resource-loading/)
 5. [初探 performance – 监控网页与程序性能](http://www.alloyteam.com/2015/09/explore-performance/)
 6. [7 天打造前端性能监控系统](http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
+7. [DOMContentLoaded与load的区别](https://www.cnblogs.com/caizhenbo/p/6679478.html)
