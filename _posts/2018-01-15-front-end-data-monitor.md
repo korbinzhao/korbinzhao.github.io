@@ -89,7 +89,29 @@ DOMContentLoaded 和 load 事件的区别，详见 [DOMContentLoaded与load的�
 Resource timing API是用来统计静态资源相关的时间信息，详细的内容请参考[W3C Resource timing](https://www.w3.org/TR/resource-timing/)。这里我们只介绍performance.getEntries方法
 
 
-### 关键指标及计算方法
+### 指标及计算方法
+
+#### 指标
+* 总体指标
+  * 到 DOM 可交互耗时timing.domComplete - timing.navigationStart
+  * 总耗时timing.loadEventEnd - timing.navigationStart
+到 DNS 查询结束耗时timing.domainLookupEnd - timing.navigationStart
+  * 到请求结束耗时timing.responseEnd - timing.navigationStart
+  * 首次渲染耗时timing.msFirstPaint
+* 阶段指标（按顺序）
+  * 重定向时间timing.redirectEnd - timing.redirectStart
+  * unload 事件时间timing.unloadEventEnd - timing.unloadEventStart
+  * appcache 时间timing.domainLookupStart - timing.fetchStart
+  * DNS 查询时间timing.domainLookupEnd - timing.domainLookupStart
+  * 连接时间timing.connectEnd - timing.connectStart
+  * 请求时间timing.responseEnd - timing.requestStart
+  * 请求到 DOM 可交互时间（包含解析HTML，非defer的script和css的时间）timing.domInteractive - timing.responseEnd
+  * DOM 可交互到 DOMReady 时间（包含处理defer的script的时间）timing.domComplete - * timing.domInteractive
+  * load 事件时间timing.loadEventEnd - timing.loadEventStart
+  
+详见源码：[timing](https://github.com/addyosmani/timing.js/blob/master/timing.js)
+
+#### 关键指标
   * 白屏时间（first paint time）- 用户从打开页面到页面开始有内容呈现为止
   * 首屏时间 - 用户从打开页面到首屏内所有内容都呈现出来所花费的时间
   * 用户可操作时间（dom interactive） - 用户从打开页面到可以进行正常点击、输入等操作的时间
