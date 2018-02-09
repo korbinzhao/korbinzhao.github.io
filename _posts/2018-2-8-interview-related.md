@@ -11,8 +11,10 @@ tags:
 - 性能优化
 ---
 
+
 ## 面试问题汇总
 http://www.cnblogs.com/bigboyLin/p/5272902.html
+https://zhuanlan.zhihu.com/p/28911400
 
 ## 性能优化
 
@@ -380,7 +382,11 @@ function trim(str) {
 swipe-tabs - 阅读源码
 
 ## 设计模式
-对MVC、MVVM的理解
+* 对MVC、MVVM的理解
+http://www.cnblogs.com/indream/p/3602348.html
+
+* commonjs/cmd/amd
+http://zccst.iteye.com/blog/2215317
 
 
 ## 备注
