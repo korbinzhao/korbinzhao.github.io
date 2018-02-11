@@ -241,6 +241,13 @@ https://github.com/jawil/blog/issues/9
 ### JS 基础
 https://zhuanlan.zhihu.com/p/30275607
 
+* 手写jsonp
+http://blog.csdn.net/kumayato/article/details/73161980
+
+* 原型链
+
+https://www.cnblogs.com/libin-1/p/5820550.html
+
 * 如何理解闭包
 
   https://korbinzhao.github.io/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/2018/01/16/closure/ 
@@ -384,10 +391,32 @@ swipe-tabs - 阅读源码
 ## 设计模式
 * 对MVC、MVVM的理解
 http://www.cnblogs.com/indream/p/3602348.html
+https://www.jianshu.com/p/ccea87433caf
 
 * commonjs/cmd/amd
 http://zccst.iteye.com/blog/2215317
 
+## react 相关面试题
+* PureComponent使用浅比较判断组件是否需要重绘
+
+## vue 相关面试题
+* http://www.bslxx.com/p/3187.html
+* https://www.cnblogs.com/libin-1/p/6864344.html
+* https://www.jianshu.com/p/e54a9a34a773
+* https://cn.vuejs.org/v2/guide/comparison.html
+
+## css in js
+
+## webpack
+https://segmentfault.com/a/1190000011383224
+
+## pwa
+https://zhuanlan.zhihu.com/p/25459319
+
+## 新技术
+* pwa
+https://juejin.im/post/5a519d305188257327396da5
+https://www.w3cplus.com/pwa/nextgen-web-pwa.html
 
 ## 备注
 * http 状态码
