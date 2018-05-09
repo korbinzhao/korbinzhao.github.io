@@ -166,12 +166,14 @@ console.log(i); // 5
 
 ES6 允许块级作用域的任意嵌套。
 
+{% raw %}
 ```
 {{{{
   let insane = 'Hello World';
   {let insane = 'Hello World'}
 }}}};
 ```
+{% endraw %}
 
 块级作用域的出现，实际上使得获得广泛应用的立即执行函数表达式（IIFE）不再必要了。
 ```
