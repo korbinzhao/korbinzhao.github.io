@@ -179,31 +179,34 @@ requestAnimationFrame 的其他高能用法
 * 动画： 也是它的主要用途，它将我们动画的执行时机和执行频率交由浏览器决定，以得到更好的性能。
 * 函数节流：requestAnimationFrame 的执行频率（一帧）是16.67ms，利用这一特性就可以做到函数节流，避免高频事件在一帧内做多与的无用功的函数执行，例如：
 
-	 	var $box = $('#J_Test'),
-	 	$point = $box.find('b');
- 		$box.on('mouseenter',function(e){
- 		requestAnimationFrame(function(){
- 				$point.css({
- 	      			top : e.pageY,
-	          	left : e.pageX
-	  	   		})
-    		});
- 		});
+```
+var $box = $('#J_Test'),
+$point = $box.find('b');
+$box.on('mouseenter',function(e){
+requestAnimationFrame(function(){
+		$point.css({
+			top : e.pageY,
+		left : e.pageX
+		})
+	});
+});
+```
 
 * 分帧初始化：同样利用一帧的执行时间将模块的初始化或渲染函数分散到不同的帧中来执行，这样每个模块都有16.67ms的执行时间，而不是一股脑的堆在哪里等着执行。
 
- 		 	var rAF = window.requestAnimationFrame ||  window.webkitRequestAnimationFrame ||
- 	     	function(c) {
- 	            setTimeout(c, 1 / 60 * 1000);
- 	      	};
+```
+var rAF = window.requestAnimationFrame ||  window.webkitRequestAnimationFrame ||
+function(c) {
+	setTimeout(c, 1 / 60 * 1000);
+};
 
- 		   	function render() {
- 	       	self.$container.html(itemHtml);
- 	       	self.$container.find('.J_LazyLoad').lazyload();
-	     	}
+function render() {
+self.$container.html(itemHtml);
+self.$container.find('.J_LazyLoad').lazyload();
+}
 
-	     	rAF(render);
-
+rAF(render);
+```
 
 
 #### 使用 transform 实现动画 （待定）
@@ -211,10 +214,10 @@ requestAnimationFrame 的其他高能用法
 css transition 是我们在实现一个动画是能够想到的最简单的一种实现方式。但是当频繁操作样式时，也会出现动画不怎么流畅的问题。
 
 解决这一问题的一个方式就是使用 transform 来实现相同的效果：
-
+```
 	transition: left 2s ease-in-out;  ---> transition: transform 2s ease-in-out;
 	left: xxx; ---> transform: translate3d(xxx, yyy, zzz);
-
+```
 #### 硬件（GPU）加速
 
 硬件（GPU）加速，即层的合成（layer composite）。我们常说的使用 translate3D 开启硬件加速，其实是使应用了 translate3D 的元素获得独立的 GraphicsLayer，好处如下：
@@ -242,6 +245,7 @@ JS 代码是运行在浏览器的主线程上的。与此同时，浏览器的�
 
 大多数情况下，可以把纯计算工作放在 Web Workers 中（如果这些计算工作不会涉及 DOM 操作）。一般来说， JS 中数据的处理工作，比如排序或搜索，一般都适合这种处理方式。
 
+```
 	var dataSortWorker = new Worker("sort-worker.js");
 	dataSortWorker.postMesssage(dataToSort);
 
@@ -252,8 +256,11 @@ JS 代码是运行在浏览器的主线程上的。与此同时，浏览器的�
    	// Update data on screen...
 	});
 
+```
+
 如果 JS 代码需要存取 DOM 元素，也就是说必须在主线程上运行，可以考虑批处理的方式：把任务细分为若干个小任务，每个小任务耗时很少，各自放在一个 requestAminationFrame 中回调运行。
 
+```
 	var taskList = breakBigTaskIntoMicroTasks(monsterTaskList);
 	requestAnimationFrame(processTaskList);
 
@@ -275,6 +282,7 @@ JS 代码是运行在浏览器的主线程上的。与此同时，浏览器的�
    	 	requestAnimationFrame(processTaskList);
 
 	}
+```	
 
 如果采用划分小任务的方式，那么需要确保给用户一个好的 UX/UI，使得用户能够感知到当前浏览器正在处理一个任务，比如一个进度条或者指示器。
 
