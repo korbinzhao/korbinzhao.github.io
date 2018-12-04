@@ -378,14 +378,7 @@ function selectorExistedInHtml(selector, document) {
 
 ## 使用说明
 
-组件地址：[@ali/nozomi-ctrl-skeleton](http://web.npm.alibaba-inc.com/package/@ali/nozomi-ctrl-skeleton)
-
 命令行用法
-
-```
-// 安装
-tnpm i -g @ali/nozomi-ctrl-skeleton
-```
 
 ```
 Usage: skeleton [options]
@@ -411,8 +404,6 @@ skeleton -u http://market.wapa.taobao.com/app/nozomi/app-free-shipping/main/inde
 node 用法
 
 ```
-import getSkeleton from '@ali/nozomi-ctrl-skeleton';
-
 getSkeleton({
   name: 'freeshipping',
   url: 'https://market.m.taobao.com/app/nozomi/app-free-shipping/main/index.html',
